@@ -20,7 +20,6 @@
 *.qbs.user.*
 *.moc
 moc_*.cpp
-moc_*.h
 qrc_*.cpp
 ui_*.h
 Makefile*
@@ -30,10 +29,14 @@ Makefile*
 
 *.autosave
 
-# QtCtreator Qml
+#QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
 
-# QtCtreator CMake
-CMakeLists.txt.user*
+*.qm
+
+android/gradle.properties
+android/local.properties
+
+ios_signature.pri
 
