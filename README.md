@@ -43,3 +43,15 @@ more info: http://bit.ly/nfcReaderInfo
 A detailed description you'll find at my blog
 http://bit.ly/ekkeBTLEapp
 
+## Download from Google Play
+http://play.google.com/store/apps/details?id=org.ekkescorner.examples.btle
+
+Don't have a Google Account ? Grab the APK here: https://app.box.com/s/fgeo14re3hrp47shg915geo1q4gzyxrz
+
+## Download from Amazon App Store
+.com: http://www.amazon.com/gp/product/B073NLD652
+.de: http://www.amazon.de/gp/product/B073NLD652
+
+## Download from Apple Appstore
+https://itunes.apple.com/us/app/ekkes-btle-example/id1254196043
+
