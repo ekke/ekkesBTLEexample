@@ -71,6 +71,9 @@ ToolBar {
             }
             Menu {
                 id: homeOptionsMenu
+                modal:true
+                dim: false
+                closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
                 x: parent.width - width
                 transformOrigin: Menu.TopRight
                 MenuItemWithIcon {

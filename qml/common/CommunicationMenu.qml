@@ -26,6 +26,9 @@ Item {
 
     Menu {
         id: callMenu
+        modal:true
+        dim: false
+        closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
         property string phoneNumber: ""
         MenuItemWithIcon {
             itemText: qsTr("Phone Call")
@@ -56,6 +59,9 @@ Item {
 
     Menu {
         id: callMenuIOS
+        modal:true
+        dim: false
+        closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
         property string phoneNumber: ""
         MenuItemWithIcon {
             itemText: qsTr("Phone Call")

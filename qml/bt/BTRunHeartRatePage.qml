@@ -477,8 +477,9 @@ Page {
     }
     Menu {
         id: btSettingsMenu
-        // workaround set closePolicy https://bugreports.qt.io/browse/QTBUG-59670
-        closePolicy: Popup.NoAutoClose
+        modal:true
+        dim: false
+        closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
         parent: btSettingsMenuButton
         x: parent.width - width
         transformOrigin: Menu.TopRight

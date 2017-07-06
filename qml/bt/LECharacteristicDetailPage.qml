@@ -227,6 +227,9 @@ Page {
                             }
                             Menu {
                                 id: stringHexMenu
+                                modal:true
+                                dim: false
+                                closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
                                 MenuItem {
                                     text: qsTr("Write as ASCII String")
                                     onClicked: {

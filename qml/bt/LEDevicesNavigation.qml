@@ -182,8 +182,9 @@ Page {
         }
         Menu {
             id: deviceMenu
-            // workaround set closePolicy https://bugreports.qt.io/browse/QTBUG-59670
-            closePolicy: Popup.NoAutoClose
+            modal:true
+            dim: false
+            closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
             property MyBluetoothDeviceInfo deviceInfo
             MenuItemWithIcon {
                 enabled: deviceMenu.deviceInfo? deviceMenu.deviceInfo.deviceType > 0 : false
