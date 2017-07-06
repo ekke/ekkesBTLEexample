@@ -1,5 +1,5 @@
 # ekkes BTLE example APP
-Sample APP - Qt 5.9+ - tested on Android + iOS
+Sample APP - Qt 5.9.1+ - tested on Android + iOS
 
 [AUTHOR ( ekke )](AUTHOR.md)
 
@@ -8,7 +8,7 @@ http://j.mp/qt-x
 
 This is not a real-life app - this app only demonstrates the use of Bluetooth LE in a Qt Quick Controls 2 APP
 
-This app needs Qt 5.9 Release or greater
+This app needs Qt 5.9.1 Release or greater
 
 ![alt tag](https://appbus.files.wordpress.com/2017/06/01_home.png  "ekkes BTLE example APP")
 
@@ -22,7 +22,7 @@ most Images downloaded from https://design.google.com/icons/ - then renamed to m
 [see /images/LICENSE ( cc-by )](images/LICENSE)
 
 ## ekkes BTLE example
-This sample APP uses Material Design with UI Controls provided by Qt 5.9+ and was designed and tested on Android Smartphones (BlackBerry PRIV, DTEK 50/60 - Android 6.1), Android Tablet (Google PixelC - Android 7.1), Amazon Fire HD 8 Tablet, iOS (iPhone 6s, iPad Mini 2 - iOS 10.3.2).
+This sample APP uses Material Design with UI Controls provided by Qt 5.9.1+ and was designed and tested on Android Smartphones (BlackBerry PRIV, DTEK 50/60 - Android 6.1), Android Tablet (Google PixelC - Android 7.1), Amazon Fire HD 8 Tablet, iOS (iPhone 6s, iPad Mini 2 - iOS 10.3.2).
 
 ekkes BTLE example APP discovers BT LE devices nearby and you can explore Services and Characteristics. You can test Read, Notify and Write.
 
