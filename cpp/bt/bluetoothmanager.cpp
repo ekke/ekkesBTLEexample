@@ -211,7 +211,7 @@ void BluetoothManager::onDeviceDiscovered(QBluetoothDeviceInfo discoveredDevice)
     d->setDevice(discoveredDevice);
     // check if device type is known
     bool isKnownDeviceType = false;
-    if(discoveredDevice.name() == "Addimat") {
+    if(discoveredDevice.name().startsWith("Addimat", Qt::CaseInsensitive)) {
         d->setDeviceType(DEVICE_TYPE_LOCK);
         isKnownDeviceType = true;
     } else if (discoveredDevice.name() == "NFC_RDR") {
