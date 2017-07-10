@@ -594,7 +594,11 @@ Page {
                 //
             }
         } // menu item explore
+        onAboutToShow: {
+            appWindow.modalMenuOpen = true
+        }
         onAboutToHide: {
+            appWindow.modalMenuOpen = false
             appWindow.resetFocus()
         }
     } // btSettingsMenu
@@ -648,7 +652,11 @@ Page {
                 //
             }
         } // menu item explore
+        onAboutToShow: {
+            appWindow.modalMenuOpen = true
+        }
         onAboutToHide: {
+            appWindow.modalMenuOpen = false
             appWindow.resetFocus()
         }
     } // btLedMenu
@@ -700,7 +708,11 @@ Page {
                 //
             }
         } // menu item explore
+        onAboutToShow: {
+            appWindow.modalMenuOpen = true
+        }
         onAboutToHide: {
+            appWindow.modalMenuOpen = false
             appWindow.resetFocus()
         }
     } // btCommandsMenu

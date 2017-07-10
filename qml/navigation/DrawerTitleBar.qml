@@ -98,7 +98,11 @@ ToolBar {
                         //
                     }
                 } // menu item back workaround QTBUG-61581
+                onAboutToShow: {
+                    appWindow.modalMenuOpen = true
+                }
                 onAboutToHide: {
+                    appWindow.modalMenuOpen = false
                     appWindow.resetFocus()
                 }
             } // end optionsMenu

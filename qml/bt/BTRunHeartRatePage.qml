@@ -520,7 +520,11 @@ Page {
                 //
             }
         } // menu item explore
+        onAboutToShow: {
+            appWindow.modalMenuOpen = true
+        }
         onAboutToHide: {
+            appWindow.modalMenuOpen = false
             appWindow.resetFocus()
         }
     } // btSettingsMenu

@@ -272,6 +272,13 @@ Page {
             onClosed: {
                 deviceMenu.parent = initialItem
             }
+            onAboutToShow: {
+                appWindow.modalMenuOpen = true
+            }
+            onAboutToHide: {
+                appWindow.modalMenuOpen = false
+                appWindow.resetFocus()
+            }
         } // menu
 
     } // navPane
