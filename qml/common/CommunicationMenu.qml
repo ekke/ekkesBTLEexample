@@ -44,14 +44,6 @@ Item {
                 Qt.openUrlExternally("sms:%1".arg(callMenu.phoneNumber))
             }
         }
-        MenuSeparator {}
-        MenuItemWithIcon {
-            itemText: qsTr("Back")
-            imageName: "arrow_back.png"
-            onTriggered: {
-                //
-            }
-        } // menu item back workaround QTBUG-61581
         onClosed: {
             callMenu.parent = rootPane
         }
@@ -93,14 +85,6 @@ Item {
                 Qt.openUrlExternally("facetime:%1".arg(callMenuIOS.phoneNumber))
             }
         }
-        MenuSeparator {}
-        MenuItemWithIcon {
-            itemText: qsTr("Back")
-            imageName: "arrow_back.png"
-            onTriggered: {
-                //
-            }
-        } // menu item back workaround QTBUG-61581
         onClosed: {
             callMenuIOS.parent = rootPane
         }

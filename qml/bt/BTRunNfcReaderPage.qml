@@ -586,14 +586,6 @@ Page {
                 btRunNfcReaderPage.disconnectFromDevice()
             }
         }
-        MenuSeparator {}
-        MenuItemWithIcon {
-            itemText: qsTr("Back")
-            imageName: "arrow_back.png"
-            onTriggered: {
-                //
-            }
-        } // menu item explore
         onAboutToShow: {
             appWindow.modalMenuOpen = true
         }
@@ -644,14 +636,6 @@ Page {
                 return
             }
         }
-        MenuSeparator {}
-        MenuItemWithIcon {
-            itemText: qsTr("Back")
-            imageName: "arrow_back.png"
-            onTriggered: {
-                //
-            }
-        } // menu item explore
         onAboutToShow: {
             appWindow.modalMenuOpen = true
         }
@@ -700,14 +684,6 @@ Page {
                 return
             }
         }
-        MenuSeparator {}
-        MenuItemWithIcon {
-            itemText: qsTr("Back")
-            imageName: "arrow_back.png"
-            onTriggered: {
-                //
-            }
-        } // menu item explore
         onAboutToShow: {
             appWindow.modalMenuOpen = true
         }

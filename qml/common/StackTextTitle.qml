@@ -73,14 +73,6 @@ ToolBar {
                         popup.open()
                     }
                 }
-                MenuSeparator {}
-                MenuItemWithIcon {
-                    itemText: qsTr("Back")
-                    imageName: "arrow_back.png"
-                    onTriggered: {
-                        //
-                    }
-                } // menu item back workaround QTBUG-61581
                 onAboutToShow: {
                     appWindow.modalMenuOpen = true
                 }

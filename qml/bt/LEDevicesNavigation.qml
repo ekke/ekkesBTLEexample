@@ -261,14 +261,6 @@ Page {
                     }
                 }
             } // menu item connect disconnect
-            MenuSeparator {}
-            MenuItemWithIcon {
-                itemText: qsTr("Back")
-                imageName: "arrow_back.png"
-                onTriggered: {
-                    //
-                }
-            } // menu item explore
             onClosed: {
                 deviceMenu.parent = initialItem
             }

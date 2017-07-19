@@ -90,5 +90,7 @@
         <file>qml/bt/BTSettingsNfcReader.qml</file>
         <file>qml/bt/BTConfigureNfcReader.qml</file>
         <file>qml/common/MenuItemWithDot.qml</file>
+        <file>qml/common/ComboBoxButton.qml</file>
+        <file>qml/common/ComboBoxModal.qml</file>
     </qresource>
 </RCC>
