@@ -57,7 +57,8 @@ OTHER_FILES += images/black/*.png \
     images/LICENSE \
     LICENSE \
     *.md \
-    ios/*.png
+    ios/*.png \
+    ios/Images.xcassets/AppIcon.appiconset/*.*
 
 RESOURCES += \
     translations.qrc \
@@ -111,18 +112,22 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+android {
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+}
 
 ios {
     QMAKE_INFO_PLIST = ios/Info.plist
-    ios_icon.files = $$files($$PWD/ios/Icon*.png)
-    QMAKE_BUNDLE_DATA += ios_icon
+
+    QMAKE_ASSET_CATALOGS = $$PWD/ios/Images.xcassets
+    QMAKE_ASSET_CATALOGS_APP_ICON = "AppIcon"
+
     ios_artwork.files = $$files($$PWD/ios/iTunesArtwork*.png)
     QMAKE_BUNDLE_DATA += ios_artwork
     app_launch_screen.files = $$files($$PWD/ios/MyLaunchScreen.xib)
     QMAKE_BUNDLE_DATA += app_launch_screen
 
-    QMAKE_IOS_DEPLOYMENT_TARGET = 8.2
+    QMAKE_IOS_DEPLOYMENT_TARGET = 10.0
 
     disable_warning.name = GCC_WARN_64_TO_32_BIT_CONVERSION
     disable_warning.value = NO
@@ -139,6 +144,10 @@ ios {
     # MY_DEVELOPMENT_TEAM.value = your team Id from Apple Developer Account
     # QMAKE_MAC_XCODE_SETTINGS += MY_DEVELOPMENT_TEAM
     include(ios_signature.pri)
+
+    MY_BUNDLE_ID.name = PRODUCT_BUNDLE_IDENTIFIER
+    MY_BUNDLE_ID.value = org.ekkescorner.examples.btle
+    QMAKE_MAC_XCODE_SETTINGS += MY_BUNDLE_ID
 
     # Note for devices: 1=iPhone, 2=iPad, 1,2=Universal.
     QMAKE_APPLE_TARGETED_DEVICE_FAMILY = 1,2

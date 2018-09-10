@@ -29,8 +29,8 @@ ToolButton {
         }
     }
     onClicked: {
-        // see QTBUG-59293
-        favMenuBugfix = !favMenuBugfix
-        openNavigationBar()
+        // see QTBUG-59293 fixed in 5.9
+        // favMenuBugfix = !favMenuBugfix
+        appWindow.openNavigationBar()
     }
 }

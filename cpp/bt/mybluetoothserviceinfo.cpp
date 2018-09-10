@@ -186,7 +186,7 @@ void MyBluetoothServiceInfo::writeCharacteristicAsString(MyBluetoothCharacterist
     QByteArray valueArray = valueString.toLatin1();
     int permission = characteristic.properties();
     if(withResponse) {
-        if(!permission & QLowEnergyCharacteristic::Write) {
+        if((!permission) & QLowEnergyCharacteristic::Write) {
             qWarning() << "Write String Characteristic: no Response possible";
             // emit something
             return;
@@ -194,7 +194,7 @@ void MyBluetoothServiceInfo::writeCharacteristicAsString(MyBluetoothCharacterist
         qDebug() << "write with response: [" << valueArray << "]";
         mLowEnergyService->writeCharacteristic(characteristic, valueArray, QLowEnergyService::WriteWithResponse);
     } else {
-        if(!permission & QLowEnergyCharacteristic::WriteNoResponse) {
+        if((!permission) & QLowEnergyCharacteristic::WriteNoResponse) {
             qWarning() << "Write Characteristic: not possible without response";
             // emit something
             return;
@@ -230,7 +230,7 @@ void MyBluetoothServiceInfo::writeCharacteristicAsHex(MyBluetoothCharacteristic 
     qDebug() << "hexString " << hexString << " | myHex:" << myHex << " as HEX ByteArray: " << valueArray.toHex();
     int permission = characteristic.properties();
     if(withResponse) {
-        if(!permission & QLowEnergyCharacteristic::Write) {
+        if((!permission) & QLowEnergyCharacteristic::Write) {
             qWarning() << "Write Characteristic: no Response possible";
             // emit something
             return;
@@ -238,7 +238,7 @@ void MyBluetoothServiceInfo::writeCharacteristicAsHex(MyBluetoothCharacteristic 
         qDebug() << "write HEX with response: [" << valueArray << "]";
         mLowEnergyService->writeCharacteristic(characteristic, valueArray, QLowEnergyService::WriteWithResponse);
     } else {
-        if(!permission & QLowEnergyCharacteristic::WriteNoResponse) {
+        if((!permission) & QLowEnergyCharacteristic::WriteNoResponse) {
             qWarning() << "Write Characteristic: not possible without response";
             // emit something
             return;
