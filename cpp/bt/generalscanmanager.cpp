@@ -1,7 +1,7 @@
 #include "generalscanmanager.hpp"
 
-static const QString BARCODE_SCAN_SERVICE = "fff0";
-static const QString BARCODE_SCAN_CHARACTERISTIC = "fff1";
+static const QString BARCODE_SCAN_SERVICE = "0000fff0-0000-1000-8000-00805f9b34fb";
+static const QString BARCODE_SCAN_CHARACTERISTIC = "0000fff1-0000-1000-8000-00805f9b34fb";
 
 GeneralScanManager::GeneralScanManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
     mScanServiceAvailable(false), mScanServiceConnected(false),

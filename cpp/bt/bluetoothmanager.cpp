@@ -11,6 +11,7 @@ static const int DEVICE_TYPE_LOCK = 3;
 // static const int DEVICE_TYPE_BEACON = 4;
 // static const int DEVICE_TYPE_PEGELMETER = 5;
 static const int DEVICE_TYPE_NFC = 6;
+static const int DEVICE_TYPE_BARCODE = 7;
 
 BluetoothManager::BluetoothManager(QObject *parent) : QObject(parent), mDeviceDiscoveryActive(false)
 {
@@ -224,6 +225,10 @@ void BluetoothManager::onDeviceDiscovered(QBluetoothDeviceInfo discoveredDevice)
             // this also detects the long UUID {0000180d-0000-1000-8000-00805f9b34fb}
             if(uuid == QBluetoothUuid::HeartRate) {
                 d->setDeviceType(DEVICE_TYPE_HEARTRATE);
+            }
+            // detects the long version of fff0: {0000fff0-0000-1000-8000-00805f9b34fb}
+            if(uuid.toString() == "{0000fff0-0000-1000-8000-00805f9b34fb}") {
+                d->setDeviceType(DEVICE_TYPE_BARCODE);
             }
         }
     }
