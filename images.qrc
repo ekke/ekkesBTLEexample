@@ -2901,5 +2901,38 @@
         <file>images/extra/dropdown_arrow@2x.png</file>
         <file>images/extra/dropdown_arrow@3x.png</file>
         <file>images/extra/dropdown_arrow@4x.png</file>
+        <file>images/extra/ring_scanner.png</file>
+        <file>images/black/barcode.png</file>
+        <file>images/black/barcode@2x.png</file>
+        <file>images/black/barcode@3x.png</file>
+        <file>images/black/barcode@4x.png</file>
+        <file>images/black/x18/barcode.png</file>
+        <file>images/black/x18/barcode@2x.png</file>
+        <file>images/black/x18/barcode@3x.png</file>
+        <file>images/black/x18/barcode@4x.png</file>
+        <file>images/black/x36/barcode.png</file>
+        <file>images/black/x36/barcode@2x.png</file>
+        <file>images/black/x36/barcode@3x.png</file>
+        <file>images/black/x36/barcode@4x.png</file>
+        <file>images/black/x48/barcode.png</file>
+        <file>images/black/x48/barcode@2x.png</file>
+        <file>images/black/x48/barcode@3x.png</file>
+        <file>images/black/x48/barcode@4x.png</file>
+        <file>images/white/barcode.png</file>
+        <file>images/white/barcode@2x.png</file>
+        <file>images/white/barcode@3x.png</file>
+        <file>images/white/barcode@4x.png</file>
+        <file>images/white/x18/barcode.png</file>
+        <file>images/white/x18/barcode@2x.png</file>
+        <file>images/white/x18/barcode@3x.png</file>
+        <file>images/white/x18/barcode@4x.png</file>
+        <file>images/white/x36/barcode.png</file>
+        <file>images/white/x36/barcode@2x.png</file>
+        <file>images/white/x36/barcode@3x.png</file>
+        <file>images/white/x36/barcode@4x.png</file>
+        <file>images/white/x48/barcode.png</file>
+        <file>images/white/x48/barcode@2x.png</file>
+        <file>images/white/x48/barcode@3x.png</file>
+        <file>images/white/x48/barcode@4x.png</file>
     </qresource>
 </RCC>
