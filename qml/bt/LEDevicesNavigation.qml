@@ -25,7 +25,8 @@ Page {
             "key.png",
             "tag.png",
             "signal.png",
-            "tag.png"
+            "tag.png",
+            "barcode.png"
         ]
         anchors.fill: parent
         property string name: "DevicesNavPane"
@@ -134,7 +135,7 @@ Page {
 
         function findPage(pageName) {
             var targetPage = find(function(item) {
-                return item.name == pageName;
+                return item.name === pageName;
             })
             if(targetPage) {
                 return targetPage.StackView.index
@@ -157,19 +158,19 @@ Page {
 
         function popOnePage() {
             var page = pop()
-            if(page.name == "ServicesListPage") {
+            if(page.name === "ServicesListPage") {
                 servicesListPageLoader.active = false
                 return
             }
-            if(page.name == "CharacteristicsListPage") {
+            if(page.name === "CharacteristicsListPage") {
                 characteristicListPageLoader.active = false
                 return
             }
-            if(page.name == "CharacteristicDetailPage") {
+            if(page.name === "CharacteristicDetailPage") {
                 characteristicDetailPageLoader.active = false
                 return
             }
-            if(page.name == "BTWriteValuePage") {
+            if(page.name === "BTWriteValuePage") {
                 writeValuePageLoader.active = false
                 return
             }
@@ -236,6 +237,18 @@ Page {
                             }
                         }
                         appWindow.gotoNfc(deviceMenu.deviceInfo)
+                        break
+                    case 7:
+                        // check if there's another device already connected
+                        if(scanManager.hasDevice) {
+                            if(scanManager.getSettingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
+                                if(scanManager.isCurrentDeviceConnected()) {
+                                    appWindow.showInfo(qsTr("There's another Barcode Scanner connected.\nPlease disconnect before selecting another one"))
+                                    return
+                                }
+                            }
+                        }
+                        appWindow.gotoBarcode(deviceMenu.deviceInfo)
                         break
                     }
                 } // triggered

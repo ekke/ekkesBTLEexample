@@ -14,35 +14,28 @@ void GeneralScanManager::init(BluetoothManager *bluetoothManager)
 {
     mBluetoothManager = bluetoothManager;
     // get settings
-    mWaiterLockSettingsMap = mBluetoothManager->mBluetoothSettingsMap.value("addimat").toMap();
-    if(mWaiterLockSettingsMap.isEmpty()) {
-        mWaiterLockSettingsMap.insert("settingsFavoriteAddress", mSettingsFavoriteAddress);
-        mWaiterLockSettingsMap.insert("settingsBatteryLevelInfo", mSettingsBatteryLevelInfo);
-        mWaiterLockSettingsMap.insert("settingsBatteryLevelWarning", mSettingsBatteryLevelWarning);
-        mWaiterLockSettingsMap.insert("mappingsList", mappingsToVariantList());
-        mBluetoothManager->mBluetoothSettingsMap.insert("addimat", mWaiterLockSettingsMap);
+    mGeneralScanSettingsMap = mBluetoothManager->mBluetoothSettingsMap.value("generalscan").toMap();
+    if(mGeneralScanSettingsMap.isEmpty()) {
+        mGeneralScanSettingsMap.insert("settingsFavoriteAddress", mSettingsFavoriteAddress);
+        mBluetoothManager->mBluetoothSettingsMap.insert("generalscan", mGeneralScanSettingsMap);
         mBluetoothManager->cacheSettings();
-        qDebug() << "WaiterLock Settings created | mappings:" << mMappings.size();
+        qDebug() << "GeneralScan Settings created";
     } else {
-        mSettingsFavoriteAddress = mWaiterLockSettingsMap.value("settingsFavoriteAddress").toString();
-        mSettingsBatteryLevelInfo = mWaiterLockSettingsMap.value("settingsBatteryLevelInfo").toInt();
-        mSettingsBatteryLevelWarning = mWaiterLockSettingsMap.value("settingsBatteryLevelWarning").toInt();
-        QVariantList vl = mWaiterLockSettingsMap.value("mappingsList").toList();
-        mappingsFromVariantList(vl);
-        qDebug() << "WaiterLock Settings read | mappings:" << mMappings.size();
+        mSettingsFavoriteAddress = mGeneralScanSettingsMap.value("settingsFavoriteAddress").toString();
+        qDebug() << "GeneralScan Settings read:";
     }
 }
 
 void GeneralScanManager::updateSettings()
 {
-    mBluetoothManager->mBluetoothSettingsMap.insert("addimat", mWaiterLockSettingsMap);
+    mBluetoothManager->mBluetoothSettingsMap.insert("generalscan", mGeneralScanSettingsMap);
     mBluetoothManager->cacheSettings();
     emit settingsChanged();
 }
 
-QString GeneralScanManager::getKeyIdValue() const
+QString GeneralScanManager::getBarcodeValue() const
 {
-    return mKeyIdValue;
+    return mBarcodeValue;
 }
 
 bool GeneralScanManager::getFeaturesPrepared() const
@@ -58,16 +51,16 @@ void GeneralScanManager::setFeaturesPrepared(bool isPrepared)
     }
 }
 
-bool GeneralScanManager::getKeyNotificationsActive() const
+bool GeneralScanManager::getScanNotificationsActive() const
 {
-    return mKeyNotificationsActive;
+    return mScanNotificationsActive;
 }
 
-void GeneralScanManager::setKeyNotificationsActive(bool isActive)
+void GeneralScanManager::setScanNotificationsActive(bool isActive)
 {
-    if(mKeyNotificationsActive != isActive) {
-        mKeyNotificationsActive = isActive;
-        emit keyNotificationsActiveChanged();
+    if(mScanNotificationsActive != isActive) {
+        mScanNotificationsActive = isActive;
+        emit scanNotificationsActiveChanged();
     }
 }
 
@@ -85,7 +78,7 @@ void GeneralScanManager::setSettingsFavoriteAddress(QString address)
 {
     if(mSettingsFavoriteAddress != address) {
         mSettingsFavoriteAddress = address;
-        mWaiterLockSettingsMap.insert("settingsFavoriteAddress", address);
+        mGeneralScanSettingsMap.insert("settingsFavoriteAddress", address);
         updateSettings();
         emit settingsChanged();
     }
@@ -99,17 +92,16 @@ void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
             deviceAddressChanged = true;
         }
         mDeviceInfo = myDevice;
-        qDebug() << "WaiterLock Manager: current Device " << myDevice->getAddress();
+        qDebug() << "GeneralScan Manager: current Device " << myDevice->getAddress();
         // remember address
         setSettingsFavoriteAddress(myDevice->getAddress());
         // set expected service uuids
         QStringList sl;
-        sl.append(ADDIMAT_KEY_SERVICE);
-        sl.append(BATTERY_SERVICE);
+        sl.append(BARCODE_SCAN_SERVICE);
         myDevice->setExpectedServiceUuids(sl);
         //
         mDeviceIsConnected = mDeviceInfo->getDeviceIsConnected();
-        connect(mDeviceInfo, &MyBluetoothDeviceInfo::deviceChanged, this, &WaiterLockManager::onDisconnect);
+        connect(mDeviceInfo, &MyBluetoothDeviceInfo::deviceChanged, this, &GeneralScanManager::onDisconnect);
         if(!mHasDevice || deviceAddressChanged) {
             mHasDevice = true;
             emit hasDeviceChanged();
@@ -118,17 +110,15 @@ void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
         mDeviceInfo = nullptr;
         mDeviceIsConnected = false;
         setFeaturesPrepared(false);
-        setKeyNotificationsActive(false);
-        mCurrentKey.clear();
-        mKeyIdValue.clear();
-        emit keyIdValueChanged();
-        mBatteryLevelValue = -1;
-        emit batteryLevelValueChanged();
+        setScanNotificationsActive(false);
+        // mCurrentKey.clear();
+        mBarcodeValue.clear();
+        emit barcodeValueChanged();
         if(mHasDevice) {
             mHasDevice = false;
             emit hasDeviceChanged();
         }
-        qDebug() << "WaiterLock Manager: current Device REMOVED";
+        qDebug() << "GeneralScan Manager: current Device REMOVED";
     }
 }
 
@@ -147,7 +137,7 @@ bool GeneralScanManager::isCurrentDeviceConnected()
 
 void GeneralScanManager::prepareServices()
 {
-    qDebug() << "Addimat: prepareServices and start features";
+    qDebug() << "GeneralScan: prepareServices and start features";
     if(!mDeviceInfo) {
         qWarning() << "no Device Info";
         setFeaturesPrepared(false);
@@ -173,77 +163,62 @@ void GeneralScanManager::prepareServices()
         setFeaturesPrepared(false);
         return;
     }
-    mBatteryServiceAvailable = false;
-    mBatteryServiceConnected = false;
-    mBatteryLevelAvailable = false;
 
-    mKeyServiceAvailable = false;
-    mKeyServiceConnected = false;
-    mKeyIdAvailable = false;
+    mScanServiceAvailable = false;
+    mScanServiceConnected = false;
+    mBarcodeAvailable = false;
 
     qDebug() << "services #" << myServices.size();
     for (int i = 0; i < myServices.size(); ++i) {
         MyBluetoothServiceInfo* myService = (MyBluetoothServiceInfo*)myServices.at(i);
-        if(myService->getUuid() == BATTERY_SERVICE) {
-            mBatteryService = myService;
-            connect(mBatteryService, &MyBluetoothServiceInfo::characteristicsDone, this, &WaiterLockManager::onBatteryCharacteristicsDone);
-            mBatteryServiceAvailable = true;
-        } else if(myService->getUuid() == ADDIMAT_KEY_SERVICE) {
-            mKeyService = myService;
-            connect(mKeyService, &MyBluetoothServiceInfo::characteristicsDone, this, &WaiterLockManager::onKeyCharacteristicsDone);
-            mKeyServiceAvailable = true;
+        if(myService->getUuid() == BARCODE_SCAN_SERVICE) {
+            mScanService = myService;
+            connect(mScanService, &MyBluetoothServiceInfo::characteristicsDone, this, &GeneralScanManager::onScanCharacteristicsDone);
+            mScanServiceAvailable = true;
         }
         qDebug() << "SERVICE UUID [" << myService->getUuid() << "]";
     }
-    if(mBatteryServiceAvailable) {
-        qDebug() << "Addimat Battery Service found";
-        if(mBatteryService->hasCharacteristics()) {
-            onBatteryCharacteristicsDone();
+    if(mScanServiceAvailable) {
+        qDebug() << "GeneralScan Barcode Service available";
+        if(mScanService->hasCharacteristics()) {
+            onScanCharacteristicsDone();
         } else {
-            mBatteryService->connectToService();
-        }
-    }
-    if(mKeyServiceAvailable) {
-        qDebug() << "Addimat Key Service available";
-        if(mKeyService->hasCharacteristics()) {
-            onKeyCharacteristicsDone();
-        } else {
-            mKeyService->connectToService();
+            mScanService->connectToService();
         }
     }
 }
 
-void GeneralScanManager::updateKeyValue()
+void GeneralScanManager::updateScanValue()
 {
-    if(mKeyId) {
-        mKeyService->readCharacteristic(mKeyId);
+    if(mBarcode) {
+        mScanService->readCharacteristic(mBarcode);
     }
 }
 
-void GeneralScanManager::startKeyNotifications()
+void GeneralScanManager::startScanNotifications()
 {
-    if(mKeyService && mKeyId) {
-        mKeyService->subscribeNotifications(mKeyId);
+    if(mScanService && mBarcode) {
+        mScanService->subscribeNotifications(mBarcode);
     }
 }
 
-void GeneralScanManager::stopKeyNotifications()
+void GeneralScanManager::stopScanNotifications()
 {
-    if(mKeyService && mKeyId) {
-        mKeyService->unSubscribeNotifications(mKeyId);
+    if(mScanService && mBarcode) {
+        mScanService->unSubscribeNotifications(mBarcode);
     }
 }
 
-void GeneralScanManager::onKeyCharacteristicsDone()
+void GeneralScanManager::onScanCharacteristicsDone()
 {
-    qDebug() << "onKeyCharacteristicsDone - get " << ADDIMAT_KEY_CHARACTERISTIC;
-    mKeyId = mKeyService->getCharacteristicInfo(ADDIMAT_KEY_CHARACTERISTIC);
-    if(mKeyId) {
-        connect(mKeyId, &MyBluetoothCharacteristic::currentValueChanged, this, &WaiterLockManager::onKeyIdChanged);
-        connect(mKeyId, &MyBluetoothCharacteristic::characteristicChanged, this, &WaiterLockManager::onKeySubscriptionsChanged);
-        mKeyIdAvailable = true;
+    qDebug() << "onScanCharacteristicsDone - get " << BARCODE_SCAN_CHARACTERISTIC;
+    mBarcode = mScanService->getCharacteristicInfo(BARCODE_SCAN_CHARACTERISTIC);
+    if(mBarcode) {
+        connect(mBarcode, &MyBluetoothCharacteristic::currentValueChanged, this, &GeneralScanManager::onBarcodeChanged);
+        connect(mBarcode, &MyBluetoothCharacteristic::characteristicChanged, this, &GeneralScanManager::onScanSubscriptionsChanged);
+        mBarcodeAvailable = true;
         checkIfAllPrepared();
-        // don't read current key - the lock remains the last connected key
+        // TODO ??????  don't read current key - the lock remains the last connected key
     }
 
 }
@@ -251,46 +226,45 @@ void GeneralScanManager::onKeyCharacteristicsDone()
 // SLOT from SIGNAL deviceChanged
 void GeneralScanManager::onDisconnect()
 {
-    qDebug() << "WaiterLockManager deviceChanged - onDisconnect";
+    qDebug() << "GeneralScanManager deviceChanged - onDisconnect";
     // we're only interested into unconnect
     if(!mDeviceInfo || !mDeviceInfo->getDeviceIsConnected()) {
-        qDebug() << "WaiterLockManager onDisconnect";
+        qDebug() << "GeneralScanManager onDisconnect";
         mDeviceIsConnected = false;
         setFeaturesPrepared(false);
-        setKeyNotificationsActive(false);
+        setScanNotificationsActive(false);
     }
 }
 
-void GeneralScanManager::onKeyIdChanged()
+void GeneralScanManager::onBarcodeChanged()
 {
-    mTotterTimer->stop();
-    QByteArray valueArray = mKeyId->getCurrentValue();
+    QByteArray valueArray = mBarcode->getCurrentValue();
     QString hexValue = valueArray.toHex();
-    if(mKeyIdValue == hexValue) {
-        qDebug() << "same key while tottle timer is running";
-        return;
-    }
-    if(mKeyIdValue.length()> 0 && hexValue == NO_KEY) {
-        mCurrentKey = mKeyIdValue;
-        mTotterTimer->start();
-        return;
-    }
-    mKeyIdValue = hexValue;
-    qDebug() << "another KEY ID:" << mKeyIdValue;
-    emit keyIdValueChanged();
+//    if(mBarcodeValue == hexValue) {
+//        qDebug() << "same key while tottle timer is running";
+//        return;
+//    }
+//    if(mBarcodeValue.length()> 0 && hexValue == NO_KEY) {
+//        mCurrentKey = mKeyIdValue;
+//        mTotterTimer->start();
+//        return;
+//    }
+    mBarcodeValue = hexValue;
+    qDebug() << "it is a BARCODE:" << mBarcodeValue;
+    emit barcodeValueChanged();
 }
 
-void GeneralScanManager::onKeySubscriptionsChanged()
+void GeneralScanManager::onScanSubscriptionsChanged()
 {
-    bool isRunning = mKeyId->getNotifyIsRunning();
-    if(isRunning != mKeyNotificationsActive) {
-        setKeyNotificationsActive(isRunning);
+    bool isRunning = mBarcode->getNotifyIsRunning();
+    if(isRunning != mScanNotificationsActive) {
+        setScanNotificationsActive(isRunning);
     }
 }
 
 void GeneralScanManager::checkIfAllPrepared()
 {
-    if(mBatteryLevelAvailable && mKeyIdAvailable && mDeviceIsConnected) {
+    if(mBarcodeAvailable && mDeviceIsConnected) {
         setFeaturesPrepared(true);
     }
 }

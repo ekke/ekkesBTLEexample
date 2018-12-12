@@ -34,6 +34,7 @@ ApplicationWindow {
     property MyBluetoothDeviceInfo currentWaiterLockDeviceInfo
     property MyBluetoothDeviceInfo currentHeartRateDeviceInfo
     property MyBluetoothDeviceInfo currentNfcReaderDeviceInfo
+    property MyBluetoothDeviceInfo currentBarcodeDeviceInfo
     function resetCurrentDevices() {
         console.log("reset current devices")
         currentWaiterLockDeviceInfo = null
@@ -42,6 +43,8 @@ ApplicationWindow {
         heartRateManager.setCurrentDevice(currentHeartRateDeviceInfo)
         currentNfcReaderDeviceInfo = null
         nfcManager.setCurrentDevice(currentNfcReaderDeviceInfo)
+        currentBarcodeDeviceInfo = null
+        scanManager.setCurrentDevice(currentBarcodeDeviceInfo)
     }
     // while configuring the Key - user Mapping,
     // we only accept key changes inside Mappings Popup
@@ -606,6 +609,10 @@ ApplicationWindow {
     function isWaiterLockCurrentTab() {
         return navigationIndex === waiterLockNavigationIndex
     }
+    function isBarcodeCurrentTab() {
+        return navigationIndex === barcodeNavigationIndex
+    }
+
     function isNfcReaderCurrentTab() {
         return navigationIndex === nfcReaderNavigationIndex
     }
@@ -617,6 +624,11 @@ ApplicationWindow {
         currentWaiterLockDeviceInfo = deviceInfo
         navigationIndex = waiterLockNavigationIndex
     }
+    function gotoBarcode(deviceInfo) {
+        currentBarcodeDeviceInfo = deviceInfo
+        navigationIndex = barcodeNavigationIndex
+    }
+
     function gotoNfc(deviceInfo) {
         currentNfcReaderDeviceInfo = deviceInfo
         navigationIndex = nfcReaderNavigationIndex

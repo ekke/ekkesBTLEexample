@@ -294,7 +294,7 @@ Page {
     // ask for Reconnect if YES pop all pages using data from deviceInfo
     function checkConnect(deviceInfo) {
         if(connectToDevicePopup.isActive) {
-            if(deviceInfo == selectedDeviceInfo) {
+            if(deviceInfo === selectedDeviceInfo) {
                 connectToDevicePopup.close()
             }
         }

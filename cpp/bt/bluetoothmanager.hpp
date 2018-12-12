@@ -27,11 +27,12 @@ class BluetoothManager : public QObject
     Q_PROPERTY(QString searchAddress READ searchAddress WRITE setSearchAddress NOTIFY searchAddressChanged)
 
 public:
-    explicit BluetoothManager(QObject *parent = 0);
+    explicit BluetoothManager(QObject *parent = nullptr);
 
     friend class HeartRateManager;
     friend class WaiterLockManager;
     friend class NfcReaderManager;
+    friend class GeneralScanManager;
 
     void init();
 

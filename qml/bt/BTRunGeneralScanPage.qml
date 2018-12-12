@@ -126,27 +126,6 @@ Page {
                     Layout.leftMargin: 16
                     Layout.rightMargin: 16
                     Layout.bottomMargin: 12
-                    LabelSubheading {
-                        id: batteryLabel
-                        Layout.alignment: Qt.AlignVCenter
-                        Layout.preferredWidth: 1
-                        text: qsTr("Battery")
-                        color: primaryColor
-                        DotMarker {
-                            anchors.rightMargin: 4
-                            anchors.bottomMargin: 14
-                            visible: scanManager.featuresPrepared && scanManager.batteryLevelValue >=0
-                            color: scanManager.batteryLevelValue > scanManager.settingsBatteryLevelInfo? "green" : (scanManager.batteryLevelValue > scanManager.settingsBatteryLevelWarning? "orange" : "red")
-                        }
-                    }
-                    LabelSubheading {
-                        Layout.alignment: Qt.AlignVCenter
-                        Layout.preferredWidth: 3
-                        leftPadding: 16
-                        rightPadding: 10
-                        wrapMode: Text.WrapAnywhere
-                        text:scanManager.batteryLevelValue >=0? (scanManager.batteryLevelValue + " %") : qsTr("n/a")
-                    }
                     ItemDelegate {
                         id: btSettingsMenuButton
                         anchors.top: parent.top
@@ -169,20 +148,21 @@ Page {
                     LabelSubheading {
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: 1
-                        text: qsTr("Key")
+                        text: qsTr("Barcode")
                         color: primaryColor
                     }
                     LabelSubheading {
+                        id: theBarcodeValueField
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: 3
                         leftPadding: 16
                         rightPadding: 10
                         wrapMode: Text.WrapAnywhere
-                        text:scanManager.keyIdValue.length >0 && scanManager.keyIdValue != "0000000000000000"? scanManager.keyIdValue : qsTr("no key")
+                        text:scanManager.barcodeValue.length >0 ? scanManager.barcodeValue : qsTr("no barcode")
                     }
                 } // key
                 RowLayout {
-                    visible: scanManager.keyNotificationsActive
+                    visible: scanManager.scanNotificationsActive
                     Layout.leftMargin: 16
                     Layout.rightMargin: 16
                     Layout.bottomMargin: 12
@@ -201,35 +181,23 @@ Page {
                         indeterminate: true
                     }
                 }
-
-                RowLayout {
-                    Layout.leftMargin: 16
-                    Layout.rightMargin: 16
-                    Layout.bottomMargin: 12
-                    LabelHeadline {
-                        id: greetingsLabel
-                        text: ""
-                        color: accentColor
-                        wrapMode: Text.WordWrap
-                    }
-                } // key
             } // main column
         } // root pane
     } // flickable
 
     FloatingActionButton {
-        id: startKeyNotificationsButton
+        id: startScanNotificationsButton
         visible: scanManager.featuresPrepared
         backgroundColor: primaryColor
-        imageSource: scanManager.keyNotificationsActive? "qrc:/images/"+iconOnPrimaryFolder+"/stop.png" : "qrc:/images/"+iconOnPrimaryFolder+"/play.png"
+        imageSource: scanManager.scanNotificationsActive? "qrc:/images/"+iconOnPrimaryFolder+"/stop.png" : "qrc:/images/"+iconOnPrimaryFolder+"/play.png"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 12
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
-            if(scanManager.keyNotificationsActive) {
-                scanManager.stopKeyNotifications()
+            if(scanManager.scanNotificationsActive) {
+                scanManager.stopScanNotifications()
             } else {
-                scanManager.startKeyNotifications()
+                scanManager.startScanNotifications()
             }
         }
     } // FloatingActionButton
@@ -252,14 +220,13 @@ Page {
     // if disconnecting using the Button we don't want a dialog asking for reconnect
     property bool showDisconnectMessage: true
     function onDeviceDisconnected() {
-        greetingsLabel.text = ""
         if(!showDisconnectMessage) {
             showDisconnectMessage = true
             return
         }
         // got the signal from elsewhere, so we ask user for reconnect
         // if this is our current tab
-        if(appWindow.isWaiterLockCurrentTab() && !isSearchRunning) {
+        if(appWindow.isBarcodeCurrentTab() && !isSearchRunning) {
             reconnectDialog.open()
         }
     }
@@ -449,40 +416,23 @@ Page {
 
     //  S E R V I C E S   and   C H A R A C T E R I S T I C S
     // Notifications new or empty Keys
-    function onKeyIdValueChanged() {
-        if(scanManager.keyIdValue.length > 0 && scanManager.keyIdValue != "0000000000000000") {
-            currentAddimatMapping = scanManager.findFromMapping(scanManager.keyIdValue)
-            if(!currentAddimatMapping) {
-                greetingsLabel.text = qsTr("User not found :(\nIs the Key mapped to a User ?")
-                greetingsLabel.color = "red"
-                return
-            } else {
-                greetingsLabel.text = qsTr("Welcome %1").arg(currentAddimatMapping.userName)
-                greetingsLabel.color = "green"
-            }
+    function onBarcodeValueChanged() {
+        if(scanManager.barcodeValue.length > 0) {
+            console.log("Barcode Value changed: "+ scanManager.barcodeValue)
+            // theBarcodeValueField.text should be set from property
         } else {
-            if(scanManager.keyIdValue.length === 0) {
-                currentAddimatMapping = null
-                greetingsLabel.text = ""
-                return
-            }
-            if(currentAddimatMapping) {
-                greetingsLabel.text = qsTr("Goodbye %1").arg(currentAddimatMapping.userName)
-                greetingsLabel.color = "black"
-            } else {
-                greetingsLabel.text = ""
-            }
+            theBarcodeValueField.text = ""
         }
     }
     Connections {
         target: scanManager
-        onKeyIdValueChanged: onKeyIdValueChanged()
+        onBarcodeValueChanged: onBarcodeValueChanged()
     }
     // autostart notifications when all is prepared
     function onFeaturesPreparedChanged() {
         if(scanManager.featuresPrepared) {
-            if(!scanManager.keyNotificationsActive) {
-                scanManager.startKeyNotifications()
+            if(!scanManager.scanNotificationsActive) {
+                scanManager.startScanNotifications()
             }
         }
     }
@@ -490,12 +440,8 @@ Page {
         target: scanManager
         onFeaturesPreparedChanged: onFeaturesPreparedChanged()
     }
-    // M A P P I N G S
-    BTConfigureAddimat {
-        id: configureAddimat
-    }
     // S E T T I N G S
-    BTSettingsAddimat {
+    BTSettingsGeneralScan {
         id: mySettings
     }
     function openSettingsMenu() {
@@ -514,23 +460,6 @@ Page {
             imageName: "settings.png"
             onTriggered: {
                 mySettings.open()
-            }
-        }
-        MenuSeparator {}
-        MenuItemWithIcon {
-            itemText: qsTr("Mapping")
-            imageName: "speaker.png"
-            onTriggered: {
-                configureAddimat.open()
-            }
-        }
-        MenuSeparator {}
-        MenuItemWithIcon {
-            enabled: scanManager.featuresPrepared
-            itemText: qsTr("Refresh Battery")
-            imageName: "refresh.png"
-            onTriggered: {
-                scanManager.updateBatteryLevel()
             }
         }
         MenuSeparator {}
@@ -569,11 +498,11 @@ Page {
         console.log("DESTINATION changed to btRunGeneralScanPage")
         // coming from scanner a device can be stored at appWindow
         // if there's currently no or another device used by this controlle, we overwrite with the one from appWindow
-        if (appWindow.currentWaiterLockDeviceInfo && (btRunGeneralScanPage.deviceInfo !== appWindow.currentWaiterLockDeviceInfo)) {
+        if (appWindow.currentBarcodeDeviceInfo && (btRunGeneralScanPage.deviceInfo !== appWindow.currentBarcodeDeviceInfo)) {
             console.log("scanner device not the same")
-            scanManager.setCurrentDevice(appWindow.currentWaiterLockDeviceInfo)
-            btRunGeneralScanPage.deviceInfo = appWindow.currentWaiterLockDeviceInfo
-        } else if(!appWindow.currentWaiterLockDeviceInfo &&!scanManager.hasDevice && btRunGeneralScanPage.deviceInfo) {
+            scanManager.setCurrentDevice(appWindow.currentBarcodeDeviceInfo)
+            btRunGeneralScanPage.deviceInfo = appWindow.currentBarcodeDeviceInfo
+        } else if(!appWindow.currentBarcodeDeviceInfo &&!scanManager.hasDevice && btRunGeneralScanPage.deviceInfo) {
             // if scanner rebuilds all devices new we must delete the current one
             appWindow.showToast(qsTr("current device removed"))
             btRunGeneralScanPage.deviceInfo = null

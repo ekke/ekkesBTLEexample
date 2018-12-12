@@ -53,7 +53,7 @@ Pane {
                 topPadding: 12
                 rightPadding: 16
                 wrapMode: Text.WordWrap
-                text: qsTr("HeartRate, Waiter Lock, NFC Reader")
+                text: qsTr("HeartRate, Waiter Lock, NFC Reader", "Barcode Scanner")
             }
         }
         RowLayout {
@@ -62,7 +62,7 @@ Pane {
                 topPadding: 6
                 rightPadding: 16
                 wrapMode: Text.WordWrap
-                text: qsTr("Bluetooth LE Scanner")
+                text: qsTr("Bluetooth LE Devices")
             }
         }
     } // col layout
