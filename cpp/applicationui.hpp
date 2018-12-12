@@ -9,6 +9,7 @@
 #include "bt/heartratemanager.hpp"
 #include "bt/waiterlockmanager.hpp"
 #include "bt/nfcreadermanager.hpp"
+#include "bt/generalscanmanager.hpp"
 
 class ApplicationUI : public QObject
 {
@@ -52,6 +53,7 @@ private:
      HeartRateManager* mHeartRateManager;
      WaiterLockManager* mWaiterLockManager;
      NfcReaderManager* mNfcReaderManager;
+     GeneralScanManager* mGeneralScanManager;
 
 };
 

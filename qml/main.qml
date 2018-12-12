@@ -135,20 +135,22 @@ ApplicationWindow {
     property int heartRateNavigationIndex: 2
     property int waiterLockNavigationIndex: 3
     property int nfcReaderNavigationIndex: 4
+    property int barcodeNavigationIndex: 5
     // Devices Navigation List has Policy WHILE_CURRENT !
     // swapping between Tabs will always reset the Devices List to root
     // this is important because specific Device Pages have priority
-    property int devicesNavigationIndex: 6
-    property int helpNavigationIndex: 7
-    property int aboutNavigationIndex: 8
+    property int devicesNavigationIndex: 7
+    property int helpNavigationIndex: 8
+    property int aboutNavigationIndex: 9
     property var navigationModel: [
         {"type": "../navigation/DrawerNavigationButton.qml", "name": "Home", "icon": "home.png", "source": "../pages/HomePage.qml", "showCounter":false, "showMarker":false, "a_p":1, "canGoBack":false},
         {"type": "../navigation/DrawerDivider.qml", "name": "", "icon": "", "source": "", "a_p":1, "canGoBack":false},
         {"type": "../navigation/DrawerNavigationButton.qml", "name": qsTr("HeartRate"), "icon": "chart.png", "source": "../bt/BTRunHeartRatePage.qml", "showCounter":false, "showMarker":false, "a_p":2, "canGoBack":false},
         {"type": "../navigation/DrawerNavigationButton.qml", "name": qsTr("Lock"), "icon": "key.png", "source": "../bt/BTRunAddimatPage.qml", "showCounter":false, "showMarker":false, "a_p":2, "canGoBack":false},      
         {"type": "../navigation/DrawerNavigationButton.qml", "name": qsTr("NFC Tag"), "icon": "tag.png", "source": "../bt/BTRunNfcReaderPage.qml", "showCounter":false, "showMarker":false, "a_p":2, "canGoBack":false},
+        {"type": "../navigation/DrawerNavigationButton.qml", "name": qsTr("Barcode"), "icon": "barcode.png", "source": "../bt/BTRunGeneralScanPage.qml", "showCounter":false, "showMarker":false, "a_p":2, "canGoBack":false},
         {"type": "../navigation/DrawerDivider.qml", "name": "", "icon": "", "source": "", "a_p":1, "canGoBack":false},
-        {"type": "../navigation/DrawerNavigationButton.qml", "name": qsTr("Scanner"), "icon": "my_location.png", "source": "../bt/LEDevicesNavigation.qml", "showCounter":false, "showMarker":false, "a_p":3, "canGoBack":true},
+        {"type": "../navigation/DrawerNavigationButton.qml", "name": qsTr("Devices"), "icon": "my_location.png", "source": "../bt/LEDevicesNavigation.qml", "showCounter":false, "showMarker":false, "a_p":3, "canGoBack":true},
         {"type": "../navigation/DrawerNavigationButton.qml", "name": qsTr("Help"), "icon": "help.png", "source": "../pages/HelpPage.qml", "showCounter":false, "showMarker":false, "a_p":3, "canGoBack":false},
         {"type": "../navigation/DrawerNavigationTextButton.qml", "name": qsTr("About this App"), "icon": "", "source": "../pages/AboutPage.qml", "showCounter":false, "showMarker":false, "a_p":3, "canGoBack":false}
     ]
@@ -160,8 +162,9 @@ ApplicationWindow {
         qsTr("HeartRate"),
         qsTr("Lock"),
         qsTr("NFC Tag"),
+        qsTr("Barcode"),
         "",
-        qsTr("Scanner"),
+        qsTr("Devices"),
         qsTr("Help"),
         qsTr("About")
     ]
@@ -170,6 +173,7 @@ ApplicationWindow {
     property var navigationData: [
         {"counter":0, "marker":""},
         {},
+        {"counter":0, "marker":""},
         {"counter":0, "marker":""},
         {"counter":0, "marker":""},
         {"counter":0, "marker":""},
@@ -185,7 +189,7 @@ ApplicationWindow {
     property int messungenFavoritesIndex: 2
     property int syncFavoritesIndex: 3
     property var favoritesModel: [
-        heartRateNavigationIndex, waiterLockNavigationIndex, nfcReaderNavigationIndex, devicesNavigationIndex
+        waiterLockNavigationIndex, nfcReaderNavigationIndex, barcodeNavigationIndex, devicesNavigationIndex
     ]
     property int firstActiveDestination: homeNavigationIndex
     property int navigationIndex: firstActiveDestination

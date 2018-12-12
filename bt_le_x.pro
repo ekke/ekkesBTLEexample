@@ -18,7 +18,8 @@ HEADERS += \
     cpp/bt/addimatmapping.hpp \
     cpp/bt/heartratemessages.hpp \
     cpp/bt/nfcreadermanager.hpp \
-    cpp/bt/nfcreadermapping.hpp
+    cpp/bt/nfcreadermapping.hpp \
+    cpp/bt/generalscanmanager.hpp
 
 SOURCES += cpp/main.cpp \
     cpp/applicationui.cpp \
@@ -32,7 +33,8 @@ SOURCES += cpp/main.cpp \
     cpp/bt/addimatmapping.cpp \
     cpp/bt/heartratemessages.cpp \
     cpp/bt/nfcreadermanager.cpp \
-    cpp/bt/nfcreadermapping.cpp
+    cpp/bt/nfcreadermapping.cpp \
+    cpp/bt/generalscanmanager.cpp
 
 lupdate_only {
     SOURCES +=  qml/main.qml \
@@ -110,7 +112,9 @@ DISTFILES += \
     android/res/values/libs.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
+    android/gradlew.bat \
+    qml/bt/BTRunGeneralScanPage.qml \
+    qml/bt/BTSettingsGeneralScan.qml
 
 android {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

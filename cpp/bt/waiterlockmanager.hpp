@@ -25,7 +25,7 @@ class WaiterLockManager : public QObject
 
 
 public:
-    explicit WaiterLockManager(QObject *parent = 0);
+    explicit WaiterLockManager(QObject *parent = nullptr);
 
     void init(BluetoothManager* bluetoothManager);
 
