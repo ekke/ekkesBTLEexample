@@ -421,7 +421,7 @@ Page {
             console.log("Barcode Value changed: "+ scanManager.barcodeValue)
             // theBarcodeValueField.text should be set from property
         } else {
-            theBarcodeValueField.text = ""
+            console.log("Barcode Value EMPTY ")
         }
     }
     Connections {

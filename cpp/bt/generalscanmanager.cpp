@@ -247,8 +247,8 @@ void GeneralScanManager::onDisconnect()
 
 void GeneralScanManager::onBarcodeChanged()
 {
-    QByteArray valueArray = mBarcode->getCurrentValue();
-    QString hexValue = valueArray.toHex();
+    // QByteArray valueArray = mBarcode->getCurrentValue();
+    // QString hexValue = valueArray.toHex();
 //    if(mBarcodeValue == hexValue) {
 //        qDebug() << "same key while tottle timer is running";
 //        return;
@@ -258,7 +258,8 @@ void GeneralScanManager::onBarcodeChanged()
 //        mTotterTimer->start();
 //        return;
 //    }
-    mBarcodeValue = hexValue;
+    // mBarcodeValue = hexValue;
+    mBarcodeValue = QString::fromUtf8(mBarcode->getCurrentValue());
     qDebug() << "it is a BARCODE:" << mBarcodeValue;
     emit barcodeValueChanged();
 }
