@@ -35,6 +35,7 @@ ApplicationWindow {
     property MyBluetoothDeviceInfo currentHeartRateDeviceInfo
     property MyBluetoothDeviceInfo currentNfcReaderDeviceInfo
     property MyBluetoothDeviceInfo currentBarcodeDeviceInfo
+
     function resetCurrentDevices() {
         console.log("reset current devices")
         currentWaiterLockDeviceInfo = null
@@ -512,6 +513,10 @@ ApplicationWindow {
                 return
             }
             if(rootPane.currentItem.name === "BTRunNfcReaderPage") {
+                rootPane.currentItem.destinationChanged()
+                return
+            }
+            if(rootPane.currentItem.name === "BTRunGeneralScanPage") {
                 rootPane.currentItem.destinationChanged()
                 return
             }

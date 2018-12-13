@@ -178,7 +178,7 @@ void MyBluetoothDeviceInfo::onServiceDiscovered(const QBluetoothUuid &serviceUui
     // check if we're only looking for expected services
     if(createServicesActive()) {
         if(!mExpectedServiceUuids.contains(uuidString(serviceUuid))) {
-            qDebug() << "Service ignored: " << serviceUuid.toString();
+            qDebug() << "Service ignored: " << serviceUuid; // .toString()
             return;
         } else {
             qDebug() << "Service accepted: " << serviceUuid;

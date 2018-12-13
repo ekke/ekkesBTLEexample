@@ -1,7 +1,9 @@
 #include "generalscanmanager.hpp"
 
 static const QString BARCODE_SCAN_SERVICE = "0000fff0-0000-1000-8000-00805f9b34fb";
+static const QString BARCODE_SCAN_SERVICE_SHORT = "0xfff0";
 static const QString BARCODE_SCAN_CHARACTERISTIC = "0000fff1-0000-1000-8000-00805f9b34fb";
+static const QString BARCODE_SCAN_CHARACTERISTIC_SHORT = "0xfff1";
 
 GeneralScanManager::GeneralScanManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
     mScanServiceAvailable(false), mScanServiceConnected(false),
@@ -98,6 +100,7 @@ void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
         // set expected service uuids
         QStringList sl;
         sl.append(BARCODE_SCAN_SERVICE);
+        sl.append(BARCODE_SCAN_SERVICE_SHORT);
         myDevice->setExpectedServiceUuids(sl);
         //
         mDeviceIsConnected = mDeviceInfo->getDeviceIsConnected();
@@ -171,7 +174,8 @@ void GeneralScanManager::prepareServices()
     qDebug() << "services #" << myServices.size();
     for (int i = 0; i < myServices.size(); ++i) {
         MyBluetoothServiceInfo* myService = (MyBluetoothServiceInfo*)myServices.at(i);
-        if(myService->getUuid() == BARCODE_SCAN_SERVICE) {
+        if(myService->getUuid() == BARCODE_SCAN_SERVICE || myService->getUuid() == BARCODE_SCAN_SERVICE_SHORT) {
+            qDebug() << "BARCODE_SCAN_SERVICE detected";
             mScanService = myService;
             connect(mScanService, &MyBluetoothServiceInfo::characteristicsDone, this, &GeneralScanManager::onScanCharacteristicsDone);
             mScanServiceAvailable = true;
@@ -213,14 +217,19 @@ void GeneralScanManager::onScanCharacteristicsDone()
 {
     qDebug() << "onScanCharacteristicsDone - get " << BARCODE_SCAN_CHARACTERISTIC;
     mBarcode = mScanService->getCharacteristicInfo(BARCODE_SCAN_CHARACTERISTIC);
+    if(!mBarcode) {
+        qDebug() << "onScanCharacteristicsDone - get " << BARCODE_SCAN_CHARACTERISTIC_SHORT;
+        mBarcode = mScanService->getCharacteristicInfo(BARCODE_SCAN_CHARACTERISTIC_SHORT);
+    }
     if(mBarcode) {
         connect(mBarcode, &MyBluetoothCharacteristic::currentValueChanged, this, &GeneralScanManager::onBarcodeChanged);
         connect(mBarcode, &MyBluetoothCharacteristic::characteristicChanged, this, &GeneralScanManager::onScanSubscriptionsChanged);
         mBarcodeAvailable = true;
         checkIfAllPrepared();
         // TODO ??????  don't read current key - the lock remains the last connected key
+    } else {
+        qWarning() << "cannot create mBarcode from " << BARCODE_SCAN_CHARACTERISTIC << "or " << BARCODE_SCAN_CHARACTERISTIC_SHORT;
     }
-
 }
 
 // SLOT from SIGNAL deviceChanged
