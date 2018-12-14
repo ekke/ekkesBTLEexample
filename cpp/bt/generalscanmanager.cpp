@@ -163,6 +163,21 @@ void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
         // mCurrentKey.clear();
         mBarcodeValue.clear();
         emit barcodeValueChanged();
+        mManufacturerName.clear();
+        emit manufacturerNameChanged();
+        mModelNumber.clear();
+        emit modelNumberChanged();
+        mSerialNumber.clear();
+        emit serialNumberChanged();
+        mHardwareRevision.clear();
+        emit hardwareRevisionChanged();
+        mFirmwareRevision.clear();
+        emit firmwareRevisionChanged();
+        mSoftwareRevision.clear();
+        emit softwareRevisionChanged();
+        mSystemId.clear();
+        emit systemIdChanged();
+
         if(mHasDevice) {
             mHasDevice = false;
             emit hasDeviceChanged();
@@ -220,7 +235,12 @@ void GeneralScanManager::prepareServices()
     qDebug() << "services #" << myServices.size();
     for (int i = 0; i < myServices.size(); ++i) {
         MyBluetoothServiceInfo* myService = (MyBluetoothServiceInfo*)myServices.at(i);
-        if(myService->getUuid() == BARCODE_SCAN_SERVICE || myService->getUuid() == BARCODE_SCAN_SERVICE_SHORT) {
+        if(myService->getUuid() == DEVICE_INFO) {
+            qDebug() << "DEVICE_INFO detected";
+            mDeviceInfoService = myService;
+            connect(mDeviceInfoService, &MyBluetoothServiceInfo::characteristicsDone, this, &GeneralScanManager::onDeviceInfoCharacteristicsDone);
+            mDeviceInfoServiceAvailable = true;
+        } else if(myService->getUuid() == BARCODE_SCAN_SERVICE || myService->getUuid() == BARCODE_SCAN_SERVICE_SHORT) {
             qDebug() << "BARCODE_SCAN_SERVICE detected";
             mScanService = myService;
             connect(mScanService, &MyBluetoothServiceInfo::characteristicsDone, this, &GeneralScanManager::onScanCharacteristicsDone);
@@ -228,6 +248,15 @@ void GeneralScanManager::prepareServices()
         }
         qDebug() << "SERVICE UUID [" << myService->getUuid() << "]";
     }
+    if(mDeviceInfoServiceAvailable) {
+        qDebug() << "GeneralScan DeviceInfo Service available";
+        if(mDeviceInfoService->hasCharacteristics()) {
+            onDeviceInfoCharacteristicsDone();
+        } else {
+            mDeviceInfoService->connectToService();
+        }
+    }
+
     if(mScanServiceAvailable) {
         qDebug() << "GeneralScan Barcode Service available";
         if(mScanService->hasCharacteristics()) {
@@ -276,6 +305,11 @@ void GeneralScanManager::onScanCharacteristicsDone()
     } else {
         qWarning() << "cannot create mBarcode from " << BARCODE_SCAN_CHARACTERISTIC << "or " << BARCODE_SCAN_CHARACTERISTIC_SHORT;
     }
+}
+
+void GeneralScanManager::onDeviceInfoCharacteristicsDone()
+{
+    // TODO
 }
 
 // SLOT from SIGNAL deviceChanged

@@ -87,6 +87,8 @@ signals:
 
 public slots:
     void onScanCharacteristicsDone();
+    void onDeviceInfoCharacteristicsDone();
+
     void onDisconnect();
     void onBarcodeChanged();
     void onScanSubscriptionsChanged();
@@ -103,6 +105,11 @@ private:
     MyBluetoothCharacteristic* mBarcode;
     bool mBarcodeAvailable;
     QString mBarcodeValue;
+
+    MyBluetoothServiceInfo* mDeviceInfoService;
+    bool mDeviceInfoServiceAvailable;
+    bool mDeviceInfoServiceConnected;
+
     QString mManufacturerName;
     QString mModelNumber;
     QString mSerialNumber;
