@@ -12,6 +12,14 @@ class GeneralScanManager : public QObject
     Q_PROPERTY(bool featuresPrepared READ getFeaturesPrepared WRITE setFeaturesPrepared NOTIFY featuresPreparedChanged)
     Q_PROPERTY(bool scanNotificationsActive READ getScanNotificationsActive WRITE setScanNotificationsActive NOTIFY scanNotificationsActiveChanged)
     Q_PROPERTY(bool hasDevice READ getHasDevice NOTIFY hasDeviceChanged)
+    // BT DEVICE INFO SERVICE
+    Q_PROPERTY(QString manufacturerName READ getManufacturerName NOTIFY manufacturerNameChanged)
+    Q_PROPERTY(QString modelNumber READ getModelNumber NOTIFY modelNumberChanged)
+    Q_PROPERTY(QString serialNumber READ getSerialNumber NOTIFY serialNumberChanged)
+    Q_PROPERTY(QString hardwareRevision READ getHardwareRevision NOTIFY hardwareRevisionChanged)
+    Q_PROPERTY(QString firmwareRevision READ getFirmwareRevision NOTIFY firmwareRevisionChanged)
+    Q_PROPERTY(QString softwareRevision READ getSoftwareRevision NOTIFY softwareRevisionChanged)
+    Q_PROPERTY(QString systemId READ getSystemId NOTIFY systemIdChanged)
 
     // common settings
     Q_PROPERTY(QString settingsFavoriteAddress READ getSettingsFavoriteAddress WRITE setSettingsFavoriteAddress NOTIFY settingsChanged)
@@ -22,6 +30,14 @@ public:
     void init(BluetoothManager* bluetoothManager);
 
     QString getBarcodeValue() const;
+    QString getManufacturerName() const;
+    QString getModelNumber() const;
+    QString getSerialNumber() const;
+    QString getHardwareRevision() const;
+    QString getFirmwareRevision() const;
+    QString getSoftwareRevision() const;
+    QString getSystemId() const;
+
     bool getFeaturesPrepared() const;
     void setFeaturesPrepared(bool isPrepared);
     bool getScanNotificationsActive() const;
@@ -55,6 +71,14 @@ public:
 
 signals:
     void barcodeValueChanged();
+    void manufacturerNameChanged();
+    void modelNumberChanged();
+    void serialNumberChanged();
+    void hardwareRevisionChanged();
+    void firmwareRevisionChanged();
+    void softwareRevisionChanged();
+    void systemIdChanged();
+
     void scanNotificationsActiveChanged();
     void featuresPreparedChanged();
     void settingsChanged();
@@ -79,6 +103,14 @@ private:
     MyBluetoothCharacteristic* mBarcode;
     bool mBarcodeAvailable;
     QString mBarcodeValue;
+    QString mManufacturerName;
+    QString mModelNumber;
+    QString mSerialNumber;
+    QString mHardwareRevision;
+    QString mFirmwareRevision;
+    QString mSoftwareRevision;
+    QString mSystemId;
+
 
     void checkIfAllPrepared();
     bool mFeaturesPrepared;

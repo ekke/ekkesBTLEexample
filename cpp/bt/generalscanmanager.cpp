@@ -5,6 +5,16 @@ static const QString BARCODE_SCAN_SERVICE_SHORT = "0xfff0";
 static const QString BARCODE_SCAN_CHARACTERISTIC = "0000fff1-0000-1000-8000-00805f9b34fb";
 static const QString BARCODE_SCAN_CHARACTERISTIC_SHORT = "0xfff1";
 
+// optional
+static const QString DEVICE_INFO = "0x180a";
+static const QString MANUFACTURER_NAME = "0x2a29";
+static const QString MODEL_NUMBER = "0x2a24";
+static const QString SERIAL_NUMBER = "0x2a25";
+static const QString HARDWARE_REVISION = "0x2a27";
+static const QString FIRMWARE_REVISION = "0x2a26";
+static const QString SOFTWARE_REVISION = "0x2a28";
+static const QString SYSTEM_ID = "0x2a23";
+
 GeneralScanManager::GeneralScanManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
     mScanServiceAvailable(false), mScanServiceConnected(false),
     mBarcodeAvailable(false), mFeaturesPrepared(false), mScanNotificationsActive(false), mHasDevice(false)
@@ -38,6 +48,41 @@ void GeneralScanManager::updateSettings()
 QString GeneralScanManager::getBarcodeValue() const
 {
     return mBarcodeValue;
+}
+
+QString GeneralScanManager::getManufacturerName() const
+{
+    return mManufacturerName;
+}
+
+QString GeneralScanManager::getModelNumber() const
+{
+    return mModelNumber;
+}
+
+QString GeneralScanManager::getSerialNumber() const
+{
+    return mSerialNumber;
+}
+
+QString GeneralScanManager::getHardwareRevision() const
+{
+    return mHardwareRevision;
+}
+
+QString GeneralScanManager::getFirmwareRevision() const
+{
+    return mFirmwareRevision;
+}
+
+QString GeneralScanManager::getSoftwareRevision() const
+{
+    return mSoftwareRevision;
+}
+
+QString GeneralScanManager::getSystemId() const
+{
+    return mSystemId;
 }
 
 bool GeneralScanManager::getFeaturesPrepared() const
@@ -101,6 +146,7 @@ void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
         QStringList sl;
         sl.append(BARCODE_SCAN_SERVICE);
         sl.append(BARCODE_SCAN_SERVICE_SHORT);
+        sl.append(DEVICE_INFO);
         myDevice->setExpectedServiceUuids(sl);
         //
         mDeviceIsConnected = mDeviceInfo->getDeviceIsConnected();
