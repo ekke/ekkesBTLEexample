@@ -30,7 +30,7 @@ Popup {
         leftPadding: 12 + 24
         width: parent.width - 48
         anchors.top: label1.bottom
-        text: lockManager.settingsFavoriteAddress
+        text: scanManager.settingsFavoriteAddress
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
     }
 
