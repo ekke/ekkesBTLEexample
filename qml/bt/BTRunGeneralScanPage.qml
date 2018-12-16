@@ -128,13 +128,20 @@ Page {
                     Layout.bottomMargin: 12
                     ItemDelegate {
                         id: btSettingsMenuButton
-                        anchors.top: parent.top
-                        anchors.right: parent.right
+                        //anchors.top: parent.top
+                        //anchors.right: parent.right
+                        Layout.fillWidth: true
                         visible: scanManager.featuresPrepared || (deviceInfo && deviceInfo.controllerState >=3)
                         focusPolicy: Qt.NoFocus
                         Image {
+                            width: 48
+                            height: 48
+                            anchors.left: parent.left
+                            source: "qrc:/images/extra/ring_scanner.png"
+                        }
+                        Image {
                             opacity: 0.6
-                            anchors.centerIn: parent
+                            anchors.right: parent.right
                             source: "qrc:/images/black/more_vert.png"
                         }
                         onClicked: {
@@ -181,6 +188,132 @@ Page {
                         indeterminate: true
                     }
                 }
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelBodySecondary {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        wrapMode: Text.WrapAnywhere
+                        text: qsTr("Manufacturer")
+                    }
+                    LabelBody {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        leftPadding: 16
+                        rightPadding: 10
+                        wrapMode: Text.WrapAnywhere
+                        text:scanManager.manufacturerNameValue
+                    }
+                } // manufacturer
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelBodySecondary {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        wrapMode: Text.WrapAnywhere
+                        text: qsTr("Model")
+                    }
+                    LabelBody {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        leftPadding: 16
+                        rightPadding: 10
+                        wrapMode: Text.WrapAnywhere
+                        text:scanManager.modelNumberValue
+                    }
+                } // model number
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelBodySecondary {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        wrapMode: Text.WrapAnywhere
+                        text: qsTr("S/N")
+                    }
+                    LabelBody {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        leftPadding: 16
+                        rightPadding: 10
+                        wrapMode: Text.WrapAnywhere
+                        text:scanManager.serialNumberValue
+                    }
+                } // serial number
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelBodySecondary {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        wrapMode: Text.WrapAnywhere
+                        text: qsTr("Hardware Revision")
+                    }
+                    LabelBody {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        leftPadding: 16
+                        rightPadding: 10
+                        wrapMode: Text.WrapAnywhere
+                        text:scanManager.hardwareRevisionValue
+                    }
+                } // hw revision
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelBodySecondary {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        wrapMode: Text.WrapAnywhere
+                        text: qsTr("Firmware Revision")
+                    }
+                    LabelBody {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        leftPadding: 16
+                        rightPadding: 10
+                        wrapMode: Text.WrapAnywhere
+                        text:scanManager.firmwareRevisionValue
+                    }
+                } // fw revision
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelBodySecondary {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        wrapMode: Text.WrapAnywhere
+                        text: qsTr("Software Revision")
+                    }
+                    LabelBody {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        leftPadding: 16
+                        rightPadding: 10
+                        wrapMode: Text.WrapAnywhere
+                        text:scanManager.softwareRevisionValue
+                    }
+                } // sw revision
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelBodySecondary {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        wrapMode: Text.WrapAnywhere
+                        text: qsTr("System Id")
+                    }
+                    LabelBody {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        leftPadding: 16
+                        rightPadding: 10
+                        wrapMode: Text.WrapAnywhere
+                        text:scanManager.systemIdValue
+                    }
+                } // sw revision
             } // main column
         } // root pane
     } // flickable
