@@ -6,14 +6,14 @@ static const QString BARCODE_SCAN_CHARACTERISTIC = "0000fff1-0000-1000-8000-0080
 static const QString BARCODE_SCAN_CHARACTERISTIC_SHORT = "0xfff1";
 
 // optional
-static const QString DEVICE_INFO = "0x180a";
-static const QString MANUFACTURER_NAME = "0x2a29";
-static const QString MODEL_NUMBER = "0x2a24";
-static const QString SERIAL_NUMBER = "0x2a25";
-static const QString HARDWARE_REVISION = "0x2a27";
-static const QString FIRMWARE_REVISION = "0x2a26";
-static const QString SOFTWARE_REVISION = "0x2a28";
-static const QString SYSTEM_ID = "0x2a23";
+static const QString DEVICE_INFO_SERVICE = "0x180a";
+static const QString DEVICE_INFO_MANUFACTURER_NAME_CHARACTERISTIC = "0x2a29";
+static const QString DEVICE_INFO_MODEL_NUMBER_CHARACTERISTIC = "0x2a24";
+static const QString DEVICE_INFO_SERIAL_NUMBER_CHARACTERISTIC = "0x2a25";
+static const QString DEVICE_INFO_HARDWARE_REVISION_CHARACTERISTIC = "0x2a27";
+static const QString DEVICE_INFO_FIRMWARE_REVISION_CHARACTERISTIC = "0x2a26";
+static const QString DEVICE_INFO_SOFTWARE_REVISION_CHARACTERISTIC = "0x2a28";
+static const QString DEVICE_INFO_SYSTEM_ID_CHARACTERISTIC = "0x2a23";
 
 GeneralScanManager::GeneralScanManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
     mScanServiceAvailable(false), mScanServiceConnected(false),
@@ -50,39 +50,39 @@ QString GeneralScanManager::getBarcodeValue() const
     return mBarcodeValue;
 }
 
-QString GeneralScanManager::getManufacturerName() const
+QString GeneralScanManager::getManufacturerNameValue() const
 {
-    return mManufacturerName;
+    return mManufacturerNameValue;
 }
 
-QString GeneralScanManager::getModelNumber() const
+QString GeneralScanManager::getModelNumberValue() const
 {
-    return mModelNumber;
+    return mModelNumberValue;
 }
 
-QString GeneralScanManager::getSerialNumber() const
+QString GeneralScanManager::getSerialNumberValue() const
 {
-    return mSerialNumber;
+    return mSerialNumberValue;
 }
 
-QString GeneralScanManager::getHardwareRevision() const
+QString GeneralScanManager::getHardwareRevisionValue() const
 {
-    return mHardwareRevision;
+    return mHardwareRevisionValue;
 }
 
-QString GeneralScanManager::getFirmwareRevision() const
+QString GeneralScanManager::getFirmwareRevisionValue() const
 {
-    return mFirmwareRevision;
+    return mFirmwareRevisionValue;
 }
 
-QString GeneralScanManager::getSoftwareRevision() const
+QString GeneralScanManager::getSoftwareRevisionValue() const
 {
-    return mSoftwareRevision;
+    return mSoftwareRevisionValue;
 }
 
-QString GeneralScanManager::getSystemId() const
+QString GeneralScanManager::getSystemIdValue() const
 {
-    return mSystemId;
+    return mSystemIdValue;
 }
 
 bool GeneralScanManager::getFeaturesPrepared() const
@@ -146,7 +146,7 @@ void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
         QStringList sl;
         sl.append(BARCODE_SCAN_SERVICE);
         sl.append(BARCODE_SCAN_SERVICE_SHORT);
-        sl.append(DEVICE_INFO);
+        sl.append(DEVICE_INFO_SERVICE);
         myDevice->setExpectedServiceUuids(sl);
         //
         mDeviceIsConnected = mDeviceInfo->getDeviceIsConnected();
@@ -163,20 +163,20 @@ void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
         // mCurrentKey.clear();
         mBarcodeValue.clear();
         emit barcodeValueChanged();
-        mManufacturerName.clear();
-        emit manufacturerNameChanged();
-        mModelNumber.clear();
-        emit modelNumberChanged();
-        mSerialNumber.clear();
-        emit serialNumberChanged();
-        mHardwareRevision.clear();
-        emit hardwareRevisionChanged();
-        mFirmwareRevision.clear();
-        emit firmwareRevisionChanged();
-        mSoftwareRevision.clear();
-        emit softwareRevisionChanged();
-        mSystemId.clear();
-        emit systemIdChanged();
+        mManufacturerNameValue.clear();
+        emit manufacturerNameValueChanged();
+        mModelNumberValue.clear();
+        emit modelNumberValueChanged();
+        mSerialNumberValue.clear();
+        emit serialNumberValueChanged();
+        mHardwareRevisionValue.clear();
+        emit hardwareRevisionValueChanged();
+        mFirmwareRevisionValue.clear();
+        emit firmwareRevisionValueChanged();
+        mSoftwareRevisionValue.clear();
+        emit softwareRevisionValueChanged();
+        mSystemIdValue.clear();
+        emit systemIdValueChanged();
 
         if(mHasDevice) {
             mHasDevice = false;
@@ -235,8 +235,8 @@ void GeneralScanManager::prepareServices()
     qDebug() << "services #" << myServices.size();
     for (int i = 0; i < myServices.size(); ++i) {
         MyBluetoothServiceInfo* myService = (MyBluetoothServiceInfo*)myServices.at(i);
-        if(myService->getUuid() == DEVICE_INFO) {
-            qDebug() << "DEVICE_INFO detected";
+        if(myService->getUuid() == DEVICE_INFO_SERVICE) {
+            qDebug() << "DEVICE_INFO_SERVICE detected";
             mDeviceInfoService = myService;
             connect(mDeviceInfoService, &MyBluetoothServiceInfo::characteristicsDone, this, &GeneralScanManager::onDeviceInfoCharacteristicsDone);
             mDeviceInfoServiceAvailable = true;
@@ -290,7 +290,7 @@ void GeneralScanManager::stopScanNotifications()
 
 void GeneralScanManager::onScanCharacteristicsDone()
 {
-    qDebug() << "onScanCharacteristicsDone - get " << BARCODE_SCAN_CHARACTERISTIC;
+    qDebug() << "process onScanCharacteristicsDone - get " << BARCODE_SCAN_CHARACTERISTIC;
     mBarcode = mScanService->getCharacteristicInfo(BARCODE_SCAN_CHARACTERISTIC);
     if(!mBarcode) {
         qDebug() << "onScanCharacteristicsDone - get " << BARCODE_SCAN_CHARACTERISTIC_SHORT;
@@ -301,7 +301,6 @@ void GeneralScanManager::onScanCharacteristicsDone()
         connect(mBarcode, &MyBluetoothCharacteristic::characteristicChanged, this, &GeneralScanManager::onScanSubscriptionsChanged);
         mBarcodeAvailable = true;
         checkIfAllPrepared();
-        // TODO ??????  don't read current key - the lock remains the last connected key
     } else {
         qWarning() << "cannot create mBarcode from " << BARCODE_SCAN_CHARACTERISTIC << "or " << BARCODE_SCAN_CHARACTERISTIC_SHORT;
     }
@@ -309,7 +308,76 @@ void GeneralScanManager::onScanCharacteristicsDone()
 
 void GeneralScanManager::onDeviceInfoCharacteristicsDone()
 {
-    // TODO
+    qDebug() << "process onDeviceInfoCharacteristicsDone";
+    mManufacturerName = mDeviceInfoService->getCharacteristicInfo(DEVICE_INFO_MANUFACTURER_NAME_CHARACTERISTIC);
+    if(mManufacturerName) {
+        mManufacturerNameValue = mManufacturerName->getValue();
+        mManufacturerNameAvailable = true;
+        manufacturerNameValueChanged();
+        checkIfAllPrepared();
+    } else {
+        qWarning() << "cannot create mManufacturerName from " << DEVICE_INFO_MANUFACTURER_NAME_CHARACTERISTIC;
+    }
+    //
+    mModelNumber = mDeviceInfoService->getCharacteristicInfo(DEVICE_INFO_MODEL_NUMBER_CHARACTERISTIC);
+    if(mModelNumber) {
+        mModelNumberValue = mModelNumber->getValue();
+        mModelNumberAvailable = true;
+        emit modelNumberValueChanged();
+        checkIfAllPrepared();
+    } else {
+        qWarning() << "cannot create mModelNumber from " << DEVICE_INFO_MODEL_NUMBER_CHARACTERISTIC;
+    }
+    //
+    mSerialNumber = mDeviceInfoService->getCharacteristicInfo(DEVICE_INFO_SERIAL_NUMBER_CHARACTERISTIC);
+    if(mSerialNumber) {
+        mSerialNumberValue = mSerialNumber->getValue();
+        mSerialNumberAvailable = true;
+        emit serialNumberValueChanged();
+        checkIfAllPrepared();
+    } else {
+        qWarning() << "cannot create mSerialNumber from " << DEVICE_INFO_SERIAL_NUMBER_CHARACTERISTIC;
+    }
+    //
+    mHardwareRevision = mDeviceInfoService->getCharacteristicInfo(DEVICE_INFO_HARDWARE_REVISION_CHARACTERISTIC);
+    if(mHardwareRevision) {
+        mHardwareRevisionValue = mHardwareRevision->getValue();
+        mHardwareRevisionAvailable = true;
+        emit hardwareRevisionValueChanged();
+        checkIfAllPrepared();
+    } else {
+        qWarning() << "cannot create mHardwareRevision from " << DEVICE_INFO_HARDWARE_REVISION_CHARACTERISTIC;
+    }
+    //
+    mFirmwareRevision = mDeviceInfoService->getCharacteristicInfo(DEVICE_INFO_FIRMWARE_REVISION_CHARACTERISTIC);
+    if(mFirmwareRevision) {
+        mFirmwareRevisionValue = mFirmwareRevision->getValue();
+        mFirmwareRevisionAvailable = true;
+        emit firmwareRevisionValueChanged();
+        checkIfAllPrepared();
+    } else {
+        qWarning() << "cannot create mFirmwareRevision from " << DEVICE_INFO_FIRMWARE_REVISION_CHARACTERISTIC;
+    }
+    //
+    mSoftwareRevision = mDeviceInfoService->getCharacteristicInfo(DEVICE_INFO_SOFTWARE_REVISION_CHARACTERISTIC);
+    if(mSoftwareRevision) {
+        mSoftwareRevisionValue = mSoftwareRevision->getValue();
+        mSoftwareRevisionAvailable = true;
+        emit softwareRevisionValueChanged();
+        checkIfAllPrepared();
+    } else {
+        qWarning() << "cannot create mSoftwareRevision from " << DEVICE_INFO_SOFTWARE_REVISION_CHARACTERISTIC;
+    }
+    //
+    mSystemId = mDeviceInfoService->getCharacteristicInfo(DEVICE_INFO_SYSTEM_ID_CHARACTERISTIC);
+    if(mSystemId) {
+        mSystemIdValue = mSystemId->getValue();
+        mSystemIdAvailable = true;
+        emit systemIdValueChanged();
+        checkIfAllPrepared();
+    } else {
+        qWarning() << "cannot create mSystemId from " << DEVICE_INFO_SYSTEM_ID_CHARACTERISTIC;
+    }
 }
 
 // SLOT from SIGNAL deviceChanged
@@ -354,7 +422,15 @@ void GeneralScanManager::onScanSubscriptionsChanged()
 
 void GeneralScanManager::checkIfAllPrepared()
 {
-    if(mBarcodeAvailable && mDeviceIsConnected) {
+    if(mBarcodeAvailable && mManufacturerNameAvailable && mModelNumberAvailable && mSerialNumberAvailable && mHardwareRevisionAvailable
+            && mFirmwareRevisionAvailable && mSoftwareRevisionAvailable && mSystemIdAvailable && mDeviceIsConnected) {
         setFeaturesPrepared(true);
+        qDebug() << "Manufacturer: " << mManufacturerNameValue;
+        qDebug() << "Model No: " << mModelNumberValue;
+        qDebug() << "Serial Number: " << mSerialNumberValue;
+        qDebug() << "Hardware Revision: " << mHardwareRevisionValue;
+        qDebug() << "Firmware Revision: " << mFirmwareRevisionValue;
+        qDebug() << "Software Revision: " << mSoftwareRevisionValue;
+        qDebug() << "System ID: " << mSystemIdValue;
     }
 }

@@ -13,13 +13,13 @@ class GeneralScanManager : public QObject
     Q_PROPERTY(bool scanNotificationsActive READ getScanNotificationsActive WRITE setScanNotificationsActive NOTIFY scanNotificationsActiveChanged)
     Q_PROPERTY(bool hasDevice READ getHasDevice NOTIFY hasDeviceChanged)
     // BT DEVICE INFO SERVICE
-    Q_PROPERTY(QString manufacturerName READ getManufacturerName NOTIFY manufacturerNameChanged)
-    Q_PROPERTY(QString modelNumber READ getModelNumber NOTIFY modelNumberChanged)
-    Q_PROPERTY(QString serialNumber READ getSerialNumber NOTIFY serialNumberChanged)
-    Q_PROPERTY(QString hardwareRevision READ getHardwareRevision NOTIFY hardwareRevisionChanged)
-    Q_PROPERTY(QString firmwareRevision READ getFirmwareRevision NOTIFY firmwareRevisionChanged)
-    Q_PROPERTY(QString softwareRevision READ getSoftwareRevision NOTIFY softwareRevisionChanged)
-    Q_PROPERTY(QString systemId READ getSystemId NOTIFY systemIdChanged)
+    Q_PROPERTY(QString manufacturerNameValue READ getManufacturerNameValue NOTIFY manufacturerNameValueChanged)
+    Q_PROPERTY(QString modelNumberValue READ getModelNumberValue NOTIFY modelNumberValueChanged)
+    Q_PROPERTY(QString serialNumberValue READ getSerialNumberValue NOTIFY serialNumberValueChanged)
+    Q_PROPERTY(QString hardwareRevisionValue READ getHardwareRevisionValue NOTIFY hardwareRevisionValueChanged)
+    Q_PROPERTY(QString firmwareRevisionValue READ getFirmwareRevisionValue NOTIFY firmwareRevisionValueChanged)
+    Q_PROPERTY(QString softwareRevisionValue READ getSoftwareRevisionValue NOTIFY softwareRevisionValueChanged)
+    Q_PROPERTY(QString systemIdValue READ getSystemIdValue NOTIFY systemIdValueChanged)
 
     // common settings
     Q_PROPERTY(QString settingsFavoriteAddress READ getSettingsFavoriteAddress WRITE setSettingsFavoriteAddress NOTIFY settingsChanged)
@@ -30,13 +30,13 @@ public:
     void init(BluetoothManager* bluetoothManager);
 
     QString getBarcodeValue() const;
-    QString getManufacturerName() const;
-    QString getModelNumber() const;
-    QString getSerialNumber() const;
-    QString getHardwareRevision() const;
-    QString getFirmwareRevision() const;
-    QString getSoftwareRevision() const;
-    QString getSystemId() const;
+    QString getManufacturerNameValue() const;
+    QString getModelNumberValue() const;
+    QString getSerialNumberValue() const;
+    QString getHardwareRevisionValue() const;
+    QString getFirmwareRevisionValue() const;
+    QString getSoftwareRevisionValue() const;
+    QString getSystemIdValue() const;
 
     bool getFeaturesPrepared() const;
     void setFeaturesPrepared(bool isPrepared);
@@ -71,13 +71,13 @@ public:
 
 signals:
     void barcodeValueChanged();
-    void manufacturerNameChanged();
-    void modelNumberChanged();
-    void serialNumberChanged();
-    void hardwareRevisionChanged();
-    void firmwareRevisionChanged();
-    void softwareRevisionChanged();
-    void systemIdChanged();
+    void manufacturerNameValueChanged();
+    void modelNumberValueChanged();
+    void serialNumberValueChanged();
+    void hardwareRevisionValueChanged();
+    void firmwareRevisionValueChanged();
+    void softwareRevisionValueChanged();
+    void systemIdValueChanged();
 
     void scanNotificationsActiveChanged();
     void featuresPreparedChanged();
@@ -109,14 +109,27 @@ private:
     MyBluetoothServiceInfo* mDeviceInfoService;
     bool mDeviceInfoServiceAvailable;
     bool mDeviceInfoServiceConnected;
-
-    QString mManufacturerName;
-    QString mModelNumber;
-    QString mSerialNumber;
-    QString mHardwareRevision;
-    QString mFirmwareRevision;
-    QString mSoftwareRevision;
-    QString mSystemId;
+    MyBluetoothCharacteristic* mManufacturerName;
+    bool mManufacturerNameAvailable;
+    QString mManufacturerNameValue;
+    MyBluetoothCharacteristic* mModelNumber;
+    bool mModelNumberAvailable;
+    QString mModelNumberValue;
+    MyBluetoothCharacteristic* mSerialNumber;
+    bool mSerialNumberAvailable;
+    QString mSerialNumberValue;
+    MyBluetoothCharacteristic* mHardwareRevision;
+    bool mHardwareRevisionAvailable;
+    QString mHardwareRevisionValue;
+    MyBluetoothCharacteristic* mFirmwareRevision;
+    bool mFirmwareRevisionAvailable;
+    QString mFirmwareRevisionValue;
+    MyBluetoothCharacteristic* mSoftwareRevision;
+    bool mSoftwareRevisionAvailable;
+    QString mSoftwareRevisionValue;
+    MyBluetoothCharacteristic* mSystemId;
+    bool mSystemIdAvailable;
+    QString mSystemIdValue;
 
 
     void checkIfAllPrepared();
