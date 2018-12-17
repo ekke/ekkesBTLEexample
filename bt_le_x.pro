@@ -112,9 +112,7 @@ DISTFILES += \
     android/res/values/libs.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat \
-    qml/bt/BTRunGeneralScanPage.qml \
-    qml/bt/BTSettingsGeneralScan.qml
+    android/gradlew.bat
 
 android {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
