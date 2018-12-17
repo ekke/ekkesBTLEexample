@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include "bluetoothmanager.hpp"
-#include "addimatmapping.hpp"
 
 class GeneralScanManager : public QObject
 {
