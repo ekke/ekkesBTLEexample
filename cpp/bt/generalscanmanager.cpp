@@ -16,8 +16,11 @@ static const QString DEVICE_INFO_SOFTWARE_REVISION_CHARACTERISTIC = "0x2a28";
 static const QString DEVICE_INFO_SYSTEM_ID_CHARACTERISTIC = "0x2a23";
 
 GeneralScanManager::GeneralScanManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
-    mScanServiceAvailable(false), mScanServiceConnected(false),
-    mBarcodeAvailable(false), mFeaturesPrepared(false), mScanNotificationsActive(false), mHasDevice(false)
+    mScanServiceAvailable(false), mScanServiceConnected(false), mBarcodeAvailable(false),
+    mDeviceInfoServiceAvailable(false), mDeviceInfoServiceConnected(false), mManufacturerNameAvailable(false),
+    mModelNumberAvailable(false), mSerialNumberAvailable(false), mHardwareRevisionAvailable(false),
+    mFirmwareRevisionAvailable(false), mSoftwareRevisionAvailable(false), mSystemIdAvailable(false),
+    mFeaturesPrepared(false), mScanNotificationsActive(false), mHasDevice(false)
 {
 
 }
@@ -232,6 +235,16 @@ void GeneralScanManager::prepareServices()
     mScanServiceConnected = false;
     mBarcodeAvailable = false;
 
+    mDeviceInfoServiceAvailable = false;
+    mDeviceInfoServiceConnected = false;
+    mManufacturerNameAvailable = false;
+    mModelNumberAvailable = false;
+    mSerialNumberAvailable = false;
+    mHardwareRevisionAvailable = false;
+    mFirmwareRevisionAvailable = false;
+    mSoftwareRevisionAvailable = false;
+    mSystemIdAvailable = false;
+
     qDebug() << "services #" << myServices.size();
     for (int i = 0; i < myServices.size(); ++i) {
         MyBluetoothServiceInfo* myService = (MyBluetoothServiceInfo*)myServices.at(i);
@@ -248,20 +261,27 @@ void GeneralScanManager::prepareServices()
         }
         qDebug() << "SERVICE UUID [" << myService->getUuid() << "]";
     }
-    if(mDeviceInfoServiceAvailable) {
-        qDebug() << "GeneralScan DeviceInfo Service available";
-        if(mDeviceInfoService->hasCharacteristics()) {
-            onDeviceInfoCharacteristicsDone();
-        } else {
-            mDeviceInfoService->connectToService();
-        }
-    }
+
+    // ATTENTION: on iOS I got some trouble to scan for the characteristics from different services
+    // solution: chaining it: as soon as onScanCharacteristicsDone() we do this commented code:
+//    if(mDeviceInfoServiceAvailable) {
+//        qDebug() << "GeneralScan DeviceInfo Service available";
+//        if(mDeviceInfoService->hasCharacteristics()) {
+//            qDebug() << "GeneralScan DeviceInfo Service has Characteristics";
+//            onDeviceInfoCharacteristicsDone();
+//        } else {
+//            qDebug() << "GeneralScan DeviceInfo Service connect to service";
+//            mDeviceInfoService->connectToService();
+//        }
+//    }
 
     if(mScanServiceAvailable) {
         qDebug() << "GeneralScan Barcode Service available";
         if(mScanService->hasCharacteristics()) {
+            qDebug() << "GeneralScan Barcode Service has characteristics";
             onScanCharacteristicsDone();
         } else {
+            qDebug() << "GeneralScan Barcode Service connect to Service";
             mScanService->connectToService();
         }
     }
@@ -301,6 +321,21 @@ void GeneralScanManager::onScanCharacteristicsDone()
         connect(mBarcode, &MyBluetoothCharacteristic::characteristicChanged, this, &GeneralScanManager::onScanSubscriptionsChanged);
         mBarcodeAvailable = true;
         checkIfAllPrepared();
+        if(!mFeaturesPrepared) {
+            // see comment from prepareServices()
+            // we must chain the scanning of characteristics to avoid trouble on iOS
+            if(mDeviceInfoServiceAvailable) {
+                qDebug() << "GeneralScan DeviceInfo Service available";
+                if(mDeviceInfoService->hasCharacteristics()) {
+                    qDebug() << "GeneralScan DeviceInfo Service has Characteristics";
+                    onDeviceInfoCharacteristicsDone();
+                } else {
+                    qDebug() << "GeneralScan DeviceInfo Service connect to service";
+                    mDeviceInfoService->connectToService();
+                }
+            } // DeviceInfoServiceAvailable
+        } // ! features prepared
+
     } else {
         qWarning() << "cannot create mBarcode from " << BARCODE_SCAN_CHARACTERISTIC << "or " << BARCODE_SCAN_CHARACTERISTIC_SHORT;
     }
