@@ -196,7 +196,7 @@ Page {
                     case 1:
                         // check if there's another device already connected
                         if(heartRateManager.hasDevice) {
-                            if(heartRateManager.getSettingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
+                            if(heartRateManager.settingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
                                 if(heartRateManager.isCurrentDeviceConnected()) {
                                     appWindow.showInfo(qsTr("There's another HeartRate device connected.\nPlease disconnect before selecting another one"))
                                     return
@@ -211,7 +211,7 @@ Page {
                     case 3:
                         // check if there's another device already connected
                         if(lockManager.hasDevice) {
-                            if(lockManager.getSettingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
+                            if(lockManager.settingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
                                 if(lockManager.isCurrentDeviceConnected()) {
                                     appWindow.showInfo(qsTr("There's another Addimat Waiter Lock connected.\nPlease disconnect before selecting another one"))
                                     return
@@ -229,7 +229,7 @@ Page {
                     case 6:
                         // check if there's another device already connected
                         if(nfcManager.hasDevice) {
-                            if(nfcManager.getSettingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
+                            if(nfcManager.settingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
                                 if(nfcManager.isCurrentDeviceConnected()) {
                                     appWindow.showInfo(qsTr("There's another NFC Reader connected.\nPlease disconnect before selecting another one"))
                                     return
@@ -241,7 +241,7 @@ Page {
                     case 7:
                         // check if there's another device already connected
                         if(scanManager.hasDevice) {
-                            if(scanManager.getSettingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
+                            if(scanManager.settingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
                                 if(scanManager.isCurrentDeviceConnected()) {
                                     appWindow.showInfo(qsTr("There's another Barcode Scanner connected.\nPlease disconnect before selecting another one"))
                                     return
