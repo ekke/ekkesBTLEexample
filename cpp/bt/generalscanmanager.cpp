@@ -134,6 +134,21 @@ void GeneralScanManager::setSettingsFavoriteAddress(QString address)
     }
 }
 
+QString GeneralScanManager::getSettingsFavoriteName() const
+{
+    return mSettingsFavoriteName;
+}
+
+void GeneralScanManager::setSettingsFavoriteName(QString name)
+{
+    if(mSettingsFavoriteName != name) {
+        mSettingsFavoriteName = name;
+        mGeneralScanSettingsMap.insert("settingsFavoriteName", name);
+        updateSettings();
+        emit settingsNameChanged();
+    }
+}
+
 void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
 {
     if(myDevice) {
@@ -142,9 +157,10 @@ void GeneralScanManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
             deviceAddressChanged = true;
         }
         mDeviceInfo = myDevice;
-        qDebug() << "GeneralScan Manager: current Device " << myDevice->getAddress();
-        // remember address
+        qDebug() << "GeneralScan Manager: current Device " << myDevice->getAddress() << " / " << myDevice->getName();
+        // remember address and name
         setSettingsFavoriteAddress(myDevice->getAddress());
+        setSettingsFavoriteName(myDevice->getName());
         // set expected service uuids
         QStringList sl;
         sl.append(BARCODE_SCAN_SERVICE);

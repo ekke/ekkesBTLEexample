@@ -22,6 +22,7 @@ class GeneralScanManager : public QObject
 
     // common settings
     Q_PROPERTY(QString settingsFavoriteAddress READ getSettingsFavoriteAddress WRITE setSettingsFavoriteAddress NOTIFY settingsChanged)
+    Q_PROPERTY(QString settingsFavoriteName READ getSettingsFavoriteName WRITE setSettingsFavoriteName NOTIFY settingsNameChanged)
 
 public:
     explicit GeneralScanManager(QObject *parent = nullptr);
@@ -45,6 +46,9 @@ public:
 
     QString getSettingsFavoriteAddress() const;
     void setSettingsFavoriteAddress(QString address);
+
+    QString getSettingsFavoriteName() const;
+    void setSettingsFavoriteName(QString name);
 
     Q_INVOKABLE
     void setCurrentDevice(MyBluetoothDeviceInfo* myDevice);
@@ -81,6 +85,7 @@ signals:
     void scanNotificationsActiveChanged();
     void featuresPreparedChanged();
     void settingsChanged();
+    void settingsNameChanged();
 
     void hasDeviceChanged();
 
@@ -139,6 +144,7 @@ private:
     // SETTINGS
     QVariantMap mGeneralScanSettingsMap;
     QString mSettingsFavoriteAddress;
+    QString mSettingsFavoriteName;
     void updateSettings();
 };
 
