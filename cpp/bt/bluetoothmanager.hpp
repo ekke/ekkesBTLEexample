@@ -63,6 +63,11 @@ signals:
 
     void deviceDiscoveryErrorReceived(QString errorMessage);
 
+    // app specific !!
+    // per ex BarcodeScanner, Addimat, MobilePrinter, ...
+    // void barcodeScannerAdded(MyBluetoothDeviceInfo* deviceInfo);
+    // void addimatAdded(MyBluetoothDeviceInfo* deviceInfo);
+
 public slots:
 
 private slots:

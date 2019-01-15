@@ -215,6 +215,8 @@ void BluetoothManager::onDeviceDiscovered(QBluetoothDeviceInfo discoveredDevice)
     if(discoveredDevice.name().startsWith("Addimat", Qt::CaseInsensitive)) {
         d->setDeviceType(DEVICE_TYPE_LOCK);
         isKnownDeviceType = true;
+        // app specific
+        // emit addimatAdded(d);
     } else if (discoveredDevice.name() == "NFC_RDR") {
         d->setDeviceType(DEVICE_TYPE_NFC);
         isKnownDeviceType = true;
@@ -229,6 +231,8 @@ void BluetoothManager::onDeviceDiscovered(QBluetoothDeviceInfo discoveredDevice)
             // detects the long version of fff0: {0000fff0-0000-1000-8000-00805f9b34fb}
             if(uuid.toString() == "{0000fff0-0000-1000-8000-00805f9b34fb}") {
                 d->setDeviceType(DEVICE_TYPE_BARCODE);
+                // app specific
+                // emit barcodeScannerAdded(d);
             }
         }
     }
