@@ -71,6 +71,15 @@ public:
     Q_INVOKABLE
     void stopScanNotifications();
 
+    Q_INVOKABLE
+    void resetFoundDevices();
+
+    Q_INVOKABLE
+    void addToFoundDevices(MyBluetoothDeviceInfo* deviceInfo);
+
+    Q_INVOKABLE
+    QList<QObject*> foundDevices();
+
 
 signals:
     void barcodeValueChanged();
@@ -89,6 +98,8 @@ signals:
 
     void hasDeviceChanged();
 
+    void foundDevicesCounter(const int devicesCounter);
+
 public slots:
     void onScanCharacteristicsDone();
     void onDeviceInfoCharacteristicsDone();
@@ -99,6 +110,9 @@ public slots:
 
 private:
     BluetoothManager* mBluetoothManager;
+
+    // list of MyBluetoothDeviceInfo*
+    QList<QObject*> mFoundDevices;
 
     MyBluetoothDeviceInfo* mDeviceInfo;
     bool mDeviceIsConnected;

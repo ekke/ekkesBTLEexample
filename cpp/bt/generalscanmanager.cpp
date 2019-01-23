@@ -324,6 +324,22 @@ void GeneralScanManager::stopScanNotifications()
     }
 }
 
+void GeneralScanManager::resetFoundDevices()
+{
+    mFoundDevices.clear();
+}
+
+void GeneralScanManager::addToFoundDevices(MyBluetoothDeviceInfo *deviceInfo)
+{
+    mFoundDevices.append(deviceInfo);
+    emit foundDevicesCounter(mFoundDevices.size());
+}
+
+QList<QObject *> GeneralScanManager::foundDevices()
+{
+    return mFoundDevices;
+}
+
 void GeneralScanManager::onScanCharacteristicsDone()
 {
     qDebug() << "process onScanCharacteristicsDone - get " << BARCODE_SCAN_CHARACTERISTIC;
