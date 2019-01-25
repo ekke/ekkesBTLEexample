@@ -56,6 +56,17 @@ public:
     // CLEAN UP
     void onAboutToQuit();
 
+    // in custom applications normaly only devices of a specific type are used,
+    // per ex. Barcode Scanner, Mobile Printer
+    // so the devices list is not shown per default
+    // sometime (most for Admins) it's important to see all devices, check services etc
+    // so you can use this setting to check if devices list should be shown
+    Q_INVOKABLE
+    void setShowDevicesNextRun(bool showTheDevices);
+
+    Q_INVOKABLE
+    bool showDevicesNextRun();
+
 signals:
     void devicesUpdated();
     void deviceDiscoveryActiveChanged();

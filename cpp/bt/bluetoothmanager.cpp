@@ -187,6 +187,20 @@ void BluetoothManager::onAboutToQuit()
     }
 }
 
+void BluetoothManager::setShowDevicesNextRun(bool showTheDevices)
+{
+    mBluetoothSettingsMap.insert("SHOW_DEVICES",showTheDevices);
+    cacheSettings();
+}
+
+bool BluetoothManager::showDevicesNextRun()
+{
+    if(mBluetoothSettingsMap.contains("SHOW_DEVICES")) {
+        return mBluetoothSettingsMap.value("SHOW_DEVICES").toBool();
+    }
+    return false;
+}
+
 void BluetoothManager::onDeviceDiscovered(QBluetoothDeviceInfo discoveredDevice)
 {
     // check if already discovered
