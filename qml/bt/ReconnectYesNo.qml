@@ -11,25 +11,44 @@ Popup {
     closePolicy: Popup.NoAutoClose
     property alias text: popupLabel.text
     property bool isYes: false
+    property  string deviceImageSource
+    property int deviceImageSize: popup.width / 4
     Material.elevation: 8
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
-    implicitHeight: 240
-    implicitWidth: parent.width * .9
+    implicitHeight: isLandscape? 280 : 360
+    implicitWidth: isLandscape? 360 : 280
+    parent: Overlay.overlay
+
+    Item {
+        id: deviceImageItem
+        visible: deviceImageSource.length
+        anchors.top: popup.top
+        anchors.left: popup.left
+        width: deviceImageSize
+        height: deviceImageSize
+        Image {
+            anchors.fill: parent
+            source: deviceImageSource
+        } // theScannerImage
+    } // deviceImageItem
+
+
     ColumnLayout {
         width: parent.width - 32
         anchors.right: parent.right
         anchors.left: parent.left
-        spacing: 20
+        anchors.top: deviceImageSource.length ? (isLandscape? parent.top : deviceImageItem.bottom) : parent.top
+        spacing: 10
         RowLayout {
             LabelSubheading {
                 id: popupLabel
                 topPadding: 20
-                leftPadding: 8
+                leftPadding: deviceImageSource.length && isLandscape ? deviceImageSize + 24 : 24
                 rightPadding: 8
                 text: ""
                 color: popupTextColor
-                horizontalAlignment: Text.AlignHCenter
+                // horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
             } // popupLabel
         } // row label
@@ -59,6 +78,7 @@ Popup {
             }
         } // row layout
     }
+
 
     // workaround https://bugreports.qt.io/browse/QTBUG-59670
     onOpened: {
