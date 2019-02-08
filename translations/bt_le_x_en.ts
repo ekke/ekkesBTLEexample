@@ -884,37 +884,37 @@ Is the Tag mapped to a User ?</source>
 <context>
     <name>BluetoothManager</name>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="299"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="317"/>
         <source>The Bluetooth adaptor is powered off, power it on before doing discovery.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="305"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="323"/>
         <source>Discovery error: Writing or reading from the device resulted in an error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="309"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="327"/>
         <source>Discovery error: invalid Bluetooth Adapter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="313"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="331"/>
         <source>Discovery error: unsupported platform</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="317"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="335"/>
         <source>Discovery error: unsupported Discovery Method</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="321"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="339"/>
         <source>Discovery error: unknown error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="325"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="343"/>
         <source>Discovery error: unhandled error. Code: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1618,12 +1618,12 @@ Do you want to exit and leave the App ?
 <context>
     <name>ReconnectYesNo</name>
     <message>
-        <location filename="../qml/bt/ReconnectYesNo.qml" line="44"/>
+        <location filename="../qml/bt/ReconnectYesNo.qml" line="63"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/ReconnectYesNo.qml" line="53"/>
+        <location filename="../qml/bt/ReconnectYesNo.qml" line="72"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>

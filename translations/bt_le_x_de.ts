@@ -96,102 +96,102 @@ Diese BTLE App soll nur ein paar Eindrücke vermitteln, was für APPs Sie erwart
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="23"/>
         <source>Select Material Accent Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Accent Farbe auswählen</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="70"/>
         <source>Material Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Red</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="71"/>
         <source>Material Pink</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Pink</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="72"/>
         <source>Material Purple</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Purple</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="73"/>
         <source>Material DeepPurple</source>
-        <translation type="unfinished"></translation>
+        <translation>Material DeepPurple</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="74"/>
         <source>Material Indigo</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Indigo</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="75"/>
         <source>Material Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Blue</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="76"/>
         <source>Material LightBlue</source>
-        <translation type="unfinished"></translation>
+        <translation>Material LightBlue</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="77"/>
         <source>Material Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Cyan</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="78"/>
         <source>Material Teal</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Teal</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="79"/>
         <source>Material Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Green</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="80"/>
         <source>Material LightGreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Material LightGreen</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="81"/>
         <source>Material Lime</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Lime</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="82"/>
         <source>Material Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Yellow</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="83"/>
         <source>Material Amber</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Amber</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="84"/>
         <source>Material Orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Orange</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="85"/>
         <source>Material DeepOrange</source>
-        <translation type="unfinished"></translation>
+        <translation>Material DeepOrange</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="86"/>
         <source>Material Brown</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Brown</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="87"/>
         <source>Material Grey</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Grey</translation>
     </message>
     <message>
         <location filename="../qml/pages/AccentColorPage.qml" line="88"/>
         <source>Material BlueGrey</source>
-        <translation type="unfinished"></translation>
+        <translation>Material BlueGrey</translation>
     </message>
 </context>
 <context>
@@ -199,43 +199,44 @@ Diese BTLE App soll nur ein paar Eindrücke vermitteln, was für APPs Sie erwart
     <message>
         <location filename="../qml/bt/BTConfigureAddimat.qml" line="29"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureAddimat.qml" line="48"/>
         <source>Delete Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Mapping löschen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureAddimat.qml" line="64"/>
         <source>No mappings available.
 Use the keys to configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Mappings verfügbar.
+Bitte den Schlüssel verwenden zum konfigurieren</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureAddimat.qml" line="80"/>
         <source>Configure Key &lt;--&gt; User</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren: Schlüssel zu User</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureAddimat.qml" line="169"/>
         <source>Key ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüssel ID</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureAddimat.qml" line="185"/>
         <source>User Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer Name</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureAddimat.qml" line="206"/>
         <source>PIN</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureAddimat.qml" line="227"/>
         <source>User ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer ID</translation>
     </message>
 </context>
 <context>
@@ -243,33 +244,34 @@ Use the keys to configure</source>
     <message>
         <location filename="../qml/bt/BTConfigureNfcReader.qml" line="29"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureNfcReader.qml" line="48"/>
         <source>Delete Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Mapping löschen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureNfcReader.qml" line="64"/>
         <source>No mappings available.
 Use the Tags to configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Mappings verfügbar.
+Tags benutzen zum konfigurieren</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureNfcReader.qml" line="80"/>
         <source>Configure Tag &lt;--&gt; User</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren: Tag zu User</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureNfcReader.qml" line="151"/>
         <source>TAG ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag ID</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTConfigureNfcReader.qml" line="167"/>
         <source>User Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer Name</translation>
     </message>
 </context>
 <context>
@@ -277,43 +279,43 @@ Use the Tags to configure</source>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="35"/>
         <source>no device</source>
-        <translation type="unfinished"></translation>
+        <translation>kein Gerät</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="44"/>
         <source>Search Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät suchen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="86"/>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="543"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Trennen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="86"/>
         <source>Initialize</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisisieren</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="134"/>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="149"/>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="173"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüssel</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="182"/>
         <source>no key</source>
-        <translation type="unfinished"></translation>
+        <translation>kein Schlüssel</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="245"/>
@@ -323,68 +325,73 @@ Try to reconnect now ?
 Check Device is ON, Battery OK
 Bluetooth is On
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist getrennt.
+Jetzt neu verbinden ?
+
+Gerät prüfen: angeschaltet, Battery OK
+Bluetooth ist An
+</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="311"/>
         <source>Try to connect again: %1 of 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuche, neu zu verbinden: %1 von 5</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="330"/>
         <source>Search Device, connect, prepare Services. Please wait ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche Gerät, verbinde, bereite Dienste vor. Bitte warten ...</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="331"/>
         <source>Waited too long for end of discovering devices</source>
-        <translation type="unfinished"></translation>
+        <translation>zu lange auf Dienste gewartet</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="343"/>
         <source>No Devices found. Switch Devices Off/On or Settings Bluetooth Off/On to clear cache.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Gerät gefunden. Gerät aus/anschalten oder Bluetooth Einstellungen Aus/An um Cahce zu leeren.</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="352"/>
         <source>%1 Devices found, but not Device %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Geräte gefunden, aber nicht Gerät %2.</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="461"/>
         <source>User not found :(
 Is the Key mapped to a User ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer nicht gefunden :( Ist der Schlüssel gemapped ?</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="465"/>
         <source>Welcome %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Willkommen %1</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="475"/>
         <source>Goodbye %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Wiedersehen %1</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="518"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="526"/>
         <source>Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Mapping</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="535"/>
         <source>Refresh Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie aktualisieren</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="583"/>
         <source>current device removed</source>
-        <translation type="unfinished"></translation>
+        <translation>aktuelles Gerät entfernt</translation>
     </message>
 </context>
 <context>
@@ -511,38 +518,38 @@ Bluetooth ist An
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="34"/>
         <source>no device</source>
-        <translation type="unfinished"></translation>
+        <translation>kein Gerät</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="43"/>
         <source>Search Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät suchen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="85"/>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="508"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Trennen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="85"/>
         <source>Initialize</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisisieren</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="132"/>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="148"/>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="173"/>
         <source>Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachrichten</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="253"/>
@@ -552,52 +559,57 @@ Try to reconnect now ?
 Check Device is ON, Battery OK
 Bluetooth is On
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist getrennt.
+Jetzt neu verbinden ?
+
+Gerät prüfen: angeschaltet, Battery OK
+Bluetooth ist An
+</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="318"/>
         <source>Try to connect again: %1 of 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuche, neu zu verbinden: %1 von 5</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="337"/>
         <source>Search Device, connect, prepare Services. Please wait ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche Gerät, verbinde, bereite Dienste vor. Bitte warten ...</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="338"/>
         <source>Waited too long for end of discovering devices</source>
-        <translation type="unfinished"></translation>
+        <translation>zu lange auf Dienste gewartet</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="350"/>
         <source>No Devices found. Switch Devices Off/On or Settings Bluetooth Off/On to clear cache.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Gerät gefunden. Gerät aus/anschalten oder Bluetooth Einstellungen Aus/An um Cahce zu leeren.</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="359"/>
         <source>%1 Devices found, but not Device %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Geräte gefunden, aber nicht Gerät %2.</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="487"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="496"/>
         <source>Stop Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Beende Batrieinfo</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="496"/>
         <source>Start Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Batterieinfo</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunHeartRatePage.qml" line="547"/>
         <source>current device removed</source>
-        <translation type="unfinished"></translation>
+        <translation>aktuelles Gerät entfernt</translation>
     </message>
 </context>
 <context>
@@ -605,58 +617,58 @@ Bluetooth is On
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="35"/>
         <source>no device</source>
-        <translation type="unfinished"></translation>
+        <translation>kein Gerät</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="44"/>
         <source>Search Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät suchen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="86"/>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="582"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Trennen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="86"/>
         <source>Initialize</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisisieren</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="134"/>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="149"/>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="176"/>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommandos</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="182"/>
         <source>Buzzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieper</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="191"/>
         <source>LED</source>
-        <translation type="unfinished"></translation>
+        <translation>LED</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="207"/>
         <source>Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="216"/>
         <source>Tag read finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag lesen beendet</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="279"/>
@@ -666,108 +678,114 @@ Try to reconnect now ?
 Check Device is ON, Battery OK
 Bluetooth is On
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist getrennt.
+Jetzt neu verbinden ?
+
+Gerät prüfen: angeschaltet, Battery OK
+Bluetooth ist An
+</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="345"/>
         <source>Try to connect again: %1 of 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuche, neu zu verbinden: %1 von 5</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="364"/>
         <source>Search Device, connect, prepare Services. Please wait ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche Gerät, verbinde, bereite Dienste vor. Bitte warten ...</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="365"/>
         <source>Waited too long for end of discovering devices</source>
-        <translation type="unfinished"></translation>
+        <translation>zu lange auf Dienste gewartet</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="377"/>
         <source>No Devices found. Switch Devices Off/On or Settings Bluetooth Off/On to clear cache.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Gerät gefunden. Gerät aus/anschalten oder Bluetooth Einstellungen Aus/An um Cahce zu leeren.</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="386"/>
         <source>%1 Devices found, but not Device %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Geräte gefunden, aber nicht Gerät %2.</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="495"/>
         <source>User not found :(
 Is the Tag mapped to a User ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer nicht gefunden :( 
+Ist der Tag gemapped ?</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="502"/>
         <source>Welcome %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Willkommen %1</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="513"/>
         <source>Goodbye %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Wiedersehen %1</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="556"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="564"/>
         <source>Mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Mapping</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="573"/>
         <source>Refresh Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie aktualisieren</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="576"/>
         <source>not available yet for NFC Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>derzeit nicht verfügbar für NFC Reader</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="614"/>
         <source>LED Red</source>
-        <translation type="unfinished"></translation>
+        <translation>LED rot</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="623"/>
         <source>LED Green</source>
-        <translation type="unfinished"></translation>
+        <translation>LED grün</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="632"/>
         <source>LED Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>LED blau</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="657"/>
         <source>1 high Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>1 hoher Piepton</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="665"/>
         <source>2 short Beeps</source>
-        <translation type="unfinished"></translation>
+        <translation>2 kurze Töne</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="673"/>
         <source>1 long Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>1 langer Ton</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="681"/>
         <source>1 low short Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>1 niedriger kurzer Ton</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTRunNfcReaderPage.qml" line="720"/>
         <source>current device removed</source>
-        <translation type="unfinished"></translation>
+        <translation>aktuelles Gerät entfernt</translation>
     </message>
 </context>
 <context>
@@ -775,12 +793,12 @@ Is the Tag mapped to a User ?</source>
     <message>
         <location filename="../qml/bt/BTScanPopup.qml" line="69"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTScanPopup.qml" line="78"/>
         <source>Stop pending</source>
-        <translation type="unfinished"></translation>
+        <translation>warte auf Stop</translation>
     </message>
 </context>
 <context>
@@ -788,22 +806,22 @@ Is the Tag mapped to a User ?</source>
     <message>
         <location filename="../qml/bt/BTSettingsAddimat.qml" line="24"/>
         <source>Favorite Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorit</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsAddimat.qml" line="42"/>
         <source>Battery Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie Info</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsAddimat.qml" line="52"/>
         <source>Battery Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie Warnung</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsAddimat.qml" line="78"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -824,22 +842,22 @@ Is the Tag mapped to a User ?</source>
     <message>
         <location filename="../qml/bt/BTSettingsHeartRate.qml" line="24"/>
         <source>Favorite Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorit</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsHeartRate.qml" line="42"/>
         <source>Battery Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie Info</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsHeartRate.qml" line="52"/>
         <source>Battery Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie Warnung</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsHeartRate.qml" line="78"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -847,22 +865,22 @@ Is the Tag mapped to a User ?</source>
     <message>
         <location filename="../qml/bt/BTSettingsNfcReader.qml" line="24"/>
         <source>Favorite Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorit</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsNfcReader.qml" line="42"/>
         <source>Battery Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie Info</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsNfcReader.qml" line="52"/>
         <source>Battery Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie Warnung</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTSettingsNfcReader.qml" line="78"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -870,60 +888,60 @@ Is the Tag mapped to a User ?</source>
     <message>
         <location filename="../qml/bt/BTWriteValuePage.qml" line="78"/>
         <source>Please enter HEX Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte HEX Wert eingeben</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTWriteValuePage.qml" line="78"/>
         <source>Please enter ASCII String Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte ASCII String eingeben</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTWriteValuePage.qml" line="92"/>
         <source>Write as HEX: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Als HEX schreiben: %1</translation>
     </message>
     <message>
         <location filename="../qml/bt/BTWriteValuePage.qml" line="95"/>
         <source>Write String: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Als String schreiben: %1</translation>
     </message>
 </context>
 <context>
     <name>BluetoothManager</name>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="299"/>
-        <source>The Bluetooth adaptor is powered off, power it on before doing discovery.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="305"/>
-        <source>Discovery error: Writing or reading from the device resulted in an error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="309"/>
-        <source>Discovery error: invalid Bluetooth Adapter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="313"/>
-        <source>Discovery error: unsupported platform</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../cpp/bt/bluetoothmanager.cpp" line="317"/>
+        <source>The Bluetooth adaptor is powered off, power it on before doing discovery.</source>
+        <translation>Der Bluetooth Adapter ist ausgeschaltet, bitte anschalten.</translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="323"/>
+        <source>Discovery error: Writing or reading from the device resulted in an error.</source>
+        <translation>Discovery error: Schreiben zum oder Lesen vom Gerät führte zu Fehler.</translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="327"/>
+        <source>Discovery error: invalid Bluetooth Adapter</source>
+        <translation>Discovery error: ungültiger Bluetooth Adapter</translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="331"/>
+        <source>Discovery error: unsupported platform</source>
+        <translation>Discovery error: Plattform nicht unterstützt</translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="335"/>
         <source>Discovery error: unsupported Discovery Method</source>
-        <translation type="unfinished"></translation>
+        <translation>Discovery error: Discovery Methode nicht supported</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="321"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="339"/>
         <source>Discovery error: unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>Discovery error: unbekannter Fehler</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="325"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="343"/>
         <source>Discovery error: unhandled error. Code: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Discovery error: unbekannter Fehler. Code: %1</translation>
     </message>
 </context>
 <context>
@@ -931,7 +949,7 @@ Is the Tag mapped to a User ?</source>
     <message>
         <location filename="../qml/common/ComboBoxButton.qml" line="11"/>
         <source>Please select</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte auswählen</translation>
     </message>
 </context>
 <context>
@@ -940,18 +958,18 @@ Is the Tag mapped to a User ?</source>
         <location filename="../qml/common/CommunicationMenu.qml" line="34"/>
         <location filename="../qml/common/CommunicationMenu.qml" line="66"/>
         <source>Phone Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefonanruf</translation>
     </message>
     <message>
         <location filename="../qml/common/CommunicationMenu.qml" line="41"/>
         <location filename="../qml/common/CommunicationMenu.qml" line="74"/>
         <source>SMS</source>
-        <translation type="unfinished"></translation>
+        <translation>SMS</translation>
     </message>
     <message>
         <location filename="../qml/common/CommunicationMenu.qml" line="82"/>
         <source>Facetime</source>
-        <translation type="unfinished"></translation>
+        <translation>FaceTime</translation>
     </message>
 </context>
 <context>
@@ -959,17 +977,17 @@ Is the Tag mapped to a User ?</source>
     <message>
         <location filename="../qml/popups/DatePicker.qml" line="284"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute</translation>
     </message>
     <message>
         <location filename="../qml/popups/DatePicker.qml" line="295"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwerfen</translation>
     </message>
     <message>
         <location filename="../qml/popups/DatePicker.qml" line="304"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -994,12 +1012,12 @@ Is the Tag mapped to a User ?</source>
     <message>
         <location filename="../qml/common/FooterCancelSave.qml" line="28"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwerfen</translation>
     </message>
     <message>
         <location filename="../qml/common/FooterCancelSave.qml" line="36"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichern</translation>
     </message>
 </context>
 <context>
@@ -1085,7 +1103,7 @@ Addimat Kellnerschloss, NFC Lesegerät, HeartRate Monitor.</translation>
         <location filename="../qml/pages/HomePage.qml" line="56"/>
         <source>HeartRate, Waiter Lock, NFC Reader</source>
         <comment>Barcode Scanner</comment>
-        <translation type="unfinished">HeartRate, Kellnerschloß, NFC Lesegerät</translation>
+        <translation>HeartRate, Kellnerschloß, NFC Lesegerät</translation>
     </message>
     <message>
         <location filename="../qml/pages/HomePage.qml" line="65"/>
@@ -1122,68 +1140,69 @@ ekkes BTLE example</translation>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="83"/>
         <source>UUID</source>
-        <translation type="unfinished"></translation>
+        <translation>UUID</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="102"/>
         <source>Is Valid</source>
-        <translation type="unfinished"></translation>
+        <translation>ist gültig</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="110"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="110"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="120"/>
         <source>Handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Handle</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="139"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="159"/>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuell</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="173"/>
         <source>Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Berechtigungen</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="234"/>
         <source>Write as ASCII String</source>
-        <translation type="unfinished"></translation>
+        <translation>Als ASCII String schreiben</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="245"/>
         <source>Write as HEX String</source>
-        <translation type="unfinished"></translation>
+        <translation>Als HEX String schreiben</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="284"/>
         <source>Collect Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Werte sammeln</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="300"/>
         <source>Descriptors</source>
-        <translation type="unfinished"></translation>
+        <translation>Descriptors</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicDetailPage.qml" line="354"/>
         <source>Read, Write, Notify: Operation cannot be done. Getting OperationError from QLowEnergyService.
 Is %1 connected ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Read, Write, Notify: Operation nicht möglich. Bekomme OperationError vom QLowEnergyService.
+Ist %1 verbunden ?</translation>
     </message>
 </context>
 <context>
@@ -1191,22 +1210,22 @@ Is %1 connected ?</source>
     <message>
         <location filename="../qml/bt/LECharacteristicListPage.qml" line="221"/>
         <source>Scanning %1-%2 for Characteristics - please wait ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Scanne %1-%2 für Characteristics - bitte warten ...</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicListPage.qml" line="222"/>
         <source>Waited too long for end of scanning Characteristics</source>
-        <translation type="unfinished"></translation>
+        <translation>zu lange auf das Ende vom Characteristics Scan gewartet</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicListPage.qml" line="244"/>
         <source>Couldn&apos;t scan Characteristics: Service is invalid. Device connected ?.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann Characteristics nicht scannen: Service ist ungültig. Gerät verbunden ?.</translation>
     </message>
     <message>
         <location filename="../qml/bt/LECharacteristicListPage.qml" line="253"/>
         <source>Couldn&apos;t scan Characteristics: Service is already discovering. Wait and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann Characteristics nicht scannen: Service ist am Erkennen. Bitte warten und neu versuchen.</translation>
     </message>
 </context>
 <context>
@@ -1214,27 +1233,27 @@ Is %1 connected ?</source>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="148"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Trennen</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="148"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinden</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="248"/>
         <source>Discovering Bluetooth LE Devices - please wait ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Erkunde Bluetooth LE Devices - bitte warten ...</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="249"/>
         <source>Waited too long for end of discovering devices</source>
-        <translation type="unfinished"></translation>
+        <translation>zu lange auf Dienste gewartet</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="261"/>
         <source>No Devices found. Switch Devices Off/On or Settings Bluetooth Off/On to clear cache.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Gerät gefunden. Gerät aus/anschalten oder Bluetooth Einstellungen Aus/An um Cache zu leeren.</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="313"/>
@@ -1244,22 +1263,27 @@ Reconnect to %1 now ?
 Check Device is ON, Battery OK
 Bluetooth is On
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist getrennt.
+Jetzt neu mit %1 verbinden ?
+
+Gerät prüfen: angeschaltet, Battery OK
+Bluetooth ist An
+</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="326"/>
         <source>Connecting to %1 - please wait ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde mit %1 - bitte warten ...</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="327"/>
         <source>Waited too long for end of connecting to device</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu lange auf das Verbinden gewartet</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesListPage.qml" line="365"/>
         <source>Try to connect again: %1 of 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuche, neu zu verbinden: %1 von 5</translation>
     </message>
 </context>
 <context>
@@ -1267,51 +1291,55 @@ Bluetooth is On
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="192"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswählen</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="192"/>
         <source>unknown Type</source>
-        <translation type="unfinished"></translation>
+        <translation>unbekannter Typ</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="201"/>
         <source>There&apos;s another HeartRate device connected.
 Please disconnect before selecting another one</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist bereits ein anderes HeartRate Gerät verbunden.
+Bitte trennen, bevor ein anderes ausgewählt wird</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="216"/>
         <source>There&apos;s another Addimat Waiter Lock connected.
 Please disconnect before selecting another one</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist bereits ein anderes Kellnerschloss verbunden.
+Bitte trennen, bevor ein anderes ausgewählt wird</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="234"/>
         <source>There&apos;s another NFC Reader connected.
 Please disconnect before selecting another one</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist bereits ein anderer NFC Reader verbunden.
+Bitte trennen, bevor ein anderes ausgewählt wird</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="246"/>
         <source>There&apos;s another Barcode Scanner connected.
 Please disconnect before selecting another one</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist bereits ein anderer Barcode Scanner verbunden.
+Bitte trennen, bevor ein anderes ausgewählt wird</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="258"/>
         <source>Explore Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Dienste erkunden</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="267"/>
         <source>Disconnect now</source>
-        <translation type="unfinished"></translation>
+        <translation>Jetzt trennen</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEDevicesNavigation.qml" line="267"/>
         <source>Connect now</source>
-        <translation type="unfinished"></translation>
+        <translation>Jetzt verbinden</translation>
     </message>
 </context>
 <context>
@@ -1319,22 +1347,22 @@ Please disconnect before selecting another one</source>
     <message>
         <location filename="../qml/bt/LEServicesListPage.qml" line="91"/>
         <source>Human Interface Device not supported yet</source>
-        <translation type="unfinished"></translation>
+        <translation>HID (Human Interface) Geräte derzeit nicht unterstützt</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEServicesListPage.qml" line="192"/>
         <source>Discover %1 for Services - please wait ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Erkunde für %1 Services - bitte warten ...</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEServicesListPage.qml" line="193"/>
         <source>Waited too long for end of discovering services</source>
-        <translation type="unfinished"></translation>
+        <translation>zu lange auf Dienste gewartet</translation>
     </message>
     <message>
         <location filename="../qml/bt/LEServicesListPage.qml" line="244"/>
         <source>Try to connect again: %1 of 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuche, neu zu verbinden: %1 von 5</translation>
     </message>
 </context>
 <context>
@@ -1342,132 +1370,132 @@ Please disconnect before selecting another one</source>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="57"/>
         <source>MiscellaneousDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemeines Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="59"/>
         <source>ComputerDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Computer Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="61"/>
         <source>PhoneDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Phone Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="63"/>
         <source>LANAccessDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>LAN Access Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="65"/>
         <source>AudioVideoDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio Video Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="67"/>
         <source>PeripheralDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Peripherie Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="69"/>
         <source>WearableDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Wearable Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="71"/>
         <source>ImagingDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Imaging Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="73"/>
         <source>ToyDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Toy Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="75"/>
         <source>HealthDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesundheits Gerät</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="77"/>
         <source>UncategorizedDevice</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät nicht kategorisiert</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="95"/>
         <source>unconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>nicht verbunden</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="97"/>
         <source>connecting ...</source>
-        <translation type="unfinished"></translation>
+        <translation>verbinde ...</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="99"/>
         <source>connected</source>
-        <translation type="unfinished"></translation>
+        <translation>verbunden</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="101"/>
         <source>discovering services ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Erkunde Services ...</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="103"/>
         <source>discovered all services</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Services erkundet</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="105"/>
         <source>closing ...</source>
-        <translation type="unfinished"></translation>
+        <translation>schliesse ...</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="107"/>
         <source>advertising ...</source>
-        <translation type="unfinished"></translation>
+        <translation>advertising ...</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="109"/>
         <source>unknown state</source>
-        <translation type="unfinished"></translation>
+        <translation>unbekannter Status</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="286"/>
         <source>The Bluetooth Device is unknown - perhaps scan Devices again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Bluetooth Gerät ist nicht bekannt - vielleicht neu scannen .</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="292"/>
         <source>LE Controller Error: Writing or reading from the device resulted in an error.</source>
-        <translation type="unfinished"></translation>
+        <translation>LE Controller error: Schreiben zum oder Lesen vom Gerät führte zu Fehler.</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="296"/>
         <source>LE Controller Error: invalid Bluetooth Adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>LE Controller error: ungültiger Bluetooth Adapter</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="300"/>
         <source>LE Controller Error: cannot connect to Device. Please try switch on/off, check Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>LE Controller error: kann nicht mit Gerät verbinden. Bitte versuchen: an/ausschalten, Batterie prüfen</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="315"/>
         <source>LE Controller Error: start Advertising failed</source>
-        <translation type="unfinished"></translation>
+        <translation>LE Controller Error: start Advertising fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="319"/>
         <source>LE Controller Error: unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>LE Controller Error: unbekannter Fehler</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothdeviceinfo.cpp" line="323"/>
         <source>LE Controller Error: unhandled error. Code: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>LE Controller Error: unbekannter Fehler. Code: %1</translation>
     </message>
 </context>
 <context>
@@ -1475,12 +1503,12 @@ Please disconnect before selecting another one</source>
     <message>
         <location filename="../cpp/bt/mybluetoothserviceinfo.cpp" line="373"/>
         <source>Unknown Error from QLowEnergyService</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Fehler vom QLowEnergyService</translation>
     </message>
     <message>
         <location filename="../cpp/bt/mybluetoothserviceinfo.cpp" line="377"/>
         <source>Unhandled Error %1 from QLowEnergyService</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Fehler %1 vom QLowEnergyService</translation>
     </message>
 </context>
 <context>
@@ -1537,115 +1565,115 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="23"/>
         <source>Select Material Primary Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Primary Farbe auswählen</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="64"/>
         <source>Material Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Red</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="65"/>
         <source>Material Pink</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Pink</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="66"/>
         <source>Material Purple</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Purple</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="67"/>
         <source>Material DeepPurple</source>
-        <translation type="unfinished"></translation>
+        <translation>Material DeepPurple</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="68"/>
         <source>Material Indigo</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Indigo</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="69"/>
         <source>Material Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Blue</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="70"/>
         <source>Material LightBlue</source>
-        <translation type="unfinished"></translation>
+        <translation>Material LightBlue</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="71"/>
         <source>Material Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Cyan</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="72"/>
         <source>Material Teal</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Teal</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="73"/>
         <source>Material Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Green</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="74"/>
         <source>Material LightGreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Material LightGreen</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="75"/>
         <source>Material Lime</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Lime</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="76"/>
         <source>Material Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Yellow</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="77"/>
         <source>Material Amber</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Amber</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="78"/>
         <source>Material Orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Orange</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="79"/>
         <source>Material DeepOrange</source>
-        <translation type="unfinished"></translation>
+        <translation>Material DeepOrange</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="80"/>
         <source>Material Brown</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Brown</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="81"/>
         <source>Material Grey</source>
-        <translation type="unfinished"></translation>
+        <translation>Material Grey</translation>
     </message>
     <message>
         <location filename="../qml/pages/PrimaryColorPage.qml" line="82"/>
         <source>Material BlueGrey</source>
-        <translation type="unfinished"></translation>
+        <translation>Material BlueGrey</translation>
     </message>
 </context>
 <context>
     <name>ReconnectYesNo</name>
     <message>
-        <location filename="../qml/bt/ReconnectYesNo.qml" line="44"/>
+        <location filename="../qml/bt/ReconnectYesNo.qml" line="63"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
     <message>
-        <location filename="../qml/bt/ReconnectYesNo.qml" line="53"/>
+        <location filename="../qml/bt/ReconnectYesNo.qml" line="72"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
 </context>
 <context>
@@ -1653,7 +1681,7 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/common/SearchTextPane.qml" line="39"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen</translation>
     </message>
 </context>
 <context>
@@ -1661,22 +1689,22 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/common/SimpleTextTitle.qml" line="42"/>
         <source>Light Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Helles Thema</translation>
     </message>
     <message>
         <location filename="../qml/common/SimpleTextTitle.qml" line="42"/>
         <source>Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkles Thema</translation>
     </message>
     <message>
         <location filename="../qml/common/SimpleTextTitle.qml" line="49"/>
         <source>Select Primary Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Primary Farbe auswählen</translation>
     </message>
     <message>
         <location filename="../qml/common/SimpleTextTitle.qml" line="57"/>
         <source>Select Accent Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Accent Farbe auswählen</translation>
     </message>
 </context>
 <context>
@@ -1684,22 +1712,22 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/common/StackTextTitle.qml" line="55"/>
         <source>Light Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Helles Thema</translation>
     </message>
     <message>
         <location filename="../qml/common/StackTextTitle.qml" line="55"/>
         <source>Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkles Thema</translation>
     </message>
     <message>
         <location filename="../qml/common/StackTextTitle.qml" line="62"/>
         <source>Select Primary Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Primary Farbe auswählen</translation>
     </message>
     <message>
         <location filename="../qml/common/StackTextTitle.qml" line="70"/>
         <source>Select Accent Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Accent Farbe auswählen</translation>
     </message>
 </context>
 <context>
@@ -1707,22 +1735,22 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/common/SwipeTextTitle.qml" line="56"/>
         <source>Light Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Helles Thema</translation>
     </message>
     <message>
         <location filename="../qml/common/SwipeTextTitle.qml" line="56"/>
         <source>Dark Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkles Thema</translation>
     </message>
     <message>
         <location filename="../qml/common/SwipeTextTitle.qml" line="63"/>
         <source>Select Primary Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Primary Farbe auswählen</translation>
     </message>
     <message>
         <location filename="../qml/common/SwipeTextTitle.qml" line="71"/>
         <source>Select Accent Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Accent Farbe auswählen</translation>
     </message>
 </context>
 <context>
@@ -1730,12 +1758,12 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/common/TextAreaRow.qml" line="67"/>
         <source>Word Selection by Double Tap switched ON</source>
-        <translation type="unfinished"></translation>
+        <translation>Wortauswahl mit doppeltem Tippen AN schalten</translation>
     </message>
     <message>
         <location filename="../qml/common/TextAreaRow.qml" line="69"/>
         <source>Word Selection by Double Tap switched OFF</source>
-        <translation type="unfinished"></translation>
+        <translation>Wortauswahl mit doppeltem Tippen AUS schalten</translation>
     </message>
 </context>
 <context>
@@ -1743,7 +1771,7 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/common/TextFieldDecimal.qml" line="18"/>
         <source>%1...%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1...%2</translation>
     </message>
 </context>
 <context>
@@ -1751,7 +1779,7 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/common/TextFieldInt.qml" line="14"/>
         <source>%1...%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1...%2</translation>
     </message>
 </context>
 <context>
@@ -1759,22 +1787,22 @@ Do you want to exit and leave the App ?
     <message>
         <location filename="../qml/popups/TimePicker.qml" line="210"/>
         <source>Time (HH:MM)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit (HH:MM)</translation>
     </message>
     <message>
         <location filename="../qml/popups/TimePicker.qml" line="318"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwerfen</translation>
     </message>
     <message>
         <location filename="../qml/popups/TimePicker.qml" line="331"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../qml/popups/TimePicker.qml" line="362"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Jetzt</translation>
     </message>
 </context>
 <context>
