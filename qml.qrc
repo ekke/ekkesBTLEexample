@@ -94,5 +94,7 @@
         <file>qml/common/ComboBoxModal.qml</file>
         <file>qml/bt/BTRunGeneralScanPage.qml</file>
         <file>qml/bt/BTSettingsGeneralScan.qml</file>
+        <file>qml/bt/BTRunFeitianCardReaderPage.qml</file>
+        <file>qml/bt/BTSettingsFeitianCardReader.qml</file>
     </qresource>
 </RCC>

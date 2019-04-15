@@ -19,7 +19,8 @@ HEADERS += \
     cpp/bt/heartratemessages.hpp \
     cpp/bt/nfcreadermanager.hpp \
     cpp/bt/nfcreadermapping.hpp \
-    cpp/bt/generalscanmanager.hpp
+    cpp/bt/generalscanmanager.hpp \
+    cpp/bt/feitiancardreadermanager.hpp
 
 SOURCES += cpp/main.cpp \
     cpp/applicationui.cpp \
@@ -34,7 +35,8 @@ SOURCES += cpp/main.cpp \
     cpp/bt/heartratemessages.cpp \
     cpp/bt/nfcreadermanager.cpp \
     cpp/bt/nfcreadermapping.cpp \
-    cpp/bt/generalscanmanager.cpp
+    cpp/bt/generalscanmanager.cpp \
+    cpp/bt/feitiancardreadermanager.cpp
 
 lupdate_only {
     SOURCES +=  qml/main.qml \
