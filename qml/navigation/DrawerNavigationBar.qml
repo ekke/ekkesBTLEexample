@@ -29,8 +29,9 @@ Drawer {
             anchors.right: parent.right
             spacing: 0
             Item {
-                anchors.left: parent.left
-                anchors.right: parent.right
+                Layout.fillWidth: true
+                //anchors.left: parent.left
+                // anchors.right: parent.right
                 height: 90 // 120
                 Rectangle {
                     anchors.fill: parent
