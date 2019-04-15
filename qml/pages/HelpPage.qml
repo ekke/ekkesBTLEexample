@@ -123,6 +123,70 @@ Flickable {
                     leftPadding: 10
                     rightPadding: 10
                     wrapMode: Text.WordWrap
+                    text: qsTr("BT LE Device 'Card Reader'")
+                    color: primaryColor
+                }
+            }
+            RowLayout {
+                Image {
+                    Layout.leftMargin: 16
+                    Layout.fillWidth: true
+                    source: "qrc:/images/extra/feitian_egk.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+//                LabelSubheading {
+//                    leftPadding: 10
+//                    rightPadding: 10
+//                    wrapMode: Text.WordWrap
+//                    text: qsTr("Get more Info from <a href=\"http://bit.ly/nfcReaderInfo\">NFC Reader Product Page</a>")
+//                    onLinkActivated: Qt.openUrlExternally("http://bit.ly/nfcReaderInfo")
+//                }
+            }
+            RowLayout {
+                LabelSubheading {
+                    leftPadding: 10
+                    rightPadding: 10
+                    wrapMode: Text.WordWrap
+                    text: qsTr("There are many use-cases where you want to read some data from a smart card. One of my customers from health domain want to read the personal data from german health card (eGK) - for more info take a look at 'ProfSys' apps in the store. You can read cards via USB or BLE. Feitian CardCreader enables you to use BLE from all your mobile devices. This app shows you HowTo read the data from the card.")
+                }
+            }
+            HorizontalDivider {}
+            RowLayout {
+                LabelTitle {
+                    leftPadding: 10
+                    rightPadding: 10
+                    wrapMode: Text.WordWrap
+                    text: qsTr("BT LE Device 'Barcode Scanner'")
+                    color: primaryColor
+                }
+            }
+            RowLayout {
+                Image {
+                    Layout.leftMargin: 16
+                    source: "qrc:/images/extra/ring_scanner.png"
+                }
+//                LabelSubheading {
+//                    leftPadding: 10
+//                    rightPadding: 10
+//                    wrapMode: Text.WordWrap
+//                    text: qsTr("Get more Info from <a href=\"http://bit.ly/nfcReaderInfo\">NFC Reader Product Page</a>")
+//                    onLinkActivated: Qt.openUrlExternally("http://bit.ly/nfcReaderInfo")
+//                }
+            }
+            RowLayout {
+                LabelSubheading {
+                    leftPadding: 10
+                    rightPadding: 10
+                    wrapMode: Text.WordWrap
+                    text: qsTr("Barcode Scanners can be used as HID device or as BLE device. This App demonstrates HowTo read Barcodes from GeneralScan Barcode Scanners.")
+                }
+            }
+            HorizontalDivider {}
+            RowLayout {
+                LabelTitle {
+                    leftPadding: 10
+                    rightPadding: 10
+                    wrapMode: Text.WordWrap
                     text: qsTr("BT LE Device 'Heart Rate Monitor'")
                     color: primaryColor
                 }
