@@ -29,7 +29,7 @@ Flickable {
                     leftPadding: 10
                     rightPadding: 10
                     wrapMode: Text.WordWrap
-                    text: qsTr("ekkes BTLE example\nQt 5.9 x-platform\nQtQuickControls2")
+                    text: qsTr("ekkes BTLE example\nQt 5.12 x-platform\nQtQuickControls2")
                     color: primaryColor
                 }
             }
@@ -51,7 +51,7 @@ Flickable {
                     leftPadding: 10
                     rightPadding: 10
                     wrapMode: Text.WordWrap
-                    text: qsTr("This APP is developed with Qt 5.9 and <a href=\"http://doc.qt.io/qt-5/qtquickcontrols2-index.html\">QtQuickControls2</a>.")
+                    text: qsTr("This APP is developed with Qt 5.12 and <a href=\"http://doc.qt.io/qt-5/qtquickcontrols2-index.html\">QtQuickControls2</a>.")
                     onLinkActivated: Qt.openUrlExternally("http://doc.qt.io/qt-5/qtquickcontrols2-index.html")
                 }
             }
