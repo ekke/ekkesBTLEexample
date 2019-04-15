@@ -53,7 +53,7 @@ Pane {
                 topPadding: 12
                 rightPadding: 16
                 wrapMode: Text.WordWrap
-                text: qsTr("HeartRate, Waiter Lock, NFC Reader", "Barcode Scanner")
+                text: qsTr("HeartRate, Waiter Lock, NFC Reader, Barcode Scanner, Card Reader")
             }
         }
         RowLayout {
