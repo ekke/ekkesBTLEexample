@@ -10,7 +10,8 @@ using namespace ekke::constants;
 
 ApplicationUI::ApplicationUI(QObject *parent) : QObject(parent),  mBluetoothManager(new BluetoothManager(this)),
     mHeartRateManager(new HeartRateManager(this)), mWaiterLockManager(new WaiterLockManager(this)),
-    mNfcReaderManager(new NfcReaderManager(this)), mGeneralScanManager(new GeneralScanManager(this))
+    mNfcReaderManager(new NfcReaderManager(this)), mGeneralScanManager(new GeneralScanManager(this)),
+    mFeitianCardReaderManager(new FeitianCardReaderManager(this))
 {
     // default theme is light
     mIsDarkTheme = false;
@@ -24,6 +25,7 @@ ApplicationUI::ApplicationUI(QObject *parent) : QObject(parent),  mBluetoothMana
     mWaiterLockManager->init(mBluetoothManager);
     mNfcReaderManager->init(mBluetoothManager);
     mGeneralScanManager->init(mBluetoothManager);
+    mFeitianCardReaderManager->init(mBluetoothManager);
 }
 
 void ApplicationUI::addContextProperty(QQmlContext *context)

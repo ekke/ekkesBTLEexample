@@ -527,6 +527,10 @@ ApplicationWindow {
                 rootPane.currentItem.destinationChanged()
                 return
             }
+            if(rootPane.currentItem.name === "BTRunFeitianCardReaderPage") {
+                rootPane.currentItem.destinationChanged()
+                return
+            }
         }
         // end STACKVIEW FUNCTIONS
 
@@ -627,6 +631,9 @@ ApplicationWindow {
 
     function isNfcReaderCurrentTab() {
         return navigationIndex === nfcReaderNavigationIndex
+    }
+    function isCardReaderCurrentTab() {
+        return navigationIndex === cardReaderNavigationIndex
     }
     function gotoHeartRate(deviceInfo) {
         currentHeartRateDeviceInfo = deviceInfo

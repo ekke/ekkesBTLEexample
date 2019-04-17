@@ -61,6 +61,9 @@ signals:
     void operationError();
     void serviceError(QString errorMessage);
 
+    // temp solution !!!
+    void cardData(const QByteArray cardDataArray);
+
 public slots:
     // QLowEnergyService related
     void serviceDetailsDiscovered(QLowEnergyService::ServiceState newState);

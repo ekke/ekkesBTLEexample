@@ -4,27 +4,27 @@ static const QString CARD_READER_SERVICE = "46540001-0002-00c4-0000-465453414645
 static const QString CARD_DATA_CHARACTERISTIC = "46540002-0002-00c4-0000-465453414645";
 static const QString CARD_WRITE_CHARACTERISTIC = "46540003-0002-00c4-0000-465453414645";
 
-static const QString CARD_STATE_IN = "0x5001";
-static const QString CARD_STATE_OUT = "0x5003";
+static const QString CARD_STATE_IN = "5003";
+static const QString CARD_STATE_OUT = "5002";
 
-static const QString SUCCESS_APDU = "0x9000";
-static const QString SUCCESS_POWER_OFF = "0x010000";
-static const QString FAILED = "0x000000";
+static const QString SUCCESS_APDU = "9000";
+static const QString SUCCESS_POWER_OFF = "010000";
+static const QString FAILED = "000000";
 
-static const QString COMMAND_POWER_ON = "0x620000";
-static const QString COMMAND_POWER_OFF = "0x630000";
-static const QString COMMAND_SELECT_FILE = "0x6f0b00";
-static const QString COMMAND_READ_BINARY = "0x6f0700";
-static const QString COMMAND_READ_BINARY_NEXT = "0x6f0000";
+static const QString COMMAND_POWER_ON = "620000";
+static const QString COMMAND_POWER_OFF = "630000";
+static const QString COMMAND_SELECT_FILE = "6f0b00";
+static const QString COMMAND_READ_BINARY = "6f0700";
+static const QString COMMAND_READ_BINARY_NEXT = "6f0000";
 
 // select eGK Application
-static const QString APDU_SELECT_FILE = "0x00a4040c06d27600000102";
-static const QString APDU_READ_BINARY_STATUS_VD = "0x00b08c00000000";
-static const QString APDU_READ_BINARY_PERSONAL_DATA = "0x00b08100000000";
+static const QString APDU_SELECT_FILE = "00a4040c06d27600000102";
+static const QString APDU_READ_BINARY_STATUS_VD = "00b08c00000000";
+static const QString APDU_READ_BINARY_PERSONAL_DATA = "00b08100000000";
 // not used yet:
-static const QString APDU_READ_BINARY_INSURANCE_DATA = "0x00b08200000000";
+static const QString APDU_READ_BINARY_INSURANCE_DATA = "00b08200000000";
 
-static const QString ATR_EGK_G2 = "0x3bd396ff81b1fe451f078081052d";
+static const QString ATR_EGK_G2 = "3bd396ff81b1fe451f078081052d";
 
 
 FeitianCardReaderManager::FeitianCardReaderManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
@@ -136,16 +136,19 @@ void FeitianCardReaderManager::setCurrentDevice(MyBluetoothDeviceInfo *myDevice)
         setSettingsFavoriteAddress(myDevice->getAddress());
         setSettingsFavoriteName(myDevice->getName());
         // set expected service uuids
+        qDebug() << "AAAA";
         QStringList sl;
         sl.append(CARD_READER_SERVICE);
         myDevice->setExpectedServiceUuids(sl);
         //
+        qDebug() << "BBBB";
         mDeviceIsConnected = mDeviceInfo->getDeviceIsConnected();
         connect(mDeviceInfo, &MyBluetoothDeviceInfo::deviceChanged, this, &FeitianCardReaderManager::onDisconnect);
         if(!mHasDevice || deviceAddressChanged) {
             mHasDevice = true;
             emit hasDeviceChanged();
         }
+        qDebug() << "CCCC";
     } else {
         mDeviceInfo = nullptr;
         mDeviceIsConnected = false;
@@ -217,6 +220,8 @@ void FeitianCardReaderManager::prepareServices()
             qDebug() << "CARD_READER_SERVICE detected";
             mCardService = myService;
             connect(mCardService, &MyBluetoothServiceInfo::characteristicsDone, this, &FeitianCardReaderManager::onCardCharacteristicsDone);
+            // cardData
+            connect(mCardService, &MyBluetoothServiceInfo::cardData, this, &FeitianCardReaderManager::onCardDataSpecial);
             mCardServiceAvailable = true;
         }
         qDebug() << "SERVICE UUID [" << myService->getUuid() << "]";
@@ -349,9 +354,16 @@ void FeitianCardReaderManager::onDisconnect()
     }
 }
 
+void FeitianCardReaderManager::onCardDataSpecial(const QByteArray dataArray)
+{
+    mCardData->setCurrentValue(dataArray);
+    onCardDataChanged();
+}
+
 void FeitianCardReaderManager::onCardDataChanged()
 {
-     QByteArray cardDataArray = mCardData->getCurrentValue();
+    qDebug() << "onCardDataChanged()";
+    QByteArray cardDataArray = mCardData->getCurrentValue();
      QString hexValue = cardDataArray.toHex();
      if(hexValue == CARD_STATE_IN) {
          emit cardIN();
@@ -379,6 +391,7 @@ void FeitianCardReaderManager::onCardDataChanged()
 
 void FeitianCardReaderManager::onCardSubscriptionsChanged()
 {
+    qDebug() << "onCardSubscriptionsChanged()";
     bool isRunning = mCardData->getNotifyIsRunning();
     if(isRunning != mCardNotificationsActive) {
         setCardNotificationsActive(isRunning);

@@ -260,7 +260,8 @@ void MyBluetoothServiceInfo::subscribeNotifications(MyBluetoothCharacteristic *m
     if(!myDescriptor.isValid()) {
         qWarning() << "subscribeNotifications Descriptor not valid";
         // emit something
-        return;
+        // curious: Feitian CardReader runs into this
+        // return;
     }
     mLowEnergyService->writeDescriptor(myDescriptor, QByteArray::fromHex("0100"));
     myCharacteristic->setNotifyIsRunning(true);
@@ -335,11 +336,17 @@ void MyBluetoothServiceInfo::onCharacteristicWritten(const QLowEnergyCharacteris
 void MyBluetoothServiceInfo::onCharacteristicChanged(const QLowEnergyCharacteristic &characteristic, const QByteArray &value)
 {
     qDebug() << characteristic.name() << " NOTIFIED value change " << value;
+    qDebug() << "characteristic handle: " << characteristic.handle() << " uuid:" << characteristic.uuid();
     for (int i = 0; i < mCharacteristics.size(); ++i) {
         MyBluetoothCharacteristic* myCharacteristic = (MyBluetoothCharacteristic*)mCharacteristics.at(i);
         if(myCharacteristic->getCharacteristic() == characteristic) {
             // qDebug() << "(NOTIFIED UPDATED VALUE) my characteristic found ";
             myCharacteristic->setCurrentValue(value);
+            if(characteristic.handle() == 3 && characteristic.uuid().toString() == "{46540003-0002-00c4-0000-465453414645}") {
+                // special for FeitianCardReader - temp solution -
+                qWarning() << "special workaround Feitian CardReader";
+                emit cardData(value);
+            }
         }
     }
 }

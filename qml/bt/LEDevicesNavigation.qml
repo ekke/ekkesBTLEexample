@@ -253,9 +253,9 @@ Page {
                         break
                     case 8:
                         // check if there's another device already connected
-                        if(scanManager.hasDevice) {
-                            if(scanManager.settingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
-                                if(scanManager.isCurrentDeviceConnected()) {
+                        if(cardReaderManager.hasDevice) {
+                            if(cardReaderManager.settingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
+                                if(cardReaderManager.isCurrentDeviceConnected()) {
                                     appWindow.showInfo(qsTr("There's another CardReader connected.\nPlease disconnect before selecting another one"))
                                     return
                                 }
