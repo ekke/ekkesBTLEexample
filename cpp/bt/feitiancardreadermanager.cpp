@@ -4,6 +4,29 @@ static const QString CARD_READER_SERVICE = "46540001-0002-00c4-0000-465453414645
 static const QString CARD_DATA_CHARACTERISTIC = "46540002-0002-00c4-0000-465453414645";
 static const QString CARD_WRITE_CHARACTERISTIC = "46540003-0002-00c4-0000-465453414645";
 
+static const QString CARD_STATE_IN = "0x5001";
+static const QString CARD_STATE_OUT = "0x5003";
+
+static const QString SUCCESS_APDU = "0x9000";
+static const QString SUCCESS_POWER_OFF = "0x010000";
+static const QString FAILED = "0x000000";
+
+static const QString COMMAND_POWER_ON = "0x620000";
+static const QString COMMAND_POWER_OFF = "0x630000";
+static const QString COMMAND_SELECT_FILE = "0x6f0b00";
+static const QString COMMAND_READ_BINARY = "0x6f0700";
+static const QString COMMAND_READ_BINARY_NEXT = "0x6f0000";
+
+// select eGK Application
+static const QString APDU_SELECT_FILE = "0x00a4040c06d27600000102";
+static const QString APDU_READ_BINARY_STATUS_VD = "0x00b08c00000000";
+static const QString APDU_READ_BINARY_PERSONAL_DATA = "0x00b08100000000";
+// not used yet:
+static const QString APDU_READ_BINARY_INSURANCE_DATA = "0x00b08200000000";
+
+static const QString ATR_EGK_G2 = "0x3bd396ff81b1fe451f078081052d";
+
+
 FeitianCardReaderManager::FeitianCardReaderManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
     mCardServiceAvailable(false), mCardServiceConnected(false), mCardDataAvailable(false),
     mFeaturesPrepared(false), mCardNotificationsActive(false), mHasDevice(false)
@@ -328,8 +351,17 @@ void FeitianCardReaderManager::onDisconnect()
 
 void FeitianCardReaderManager::onCardDataChanged()
 {
-    // QByteArray valueArray = mBarcode->getCurrentValue();
-    // QString hexValue = valueArray.toHex();
+     QByteArray cardDataArray = mCardData->getCurrentValue();
+     QString hexValue = cardDataArray.toHex();
+     if(hexValue == CARD_STATE_IN) {
+         emit cardIN();
+         return;
+     }
+     if(hexValue == CARD_STATE_OUT) {
+         emit cardOUT();
+     }
+     qDebug() << "ByteArray of " << cardDataArray.length() << " value: " << cardDataArray << " HEXVALUE length " << hexValue.length() << " value: " << hexValue;
+
 //    if(mBarcodeValue == hexValue) {
 //        qDebug() << "same key while tottle timer is running";
 //        return;
@@ -340,8 +372,8 @@ void FeitianCardReaderManager::onCardDataChanged()
 //        return;
 //    }
     // mBarcodeValue = hexValue;
-    mCardDataValue = QString::fromUtf8(mCardData->getCurrentValue());
-    qDebug() << "it is a BARCODE:" << mCardDataValue;
+    mCardDataValue = hexValue; // QString::fromUtf8(mCardData->getCurrentValue());
+    qDebug() << "we got changed Card Data:" << mCardDataValue;
     emit cardDataValueChanged();
 }
 
