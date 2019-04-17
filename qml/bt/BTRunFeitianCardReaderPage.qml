@@ -136,8 +136,8 @@ Page {
                         visible: cardReaderManager.featuresPrepared || (deviceInfo && deviceInfo.controllerState >=3)
                         focusPolicy: Qt.NoFocus
                         Item {
-                            width: cardAvailable? 200 : 96
-                            height: 96
+                            width: 200
+                            height: 106
                             anchors.left: parent.left
                             Image {
                                 id: theCardReaderImage
@@ -155,10 +155,33 @@ Page {
                         }
                     } // btSettingsMenuButton
                 } // battery level
+
                 RowLayout {
+                    visible: cardReaderManager.cardNotificationsActive
                     Layout.leftMargin: 16
                     Layout.rightMargin: 16
-                    Layout.topMargin: 36
+                    Layout.bottomMargin: 12
+                    Layout.topMargin: 42
+                    LabelSubheading {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        text: " "
+                        color: primaryColor
+                    }
+                    ProgressBar {
+                        id: commandProgressBar
+                        Layout.preferredWidth: 3
+                        Layout.fillWidth: true
+                        leftPadding: 16
+                        rightPadding: 10
+                        indeterminate: true
+                    }
+                } // progress
+
+                RowLayout {
+                    Layout.topMargin: cardReaderManager.cardNotificationsActive? 0:42
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
                     LabelSubheading {
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: 1
@@ -174,27 +197,8 @@ Page {
                         wrapMode: Text.WrapAnywhere
                         text:cardReaderManager.cardDataValue.length >0 ? cardReaderManager.cardDataValue : qsTr("no card data")
                     }
-                } // key
-                RowLayout {
-                    visible: cardReaderManager.cardNotificationsActive
-                    Layout.leftMargin: 16
-                    Layout.rightMargin: 16
-                    Layout.bottomMargin: 12
-                    LabelSubheading {
-                        Layout.alignment: Qt.AlignTop
-                        Layout.preferredWidth: 1
-                        text: " "
-                        color: primaryColor
-                    }
-                    ProgressBar {
-                        id: commandProgressBar
-                        Layout.preferredWidth: 3
-                        Layout.fillWidth: true
-                        leftPadding: 16
-                        rightPadding: 10
-                        indeterminate: true
-                    }
-                }
+                } // card data
+
             } // main column
         } // root pane
     } // flickable
@@ -440,6 +444,7 @@ Page {
     }
     function onCardIn() {
         cardAvailable = true
+        cardReaderManager.doPowerOn()
     }
     function onCardout() {
         cardAvailable = false
