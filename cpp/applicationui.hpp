@@ -10,6 +10,7 @@
 #include "bt/waiterlockmanager.hpp"
 #include "bt/nfcreadermanager.hpp"
 #include "bt/generalscanmanager.hpp"
+#include "bt/feitiancardreadermanager.hpp"
 
 class ApplicationUI : public QObject
 {
@@ -54,6 +55,7 @@ private:
      WaiterLockManager* mWaiterLockManager;
      NfcReaderManager* mNfcReaderManager;
      GeneralScanManager* mGeneralScanManager;
+     FeitianCardReaderManager* mFeitianCardReaderManager;
 
 };
 

@@ -35,6 +35,7 @@ ApplicationWindow {
     property MyBluetoothDeviceInfo currentHeartRateDeviceInfo
     property MyBluetoothDeviceInfo currentNfcReaderDeviceInfo
     property MyBluetoothDeviceInfo currentBarcodeDeviceInfo
+    property MyBluetoothDeviceInfo currentCardReaderDeviceInfo
 
     function resetCurrentDevices() {
         console.log("reset current devices")
@@ -46,6 +47,8 @@ ApplicationWindow {
         nfcManager.setCurrentDevice(currentNfcReaderDeviceInfo)
         currentBarcodeDeviceInfo = null
         scanManager.setCurrentDevice(currentBarcodeDeviceInfo)
+        currentCardReaderDeviceInfo = null
+        cardReaderManager.setCurrentDevice(currentCardReaderDeviceInfo)
     }
     // while configuring the Key - user Mapping,
     // we only accept key changes inside Mappings Popup
@@ -637,10 +640,13 @@ ApplicationWindow {
         currentBarcodeDeviceInfo = deviceInfo
         navigationIndex = barcodeNavigationIndex
     }
-
     function gotoNfc(deviceInfo) {
         currentNfcReaderDeviceInfo = deviceInfo
         navigationIndex = nfcReaderNavigationIndex
+    }
+    function gotoCardReader(deviceInfo) {
+        currentCardReaderDeviceInfo = deviceInfo
+        navigationIndex = cardReaderNavigationIndex
     }
     function gotoDeviceList() {
         navigationIndex = devicesNavigationIndex

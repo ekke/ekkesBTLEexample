@@ -26,7 +26,8 @@ Page {
             "tag.png",
             "signal.png",
             "tag.png",
-            "barcode.png"
+            "barcode.png",
+            "smartcard.png"
         ]
         anchors.fill: parent
         property string name: "DevicesNavPane"
@@ -250,7 +251,19 @@ Page {
                         }
                         appWindow.gotoBarcode(deviceMenu.deviceInfo)
                         break
-                    }
+                    case 8:
+                        // check if there's another device already connected
+                        if(scanManager.hasDevice) {
+                            if(scanManager.settingsFavoriteAddress !== deviceMenu.deviceInfo.deviceAddress) {
+                                if(scanManager.isCurrentDeviceConnected()) {
+                                    appWindow.showInfo(qsTr("There's another CardReader connected.\nPlease disconnect before selecting another one"))
+                                    return
+                                }
+                            }
+                        }
+                        appWindow.gotoCardReader(deviceMenu.deviceInfo)
+                        break
+                    }   
                 } // triggered
             } // menu item goto
             MenuSeparator {}

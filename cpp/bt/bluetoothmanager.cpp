@@ -12,6 +12,7 @@ static const int DEVICE_TYPE_LOCK = 3;
 // static const int DEVICE_TYPE_PEGELMETER = 5;
 static const int DEVICE_TYPE_NFC = 6;
 static const int DEVICE_TYPE_BARCODE = 7;
+static const int DEVICE_TYPE_CARD_READER = 8;
 
 BluetoothManager::BluetoothManager(QObject *parent) : QObject(parent), mDeviceDiscoveryActive(false)
 {
@@ -233,6 +234,9 @@ void BluetoothManager::onDeviceDiscovered(QBluetoothDeviceInfo discoveredDevice)
         // emit addimatAdded(d);
     } else if (discoveredDevice.name() == "NFC_RDR") {
         d->setDeviceType(DEVICE_TYPE_NFC);
+        isKnownDeviceType = true;
+    } else if (discoveredDevice.name().startsWith("FT_")) {
+        d->setDeviceType(DEVICE_TYPE_CARD_READER);
         isKnownDeviceType = true;
     }
     if(!isKnownDeviceType) {

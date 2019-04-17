@@ -33,6 +33,7 @@ public:
     friend class WaiterLockManager;
     friend class NfcReaderManager;
     friend class GeneralScanManager;
+    friend class FeitianCardReaderManager;
 
     void init();
 

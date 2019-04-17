@@ -33,6 +33,7 @@ void ApplicationUI::addContextProperty(QQmlContext *context)
     context->setContextProperty("lockManager", mWaiterLockManager);
     context->setContextProperty("nfcManager", mNfcReaderManager);
     context->setContextProperty("scanManager", mGeneralScanManager);
+    context->setContextProperty("cardReaderManager", mFeitianCardReaderManager);
 }
 
 /* Change Theme Palette */
