@@ -26,6 +26,8 @@ static const QString APDU_READ_BINARY_INSURANCE_DATA = "00b08200000000";
 
 static const QString ATR_EGK_G2 = "3bd396ff81b1fe451f078081052d";
 
+static const QString THREE_BYTE_FILLER = "000000";
+
 
 FeitianCardReaderManager::FeitianCardReaderManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
     mCardServiceAvailable(false), mCardServiceConnected(false), mCardDataAvailable(false),
@@ -285,7 +287,12 @@ QList<QObject *> FeitianCardReaderManager::foundDevices()
 void FeitianCardReaderManager::doPowerOn()
 {
     qDebug() << "write to Feitian CardReader PowerOn command:";
-    mCardService->writeCharacteristicAsHex(mWriteData, "", false);
+    QString theCommand = COMMAND_POWER_ON;
+    theCommand.append("00000001"); // ID
+    theCommand.append(THREE_BYTE_FILLER);
+
+    mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
+    // mCardService->writeCharacteristicAsString(mWriteData, theCommand, false);
 }
 
 void FeitianCardReaderManager::doPowerOff()
@@ -365,11 +372,14 @@ void FeitianCardReaderManager::onCardDataChanged()
     qDebug() << "onCardDataChanged()";
     QByteArray cardDataArray = mCardData->getCurrentValue();
      QString hexValue = cardDataArray.toHex();
+     mCardDataValue = hexValue;
      if(hexValue == CARD_STATE_IN) {
+         emit cardDataValueChanged();
          emit cardIN();
          return;
      }
      if(hexValue == CARD_STATE_OUT) {
+         emit cardDataValueChanged();
          emit cardOUT();
      }
      qDebug() << "ByteArray of " << cardDataArray.length() << " value: " << cardDataArray << " HEXVALUE length " << hexValue.length() << " value: " << hexValue;
