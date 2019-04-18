@@ -96,5 +96,6 @@
         <file>qml/bt/BTSettingsGeneralScan.qml</file>
         <file>qml/bt/BTRunFeitianCardReaderPage.qml</file>
         <file>qml/bt/BTSettingsFeitianCardReader.qml</file>
+        <file>qml/popups/PopupYesNo.qml</file>
     </qresource>
 </RCC>
