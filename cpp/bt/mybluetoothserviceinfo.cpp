@@ -261,12 +261,7 @@ void MyBluetoothServiceInfo::subscribeNotifications(MyBluetoothCharacteristic *m
         qWarning() << "subscribeNotifications Descriptor not valid";
         // emit something
         qDebug() << "Handle: " << myCharacteristic->getCharacteristic().handle() << " UUID: " << myCharacteristic->getCharacteristic().uuid();
-        if(myCharacteristic->getCharacteristic().handle() == 2 && myCharacteristic->getCharacteristic().uuid().toString() == "{46540002-0002-00c4-0000-465453414645}") {
-            // curious: Feitian CardReader runs into this
-            // so we ignore this yet
-        } else {
-            return;
-        }
+        return;
     }
     mLowEnergyService->writeDescriptor(myDescriptor, QByteArray::fromHex("0100"));
     myCharacteristic->setNotifyIsRunning(true);
@@ -285,12 +280,7 @@ void MyBluetoothServiceInfo::unSubscribeNotifications(MyBluetoothCharacteristic 
     if(!myDescriptor.isValid()) {
         qWarning() << "unSubscribeNotifications Descriptor not valid";
         // emit something
-        if(myCharacteristic->getCharacteristic().handle() == 2 && myCharacteristic->getCharacteristic().uuid().toString() == "{46540002-0002-00c4-0000-465453414645}") {
-            // curious: Feitian CardReader runs into this
-            // so we ignore this yet
-        } else {
-            return;
-        }
+        return;
     }
     mLowEnergyService->writeDescriptor(myDescriptor, QByteArray::fromHex("0000"));
     myCharacteristic->setCurrentValue(QByteArray());
@@ -352,11 +342,6 @@ void MyBluetoothServiceInfo::onCharacteristicChanged(const QLowEnergyCharacteris
         if(myCharacteristic->getCharacteristic() == characteristic) {
             // qDebug() << "(NOTIFIED UPDATED VALUE) my characteristic found ";
             myCharacteristic->setCurrentValue(value);
-            if(characteristic.handle() == 3 && characteristic.uuid().toString() == "{46540003-0002-00c4-0000-465453414645}") {
-                // special for FeitianCardReader - temp solution -
-                qWarning() << "special workaround Feitian CardReader";
-                emit cardData(value);
-            }
         }
     }
 }
