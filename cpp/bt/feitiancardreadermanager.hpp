@@ -108,8 +108,6 @@ public slots:
     void onCardDataChanged();
     void onCardSubscriptionsChanged();
 
-    void onCardDataSpecial(const QByteArray dataArray);
-
 private:
     BluetoothManager* mBluetoothManager;
 

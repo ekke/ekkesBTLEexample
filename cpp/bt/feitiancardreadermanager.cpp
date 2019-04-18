@@ -1,8 +1,8 @@
 #include "feitiancardreadermanager.hpp"
 
 static const QString CARD_READER_SERVICE = "46540001-0002-00c4-0000-465453414645";
-static const QString CARD_DATA_CHARACTERISTIC = "46540002-0002-00c4-0000-465453414645";
-static const QString CARD_WRITE_CHARACTERISTIC = "46540003-0002-00c4-0000-465453414645";
+static const QString CARD_DATA_CHARACTERISTIC = "46540003-0002-00c4-0000-465453414645";
+static const QString CARD_WRITE_CHARACTERISTIC = "46540002-0002-00c4-0000-465453414645";
 
 static const QString CARD_STATE_IN = "5003";
 static const QString CARD_STATE_OUT = "5002";
@@ -222,8 +222,6 @@ void FeitianCardReaderManager::prepareServices()
             qDebug() << "CARD_READER_SERVICE detected";
             mCardService = myService;
             connect(mCardService, &MyBluetoothServiceInfo::characteristicsDone, this, &FeitianCardReaderManager::onCardCharacteristicsDone);
-            // cardData
-            connect(mCardService, &MyBluetoothServiceInfo::cardData, this, &FeitianCardReaderManager::onCardDataSpecial);
             mCardServiceAvailable = true;
         }
         qDebug() << "SERVICE UUID [" << myService->getUuid() << "]";
@@ -292,7 +290,6 @@ void FeitianCardReaderManager::doPowerOn()
     theCommand.append(THREE_BYTE_FILLER);
 
     mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
-    // mCardService->writeCharacteristicAsString(mWriteData, theCommand, false);
 }
 
 void FeitianCardReaderManager::doPowerOff()
@@ -361,12 +358,6 @@ void FeitianCardReaderManager::onDisconnect()
     }
 }
 
-void FeitianCardReaderManager::onCardDataSpecial(const QByteArray dataArray)
-{
-    mCardData->setCurrentValue(dataArray);
-    onCardDataChanged();
-}
-
 void FeitianCardReaderManager::onCardDataChanged()
 {
     qDebug() << "onCardDataChanged()";
@@ -381,6 +372,7 @@ void FeitianCardReaderManager::onCardDataChanged()
      if(hexValue == CARD_STATE_OUT) {
          emit cardDataValueChanged();
          emit cardOUT();
+         return;
      }
      qDebug() << "ByteArray of " << cardDataArray.length() << " value: " << cardDataArray << " HEXVALUE length " << hexValue.length() << " value: " << hexValue;
 
