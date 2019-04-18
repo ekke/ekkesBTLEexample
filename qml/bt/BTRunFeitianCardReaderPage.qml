@@ -17,6 +17,14 @@ Page {
     property string name: "BTRunFeitianCardReaderPage"
 
     property bool cardAvailable: false
+    property bool cardSupported: false
+    property bool cardPowerOn: false
+    property bool cardAppSelected: false
+    property bool cardReadStatus: false
+    property bool cardReadPersonalData: false
+
+    property var cardStatusDataMap: ({})
+    property var cardPersonalDataMap: ({})
 
     header: Pane {
         leftPadding: 24
@@ -115,7 +123,7 @@ Page {
 
     Flickable {
         id: flickable
-        contentHeight: root.implicitHeight + 60
+        contentHeight: root.implicitHeight + 64
         anchors.fill: parent
         Pane {
             id: root
@@ -157,20 +165,23 @@ Page {
                 } // battery level
 
                 RowLayout {
-                    visible: cardReaderManager.cardNotificationsActive
                     Layout.leftMargin: 16
                     Layout.rightMargin: 16
-                    Layout.bottomMargin: 12
-                    Layout.topMargin: 42
+                    Layout.topMargin: btSettingsMenuButton.visible? 42 : 0
                     LabelSubheading {
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: 1
-                        text: " "
+                        text: qsTr("Reader working")
                         color: primaryColor
                     }
+                    DotMarker {
+                        visible: !cardReaderManager.cardNotificationsActive
+                        color: "red"
+                    }
                     ProgressBar {
+                        visible: cardReaderManager.cardNotificationsActive
                         id: commandProgressBar
-                        Layout.preferredWidth: 3
+                        Layout.preferredWidth: 1
                         Layout.fillWidth: true
                         leftPadding: 16
                         rightPadding: 10
@@ -179,31 +190,112 @@ Page {
                 } // progress
 
                 RowLayout {
-                    Layout.topMargin: cardReaderManager.cardNotificationsActive? 0:42
                     Layout.leftMargin: 16
                     Layout.rightMargin: 16
                     LabelSubheading {
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: 1
-                        text: qsTr("CardData")
+                        text: qsTr("Card supported")
                         color: primaryColor
                     }
+                    DotMarker {
+                        color: cardSupported? "green":"red"
+                    }
+                } // card supported
+
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
                     LabelSubheading {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        text: qsTr("Power On ?")
+                        color: primaryColor
+                    }
+                    DotMarker {
+                        color: cardPowerOn? "green":"red"
+                    }
+                } // Power on or off
+
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelSubheading {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        text: qsTr("Card App selected")
+                        color: primaryColor
+                    }
+                    DotMarker {
+                        color: cardAppSelected? "green":"red"
+                    }
+                } // Card app selected
+
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelSubheading {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        text: qsTr("Read Status Data")
+                        color: primaryColor
+                    }
+                    DotMarker {
+                        color: cardReadStatus? "green":"red"
+                    }
+                } // Card read status
+
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelSubheading {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        text: qsTr("Read Personal Data")
+                        color: primaryColor
+                    }
+                    DotMarker {
+                        color: cardReadStatus? "green":"red"
+                    }
+                } // Card read personal data
+
+
+                HorizontalListDivider{}
+                RowLayout {
+                    Layout.leftMargin: 6
+                    Layout.rightMargin: 16
+                    LabelSubheading {
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.preferredWidth: 1
+                        text: qsTr("Protocol")
+                        color: primaryColor
+                    }
+                    ButtonFlat {
+                        visible: theCardDataValueField.text.length
+                        Layout.alignment: Qt.AlignVCenter
+                        text: qsTr("Clear Protocol")
+                        textColor: accentColor
+                        onClicked: {
+                            theCardDataValueField.text = ""
+                        }
+                    }
+                } // card data label
+                RowLayout {
+                    Layout.leftMargin: 6
+                    Layout.rightMargin: 6
+                    LabelBody {
                         id: theCardDataValueField
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: 3
-                        leftPadding: 16
-                        rightPadding: 10
                         wrapMode: Text.WrapAnywhere
-                        text:cardReaderManager.cardDataValue.length >0 ? cardReaderManager.cardDataValue : qsTr("no card data")
                     }
-                } // card data
+                } // card data protocol
 
             } // main column
         } // root pane
     } // flickable
 
-    FloatingActionButton {
+    FloatingActionMiniButton {
         id: startCardNotificationsButton
         visible: cardReaderManager.featuresPrepared
         backgroundColor: primaryColor
@@ -219,6 +311,7 @@ Page {
             }
         }
     } // FloatingActionButton
+    // TODO protocol delete button
 
     // C O N N E C T - D I S C O N N E C T
     function disconnectFromDevice() {
@@ -432,12 +525,26 @@ Page {
         }
     } // searchDevice
 
+    PopupYesNo {
+        property string parseUrl
+        id: popupWrongCard
+        text: qsTr("This Card Type is not implemented yet - you need an eGK G2.\nDo you want to see detailed Infos about the currently inserted Card ?")
+        onClosed: {
+            if(isYes) {
+                Qt.openUrlExternally(parseUrl)
+            }
+        }
+    } // popupWrongCard
+
     //  S E R V I C E S   and   C H A R A C T E R I S T I C S
     // Notifications new or changed data
     function onCardDataValueChanged() {
         if(cardReaderManager.cardDataValue.length > 0) {
-            console.log("CardData Value changed: "+ cardReaderManager.cardDataValue)
-            // theCardDataValueField.text should be set from property
+            if(theCardDataValueField.text.length) {
+                theCardDataValueField.text = theCardDataValueField.text + "\n" + cardReaderManager.cardDataValue
+            } else {
+                theCardDataValueField.text = cardReaderManager.cardDataValue
+            }
         } else {
             console.log("CardData Value EMPTY ")
         }
@@ -447,22 +554,72 @@ Page {
         cardReaderManager.doPowerOn()
     }
     function onCardout() {
+        cardReadPersonalData = false
+        cardReadStatus = false
+        cardAppSelected = false
+        cardPowerOn = false
+        cardSupported = false
         cardAvailable = false
     }
-    function onReadATRSuccess(cardName) {
-        appWindow.showInfo(cardName)
+    function onReadATRSuccess() {
+        cardSupported = true
+        cardPowerOn = true
     }
     function onReadATRWrong(message, parseATRUrl) {
-        appWindow.showInfo(message)
+        cardSupported = false
+        cardPowerOn = true
+        if(parseATRUrl.length) {
+            popupWrongCard.parseUrl = parseATRUrl
+            popupWrongCard.isYes = false
+            popupWrongCard.open()
+        } else {
+            appWindow.showInfo(message)
+        }
     }
-
+    function onAppSelectedSuccess() {
+        cardAppSelected = true
+    }
+    function onAppSelectedFailed(message) {
+        cardAppSelected = false
+        if(message.length) {
+            appWindow.showInfo(message)
+        }
+    }
+    function onStatusVDSuccess(statusVDMap) {
+        cardStatusDataMap = statusVDMap
+        cardReadStatus = true
+    }
+    function onStatusVDFailed(message) {
+        cardStatusDataMap = ({})
+        cardReadStatus = false
+        if(message.length) {
+            appWindow.showInfo(message)
+        }
+    }
+    function onPersonalDataSuccess(pdMap) {
+        cardPersonalDataMap = pdMap
+        cardReadPersonalData = true
+    }
+    function onPersonalDataFailed(message) {
+        cardPersonalDataMap = ({})
+        cardReadPersonalData = false
+        if(message.length) {
+            appWindow.showInfo(message)
+        }
+    }
     Connections {
         target: cardReaderManager
         onCardDataValueChanged: onCardDataValueChanged()
         onCardIN: onCardIn()
         onCardOUT: onCardout()
-        onReadATRSuccess: onReadATRSuccess(cardName)
+        onReadATRSuccess: onReadATRSuccess()
         onReadATRWrong: onReadATRWrong(message, parseATRUrl)
+        onAppSelectedSuccess: onAppSelectedSuccess()
+        onAppSelectedFailed: onAppSelectedFailed(message)
+        onStatusVDSuccess: onStatusVDSuccess(statusVDMap)
+        onStatusVDFailed: onStatusVDFailed(message)
+        onPersonalDataSuccess: onPersonalDataSuccess(pdMap)
+        onPersonalDataFailed: onPersonalDataFailed(message)
     }
     // autostart notifications when all is prepared
     function onFeaturesPreparedChanged() {
@@ -498,6 +655,23 @@ Page {
                 mySettings.open()
             }
         }
+        MenuItemWithIcon {
+            enabled: btRunFeitianCardReaderPage.cardReadStatus
+            itemText: qsTr("Status Data")
+            imageName: "info.png"
+            onTriggered: {
+                // TODO
+            }
+        }
+        MenuItemWithIcon {
+            enabled: btRunFeitianCardReaderPage.cardReadPersonalData
+            itemText: qsTr("Person Data")
+            imageName: "person.png"
+            onTriggered: {
+                // TODO
+            }
+        }
+
         MenuSeparator {}
         MenuItemWithIcon {
             itemText: qsTr("Disconnect")

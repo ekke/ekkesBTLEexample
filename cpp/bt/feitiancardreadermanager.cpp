@@ -356,7 +356,7 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
     qDebug() << "processing Power On. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
     qDebug() << "Payload: " << payload;
     if(payload == ATR_EGK_G2) {
-        emit readATRSuccess("Gesundheitskarte G2");
+        emit readATRSuccess();
         return;
     }
     QString parseUrl = PARSE_ATR;

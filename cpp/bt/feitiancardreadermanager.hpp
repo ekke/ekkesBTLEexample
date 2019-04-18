@@ -85,8 +85,10 @@ signals:
     void cardDataValueChanged();
     void cardIN();
     void cardOUT();
-    void readATRSuccess(const QString cardName);
+    void readATRSuccess();
     void readATRWrong(const QString message, const QString parseATRUrl);
+    void appSelectedSuccess();
+    void appSelectedFailed(const QString& message);
     void statusVDSuccess(const QVariantMap statusVDMap);
     void statusVDFailed(const QString message);
     void personalDataSuccess(const QVariantMap pdMap);
