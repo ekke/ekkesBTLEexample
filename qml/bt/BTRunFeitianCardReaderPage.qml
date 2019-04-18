@@ -449,12 +449,20 @@ Page {
     function onCardout() {
         cardAvailable = false
     }
+    function onReadATRSuccess(cardName) {
+        appWindow.showInfo(cardName)
+    }
+    function onReadATRWrong(message, parseATRUrl) {
+        appWindow.showInfo(message)
+    }
 
     Connections {
         target: cardReaderManager
         onCardDataValueChanged: onCardDataValueChanged()
         onCardIN: onCardIn()
         onCardOUT: onCardout()
+        onReadATRSuccess: onReadATRSuccess(cardName)
+        onReadATRWrong: onReadATRWrong(message, parseATRUrl)
     }
     // autostart notifications when all is prepared
     function onFeaturesPreparedChanged() {

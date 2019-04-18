@@ -86,7 +86,7 @@ signals:
     void cardIN();
     void cardOUT();
     void readATRSuccess(const QString cardName);
-    void readATRWrong(const QString message);
+    void readATRWrong(const QString message, const QString parseATRUrl);
     void statusVDSuccess(const QVariantMap statusVDMap);
     void statusVDFailed(const QString message);
     void personalDataSuccess(const QVariantMap pdMap);
@@ -133,11 +133,27 @@ private:
     bool mCardNotificationsActive;
     bool mHasDevice;
 
+    // ID for Commands sent to SmartCard
+    // (Counter - HEX)
+    QString mCurrentIdHex;
+    void calculateNextIdHex();
+    // currently running Command
+    QString mRunningCommand;
+    // currently running APDU
+    QString mRunningAPDU;
+    void resetCommand();
+    // processing commands
+    void processPowerOn(const QString &hexData);
+    // complete (concatanated) data
+    QString mCurrentData;
+
     // SETTINGS
     QVariantMap mFeitianCardReaderSettingsMap;
     QString mSettingsFavoriteAddress;
     QString mSettingsFavoriteName;
     void updateSettings();
+
+
 };
 
 #endif // FEITIANCARDREADERMANAGER_HPP

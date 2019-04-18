@@ -7,7 +7,11 @@ static const QString CARD_WRITE_CHARACTERISTIC = "46540002-0002-00c4-0000-465453
 static const QString CARD_STATE_IN = "5003";
 static const QString CARD_STATE_OUT = "5002";
 
-static const QString SUCCESS_APDU = "9000";
+// https://www.eftlab.com/index.php/site-map/knowledge-base/118-apdu-response-list
+// https://de.wikipedia.org/wiki/Application_Protocol_Data_Unit
+static const QString APDU_COMMAND_SUCCESSFULLY_EXECUTED = "9000";
+
+
 static const QString SUCCESS_POWER_OFF = "010000";
 static const QString FAILED = "000000";
 
@@ -17,14 +21,20 @@ static const QString COMMAND_SELECT_FILE = "6f0b00";
 static const QString COMMAND_READ_BINARY = "6f0700";
 static const QString COMMAND_READ_BINARY_NEXT = "6f0000";
 
-// select eGK Application
+// select eGK Application - there's only a single application
 static const QString APDU_SELECT_FILE = "00a4040c06d27600000102";
+// there are three Binary files: Status VD, Personal Data, Insurance Data
 static const QString APDU_READ_BINARY_STATUS_VD = "00b08c00000000";
 static const QString APDU_READ_BINARY_PERSONAL_DATA = "00b08100000000";
 // not used yet:
 static const QString APDU_READ_BINARY_INSURANCE_DATA = "00b08200000000";
 
+// https://de.wikipedia.org/wiki/Answer_to_Reset
+// List of ATR http://ludovic.rousseau.free.fr/softwares/pcsc-tools/smartcard_list.txt
+// online check ATR: https://smartcard-atr.appspot.com/parse?ATR=xxxxx
+// Elektronische Gesundheitskarte Generation 2:
 static const QString ATR_EGK_G2 = "3bd396ff81b1fe451f078081052d";
+static const QString PARSE_ATR = "https://smartcard-atr.appspot.com/parse?ATR=";
 
 static const QString THREE_BYTE_FILLER = "000000";
 
@@ -50,6 +60,10 @@ void FeitianCardReaderManager::init(BluetoothManager *bluetoothManager)
         mSettingsFavoriteAddress = mFeitianCardReaderSettingsMap.value("settingsFavoriteAddress").toString();
         qDebug() << "Feitian CardReader Settings read:";
     }
+    mCurrentIdHex = "00000000";
+    mRunningCommand.clear();
+    mRunningAPDU.clear();
+    mCurrentData.clear();
 }
 
 void FeitianCardReaderManager::updateSettings()
@@ -282,13 +296,27 @@ QList<QObject *> FeitianCardReaderManager::foundDevices()
     return mFoundDevices;
 }
 
+void FeitianCardReaderManager::resetCommand()
+{
+    mRunningCommand.clear();
+    mRunningAPDU.clear();
+    mCurrentData.clear();
+}
+
 void FeitianCardReaderManager::doPowerOn()
 {
     qDebug() << "write to Feitian CardReader PowerOn command:";
+    // reset commands if something left
+    resetCommand();
+    // calculate next ID
+    calculateNextIdHex();
+    // construct the command
     QString theCommand = COMMAND_POWER_ON;
-    theCommand.append("00000001"); // ID
+    theCommand.append(mCurrentIdHex);
     theCommand.append(THREE_BYTE_FILLER);
-
+    // set running command
+    mRunningCommand = COMMAND_POWER_ON;
+    // Write to CardReader
     mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
 }
 
@@ -296,6 +324,45 @@ void FeitianCardReaderManager::doPowerOff()
 {
     qDebug() << "write to Feitian CardReader PowerOff command:";
     mCardService->writeCharacteristicAsHex(mWriteData, "", false);
+}
+
+void FeitianCardReaderManager::processPowerOn(const QString& hexData)
+{
+    if(hexData.length() == 40) {
+        mCurrentData += hexData;
+        // wait for more
+        return;
+    }
+    mCurrentData += hexData;
+    if(mCurrentData.length() < 20) {
+        qWarning() << "response data should be 20 or more bytes and not " << mCurrentData.length()/2;
+        emit readATRWrong(tr("Received buffer too short for a valid ATR"),"");
+        resetCommand();
+        return;
+    }
+    QString responseType = mCurrentData.left(6);
+    QString id = mCurrentData.mid(6,8);
+    if(id != mCurrentIdHex) {
+        qWarning() << "ID seems to be wrong: " << id << " instead of " << mCurrentIdHex;
+        // we ignore this in our demo app
+    }
+    QString unknownFiller = mCurrentData.mid(14,6);
+    QString payload = mCurrentData.right(mCurrentData.length()-20);
+
+    // now it's safe to reset the command vars
+    resetCommand();
+
+    // go on
+    qDebug() << "processing Power On. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
+    qDebug() << "Payload: " << payload;
+    if(payload == ATR_EGK_G2) {
+        emit readATRSuccess("Gesundheitskarte G2");
+        return;
+    }
+    QString parseUrl = PARSE_ATR;
+    parseUrl.append(payload);
+    qDebug() << "wrong ATR. Parse URL:" << parseUrl;
+    emit readATRWrong(tr("Wrong Card - only eGK 2 is implemented yet"),parseUrl);
 }
 
 void FeitianCardReaderManager::doSelectFile()
@@ -349,6 +416,8 @@ void FeitianCardReaderManager::onCardCharacteristicsDone()
 void FeitianCardReaderManager::onDisconnect()
 {
     qDebug() << "Feitian CardReader Manager deviceChanged - onDisconnect";
+    // reset all values from command processing
+    resetCommand();
     // we're only interested into unconnect
     if(!mDeviceInfo || !mDeviceInfo->getDeviceIsConnected()) {
         qDebug() << "Feitian CardReader Manager onDisconnect";
@@ -364,31 +433,62 @@ void FeitianCardReaderManager::onCardDataChanged()
     QByteArray cardDataArray = mCardData->getCurrentValue();
      QString hexValue = cardDataArray.toHex();
      mCardDataValue = hexValue;
+     // at first check card status
      if(hexValue == CARD_STATE_IN) {
+         // only to display the data for test purpose
          emit cardDataValueChanged();
+         // Card is inserted
          emit cardIN();
          return;
      }
      if(hexValue == CARD_STATE_OUT) {
+         // only to display the data for test purpose
          emit cardDataValueChanged();
+         // Card is removed
          emit cardOUT();
          return;
      }
-     qDebug() << "ByteArray of " << cardDataArray.length() << " value: " << cardDataArray << " HEXVALUE length " << hexValue.length() << " value: " << hexValue;
-
-//    if(mBarcodeValue == hexValue) {
-//        qDebug() << "same key while tottle timer is running";
-//        return;
-//    }
-//    if(mBarcodeValue.length()> 0 && hexValue == NO_KEY) {
-//        mCurrentKey = mKeyIdValue;
-//        mTotterTimer->start();
-//        return;
-//    }
-    // mBarcodeValue = hexValue;
-    mCardDataValue = hexValue; // QString::fromUtf8(mCardData->getCurrentValue());
-    qDebug() << "we got changed Card Data:" << mCardDataValue;
+    qDebug() << "ByteArray of " << cardDataArray.length() << " value: " << cardDataArray << " HEXVALUE length " << hexValue.length() << " value: " << hexValue;
+    // only to display the data for test purpose
     emit cardDataValueChanged();
+    // check if there's data
+    if(hexValue.length() == 0) {
+        qDebug() << "getting no data. nothing to do";
+        return;
+    }
+    // now check if there's a running command
+    if(mRunningCommand.length() == 0) {
+        qWarning() << "getting Data from Card, but no Running Command.";
+        return;
+    }
+    if(mRunningCommand == COMMAND_POWER_ON) {
+        processPowerOn(hexValue);
+        return;
+    }
+    if(mRunningCommand == COMMAND_POWER_OFF) {
+
+        return;
+    }
+    if(mRunningCommand == COMMAND_SELECT_FILE) {
+
+        return;
+    }
+    if(mRunningCommand == COMMAND_READ_BINARY || mRunningCommand == COMMAND_READ_BINARY_NEXT) {
+        if(mRunningAPDU == APDU_READ_BINARY_STATUS_VD) {
+
+            return;
+        }
+        if(mRunningAPDU == APDU_READ_BINARY_PERSONAL_DATA) {
+
+            return;
+        }
+        if(mRunningAPDU == APDU_READ_BINARY_INSURANCE_DATA) {
+            qWarning() << "reading Insurance Data not implemented yet";
+            return;
+        }
+        return;
+    }
+    qWarning() << "uuups: nor handled situation. getting data back from card, but dont know what kind of data";
 }
 
 void FeitianCardReaderManager::onCardSubscriptionsChanged()
@@ -398,6 +498,8 @@ void FeitianCardReaderManager::onCardSubscriptionsChanged()
     if(isRunning != mCardNotificationsActive) {
         setCardNotificationsActive(isRunning);
     }
+    // if there's no subscription running we clear all command processing vars
+    resetCommand();
 }
 
 void FeitianCardReaderManager::checkIfAllPrepared()
@@ -405,5 +507,16 @@ void FeitianCardReaderManager::checkIfAllPrepared()
     if(mCardDataAvailable && mWriteDataAvailable  && mDeviceIsConnected) {
         setFeaturesPrepared(true);
     }
+}
+
+void FeitianCardReaderManager::calculateNextIdHex()
+{
+    bool ok = false;
+    uint nextId = mCurrentIdHex.toUInt(&ok,16);
+    nextId++;
+    QString nextIdHex;
+    nextIdHex.setNum(nextId, 16);
+    mCurrentIdHex = mCurrentIdHex.left(mCurrentIdHex.length()-nextIdHex.length());
+    mCurrentIdHex.append(nextIdHex);
 }
 
