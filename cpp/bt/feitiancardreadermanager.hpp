@@ -4,6 +4,8 @@
 #include <QObject>
 #include "bluetoothmanager.hpp"
 
+#include <zlib.h>
+
 class FeitianCardReaderManager : public QObject
 {
     Q_OBJECT
@@ -175,6 +177,7 @@ private:
 
 
 
+    QByteArray gUncompress(const QByteArray &data);
 };
 
 #endif // FEITIANCARDREADERMANAGER_HPP

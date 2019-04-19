@@ -674,9 +674,68 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
     // Third byte: CM - compression method: 1-7 reserved - 0x08 == DEFLATE
     // bytes 4-10 extra flags, like file name, comments, CRC16, etc.. all are 0
     qDebug() << "GZIP First 10 Bytes: " << xmlPayload.left(20);
-    // last 4 Bytes are size ????
+    // last 4 Bytes are size (in reverse order)
+    // per ex 6a020000 --> 0000026a = 618 bytes
+
+    // qUncompress only works for zlib
+    // now trying solution from StackOverflow
+
+    QByteArray uncompressed = gUncompress(QByteArray::fromHex(xmlPayload.toLatin1()));
+    qDebug() << "XML ???" << uncompressed;
 
     emit personalDataSuccess(pdMap);
+}
+
+// https://stackoverflow.com/questions/2690328/qt-quncompress-gzip-data
+// https://stackoverflow.com/a/7351507
+QByteArray FeitianCardReaderManager::gUncompress(const QByteArray &data)
+{
+    if (data.size() <= 4) {
+        qWarning("gUncompress: Input data is truncated");
+        return QByteArray();
+    }
+
+    QByteArray result;
+
+    int ret;
+    z_stream strm;
+    static const int CHUNK_SIZE = 1024;
+    char out[CHUNK_SIZE];
+
+    /* allocate inflate state */
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    strm.opaque = Z_NULL;
+    strm.avail_in = data.size();
+    strm.next_in = (Bytef*)(data.data());
+
+    ret = inflateInit2(&strm, 15 +  32); // gzip decoding
+    if (ret != Z_OK)
+        return QByteArray();
+
+    // run inflate()
+    do {
+        strm.avail_out = CHUNK_SIZE;
+        strm.next_out = (Bytef*)(out);
+
+        ret = inflate(&strm, Z_NO_FLUSH);
+        Q_ASSERT(ret != Z_STREAM_ERROR);  // state not clobbered
+
+        switch (ret) {
+        case Z_NEED_DICT:
+            ret = Z_DATA_ERROR;     // and fall through
+        case Z_DATA_ERROR:
+        case Z_MEM_ERROR:
+            (void)inflateEnd(&strm);
+            return QByteArray();
+        }
+
+        result.append(out, CHUNK_SIZE - strm.avail_out);
+    } while (strm.avail_out == 0);
+
+    // clean up and return
+    inflateEnd(&strm);
+    return result;
 }
 
 
