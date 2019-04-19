@@ -45,6 +45,8 @@ static const QString ATR_EGK_G2 = "3bd396ff81b1fe451f078081052d";
 static const QString PARSE_ATR = "https://smartcard-atr.appspot.com/parse?ATR=";
 
 static const QString THREE_BYTE_FILLER = "000000";
+// dont know what this data means
+static const QString UNKNOWN_NEXT_BINARY = "001000";
 
 
 FeitianCardReaderManager::FeitianCardReaderManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
@@ -537,13 +539,144 @@ void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
 void FeitianCardReaderManager::doReadBinaryPersonalData()
 {
     qDebug() << "write to Feitian CardReader ReadBinary PersonalData APDU:";
-    mCardService->writeCharacteristicAsHex(mWriteData, "", false);
+    // reset commands if something left
+    resetCommand();
+    // calculate next ID
+    calculateNextIdHex();
+    // construct the command
+    QString theCommand = COMMAND_READ_BINARY;
+    theCommand.append(mCurrentIdHex);
+    theCommand.append(THREE_BYTE_FILLER);
+    theCommand.append(APDU_READ_BINARY_PERSONAL_DATA);
+    // set running command
+    mRunningCommand = COMMAND_READ_BINARY;
+    mRunningAPDU = APDU_READ_BINARY_PERSONAL_DATA;
+    //
+    mFirstResponseProcessed = false;
+    mExpectedLength = 0;
+    // Write to CardReader
+    mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
 }
+
+void FeitianCardReaderManager::doReadBinaryNext()
+{
+    qDebug() << "write next part of data to Feitian CardReader ReadBinary PersonalData APDU:";
+    // calculate next ID
+    calculateNextIdHex();
+    // construct the command
+    QString theCommand = COMMAND_READ_BINARY_NEXT;
+    theCommand.append(mCurrentIdHex);
+    theCommand.append(UNKNOWN_NEXT_BINARY);
+    // Write to CardReader
+    mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
+}
+
+void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexData)
+{
+    if(!mFirstResponseProcessed) {
+        if(hexData.length() != 40) {
+            qWarning() << "something went wrong. first part of data always must be 20 Bytes (40), but was " << hexData.length();
+            return;
+        }
+        // calculate the length
+        QString hexLength = hexData.mid(20,4);
+        bool ok;
+        mExpectedLength = hexLength.toInt(&ok,16);
+        qDebug() << "expected length " << hexLength << " --> " << mExpectedLength;
+        mFirstResponseProcessed = true;
+    } // first response
+
+
+    if(hexData.length() == 40) {
+        mCurrentData += hexData;
+        // wait for more
+        return;
+    }
+    mCurrentData += hexData;
+
+    if(mCurrentData.length()/2 < (mExpectedLength+12+10+2)) {
+        // maximum not reached yet
+        // read next part
+        qDebug() << "received: " << mCurrentData.length()/2 << "we need " << mExpectedLength << " read next part";
+        doReadBinaryNext();
+        return;
+    }
+
+    qDebug() << "received data Bytes " << mCurrentData.length()/2 << " expected: "<< mExpectedLength+12+10+2;
+    return;
+
+
+    if(mCurrentData.length() != 74) {
+        qWarning() << "response data should be 37 bytes and not " << mCurrentData.length()/2;
+        emit statusVDFailed(tr("Received buffer not 37 Bytes for a valid Read Binary StatusVD response"),"","");
+        resetCommand();
+        return;
+    }
+    QString responseType = mCurrentData.left(6);
+    QString id = mCurrentData.mid(6,8);
+    if(id != mCurrentIdHex) {
+        qWarning() << "ID seems to be wrong: " << id << " instead of " << mCurrentIdHex;
+        // we ignore this in our demo app
+    }
+    QString unknownFiller = mCurrentData.mid(14,6);
+    QString payload = mCurrentData.right(mCurrentData.length()-20);
+
+    // now it's safe to reset the command vars
+    resetCommand();
+
+    // go on
+    qDebug() << "processing Read Binary StatsVD. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
+    qDebug() << "Payload: " << payload;
+
+    if(payload.length() != 54) {
+        qWarning() << "read statusVD payload should be 54, but was " << payload.length();
+        emit statusVDFailed(tr("Cannot Read StatusVD on eGK - wrong Response Data length."), APDU_RESPONSE_INFO_URL, payload);
+        return;
+    }
+    QString responseStatus = payload.mid(50,4);
+    if(responseStatus == APDU_COMMAND_SUCCESSFULLY_EXECUTED) {
+        QVariantMap statusVDMap;
+        QString status = QByteArray::fromHex(payload.left(2).toLocal8Bit());
+
+        QString year = QByteArray::fromHex(payload.mid(2,8).toLocal8Bit());
+        QString month = QByteArray::fromHex(payload.mid(10,4).toLocal8Bit());
+        QString day = QByteArray::fromHex(payload.mid(14,4).toLocal8Bit());
+        QString hour = QByteArray::fromHex(payload.mid(18,4).toLocal8Bit());
+        QString minutes = QByteArray::fromHex(payload.mid(22,4).toLocal8Bit());
+        QString seconds = QByteArray::fromHex(payload.mid(26,4).toLocal8Bit());
+
+        QString version1 = payload.mid(30,3);
+        QString version2 = payload.mid(33,3);
+        QString version3 = payload.mid(36,4);
+        QString notUsed = payload.mid(40,10);
+
+        statusVDMap.insert("Status", status.toInt());
+        qDebug() << "status: " << status << " value: " << status.toInt();
+
+        qDebug() << "timestamp hex: " << year << "-" << month <<"-" << day << " " << hour << ":" << minutes << ":" << seconds;
+        QDateTime timeStamp = QDateTime(QDate(year.toInt(), month.toInt(), day.toInt()), QTime(hour.toInt(), minutes.toInt(), seconds.toInt()));
+        statusVDMap.insert("Timestamp", timeStamp.toString(YYYY_MM_DD_HH_MM_SS));
+        qDebug() << "Timestamp " << timeStamp.toString(YYYY_MM_DD_HH_MM_SS);
+
+        QString version = version1+"."+version2+"."+version3;
+        statusVDMap.insert("Version", version);
+        qDebug() << "Version: " << version;
+
+        qDebug() << "StatusVDMap: " << statusVDMap;
+
+        emit statusVDSuccess(statusVDMap);
+        // do the next step
+        doReadBinaryPersonalData();
+        return;
+    }
+    emit statusVDFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, payload);
+}
+
 
 void FeitianCardReaderManager::doReadBinaryInsuranceData()
 {
     qDebug() << "write to Feitian CardReader ReadBinary InsuranceData APDU:";
-    mCardService->writeCharacteristicAsHex(mWriteData, "", false);
+    // not yet implemented
 }
 
 void FeitianCardReaderManager::onCardCharacteristicsDone()
@@ -636,7 +769,7 @@ void FeitianCardReaderManager::onCardDataChanged()
             return;
         }
         if(mRunningAPDU == APDU_READ_BINARY_PERSONAL_DATA) {
-
+            processReadBinaryPersonalData(hexValue);
             return;
         }
         if(mRunningAPDU == APDU_READ_BINARY_INSURANCE_DATA) {

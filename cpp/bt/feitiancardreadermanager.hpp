@@ -143,11 +143,19 @@ private:
     QString mRunningCommand;
     // currently running APDU
     QString mRunningAPDU;
+    // read binary can be split into some chunk of data
+    // first data contains the data length attribute
+    // so we must know if the first part was processed
+    bool mFirstResponseProcessed;
+    int mExpectedLength;
     void resetCommand();
     // processing commands
     void processPowerOn(const QString &hexData);
     void processSelectFiles(const QString &hexData);
     void processReadBinaryStatusVD(const QString &hexData);
+    void doReadBinaryNext();
+    void processReadBinaryPersonalData(const QString &hexData);
+
     // complete (concatanated) data
     QString mCurrentData;
 
@@ -156,6 +164,8 @@ private:
     QString mSettingsFavoriteAddress;
     QString mSettingsFavoriteName;
     void updateSettings();
+
+
 
 };
 
