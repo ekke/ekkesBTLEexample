@@ -23,9 +23,6 @@ Page {
     property bool cardReadStatus: false
     property bool cardReadPersonalData: false
 
-    property var cardStatusDataMap: ({})
-    property var cardPersonalDataMap: ({})
-
     header: Pane {
         leftPadding: 24
         rightPadding: 8
@@ -599,13 +596,12 @@ Page {
     }
 
     function onStatusVDSuccess(statusVDMap) {
-        cardStatusDataMap = statusVDMap
         cardReadStatus = true
         console.log("STATUS VD TIMESTAMP: "+statusVDMap.Timestamp)
         popupStatusVD.statusVDMap = statusVDMap
     }
     function onStatusVDFailed(message, apduResponseInfoUrl, apduResponse) {
-        cardStatusDataMap = ({})
+        popupStatusVD.statusVDMap = ({})
         cardReadStatus = false
         if(apduResponseInfoUrl.length) {
             popupWrongWithUrl.text = message + qsTr("\nDo you want to see detailed Infos about the Response Code %1 ?").arg(apduResponse)
@@ -619,11 +615,11 @@ Page {
         }
     }
     function onPersonalDataSuccess(pdMap) {
-        cardPersonalDataMap = pdMap
         cardReadPersonalData = true
+        console.log("TEST XML SIZE: "+pdMap.XMLBytes)
     }
     function onPersonalDataFailed(message, apduResponseInfoUrl, apduResponse) {
-        cardPersonalDataMap = ({})
+        // cardPersonalDataMap = ({})
         cardReadPersonalData = false
         if(apduResponseInfoUrl.length) {
             popupWrongWithUrl.text = message + qsTr("\nDo you want to see detailed Infos about the Response Code %1 ?").arg(apduResponse)

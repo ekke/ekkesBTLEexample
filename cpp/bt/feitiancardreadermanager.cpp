@@ -45,6 +45,8 @@ static const QString ATR_EGK_G2 = "3bd396ff81b1fe451f078081052d";
 static const QString PARSE_ATR = "https://smartcard-atr.appspot.com/parse?ATR=";
 
 static const QString THREE_BYTE_FILLER = "000000";
+static const QString THREE_BYTE_FILLER_ONE = "000001";
+static const QString THREE_BYTE_FILLER_TWO = "000002";
 // dont know what this data means
 static const QString UNKNOWN_NEXT_BINARY = "001000";
 
@@ -532,7 +534,7 @@ void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
         doReadBinaryPersonalData();
         return;
     }
-    emit statusVDFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, payload);
+    emit statusVDFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, responseStatus);
 }
 
 
@@ -553,7 +555,6 @@ void FeitianCardReaderManager::doReadBinaryPersonalData()
     mRunningAPDU = APDU_READ_BINARY_PERSONAL_DATA;
     //
     mFirstResponseProcessed = false;
-    mExpectedLength = 0;
     // Write to CardReader
     mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
 }
@@ -579,97 +580,94 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
             return;
         }
         // calculate the length
-        QString hexLength = hexData.mid(20,4);
+        QString expectedBytesHex = hexData.mid(20,4);
         bool ok;
-        mExpectedLength = hexLength.toInt(&ok,16);
-        qDebug() << "expected length " << hexLength << " --> " << mExpectedLength;
+        mExpectedBytes = expectedBytesHex.toInt(&ok,16);
         mFirstResponseProcessed = true;
+        // before getting data from first chunk we clear the list
+        mCurrentDataChunksList.clear();
+        // response Type 3
+        // ID 4
+        // filler 3 (000001)
+        // expected length 2
+        mFirstPrefixBytes = 12;
+        // response Type 3
+        // ID 4
+        // filler 3 (000002)
+        mNextPrefixBytes = 10;
+        // Status per ex 90 00 == success
+        mLastPostfixBytes = 2;
+        //
+        mRemainingBytes = mExpectedBytes + mLastPostfixBytes;
+        mReceivedBytes = 0;
+        //
+        mChunkSizeBytes = 271;
     } // first response
-
 
     if(hexData.length() == 40) {
         mCurrentData += hexData;
         // wait for more
+        // go on it's the same chunk
         return;
     }
+    // concatenate the last row of this chunk
     mCurrentData += hexData;
+    // now add to the list
+    mCurrentDataChunksList.append(mCurrentData);
 
-    if(mCurrentData.length()/2 < (mExpectedLength+12+10+2)) {
-        // maximum not reached yet
+    if(mCurrentDataChunksList.size() == 1) {
+        // the very first chunk
+        mReceivedBytes = mCurrentData.length()/2 - mFirstPrefixBytes;
+    } else {
+        // we already have more chunks
+        mReceivedBytes += (mCurrentData.length()/2 - mNextPrefixBytes);
+    }
+
+    QString responseStatus;
+
+    mRemainingBytes -= mReceivedBytes;
+    if(mRemainingBytes > 0) {
+        // we need more
         // read next part
-        qDebug() << "received: " << mCurrentData.length()/2 << "we need " << mExpectedLength << " read next part";
+        // reset chunk
+        mCurrentData.clear();
+        // go on
         doReadBinaryNext();
         return;
     }
 
-    qDebug() << "received data Bytes " << mCurrentData.length()/2 << " expected: "<< mExpectedLength+12+10+2;
-    return;
+    // now we have it all
+    qDebug() << "received data Bytes " << mReceivedBytes << "including postfix " << mLastPostfixBytes << " expected: "<< mExpectedBytes;
 
-
-    if(mCurrentData.length() != 74) {
-        qWarning() << "response data should be 37 bytes and not " << mCurrentData.length()/2;
-        emit statusVDFailed(tr("Received buffer not 37 Bytes for a valid Read Binary StatusVD response"),"","");
+    // create the XML payload
+    QString xmlPayload;
+    for (int i = 0; i < mCurrentDataChunksList.size(); ++i) {
+        QString chunkData = mCurrentDataChunksList.at(i);
+        if(i == 0) {
+            // the first one
+            xmlPayload.append(chunkData.right(chunkData.length()-mFirstPrefixBytes*2));
+        } else {
+            // the second or more
+            xmlPayload.append(chunkData.right(chunkData.length()-mNextPrefixBytes*2));
+        }
+        if(i == mCurrentDataChunksList.size()-1) {
+            // the last one: get the response status and remove from xml
+            responseStatus = chunkData.right(4);
+            xmlPayload = xmlPayload.left(xmlPayload.length()-4);
+        }
+    } // loop thru chunks
+    if(responseStatus != APDU_COMMAND_SUCCESSFULLY_EXECUTED) {
+        emit personalDataFailed(tr("Read Person Data no success."), APDU_RESPONSE_INFO_URL, responseStatus);
         resetCommand();
         return;
     }
-    QString responseType = mCurrentData.left(6);
-    QString id = mCurrentData.mid(6,8);
-    if(id != mCurrentIdHex) {
-        qWarning() << "ID seems to be wrong: " << id << " instead of " << mCurrentIdHex;
-        // we ignore this in our demo app
-    }
-    QString unknownFiller = mCurrentData.mid(14,6);
-    QString payload = mCurrentData.right(mCurrentData.length()-20);
 
     // now it's safe to reset the command vars
     resetCommand();
 
-    // go on
-    qDebug() << "processing Read Binary StatsVD. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
-    qDebug() << "Payload: " << payload;
-
-    if(payload.length() != 54) {
-        qWarning() << "read statusVD payload should be 54, but was " << payload.length();
-        emit statusVDFailed(tr("Cannot Read StatusVD on eGK - wrong Response Data length."), APDU_RESPONSE_INFO_URL, payload);
-        return;
-    }
-    QString responseStatus = payload.mid(50,4);
-    if(responseStatus == APDU_COMMAND_SUCCESSFULLY_EXECUTED) {
-        QVariantMap statusVDMap;
-        QString status = QByteArray::fromHex(payload.left(2).toLocal8Bit());
-
-        QString year = QByteArray::fromHex(payload.mid(2,8).toLocal8Bit());
-        QString month = QByteArray::fromHex(payload.mid(10,4).toLocal8Bit());
-        QString day = QByteArray::fromHex(payload.mid(14,4).toLocal8Bit());
-        QString hour = QByteArray::fromHex(payload.mid(18,4).toLocal8Bit());
-        QString minutes = QByteArray::fromHex(payload.mid(22,4).toLocal8Bit());
-        QString seconds = QByteArray::fromHex(payload.mid(26,4).toLocal8Bit());
-
-        QString version1 = payload.mid(30,3);
-        QString version2 = payload.mid(33,3);
-        QString version3 = payload.mid(36,4);
-        QString notUsed = payload.mid(40,10);
-
-        statusVDMap.insert("Status", status.toInt());
-        qDebug() << "status: " << status << " value: " << status.toInt();
-
-        qDebug() << "timestamp hex: " << year << "-" << month <<"-" << day << " " << hour << ":" << minutes << ":" << seconds;
-        QDateTime timeStamp = QDateTime(QDate(year.toInt(), month.toInt(), day.toInt()), QTime(hour.toInt(), minutes.toInt(), seconds.toInt()));
-        statusVDMap.insert("Timestamp", timeStamp.toString(YYYY_MM_DD_HH_MM_SS));
-        qDebug() << "Timestamp " << timeStamp.toString(YYYY_MM_DD_HH_MM_SS);
-
-        QString version = version1+"."+version2+"."+version3;
-        statusVDMap.insert("Version", version);
-        qDebug() << "Version: " << version;
-
-        qDebug() << "StatusVDMap: " << statusVDMap;
-
-        emit statusVDSuccess(statusVDMap);
-        // do the next step
-        doReadBinaryPersonalData();
-        return;
-    }
-    emit statusVDFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, payload);
+    QVariantMap pdMap;
+    pdMap.insert("XMLBytes", xmlPayload.length()/2);
+    emit personalDataSuccess(pdMap);
 }
 
 

@@ -147,7 +147,7 @@ private:
     // first data contains the data length attribute
     // so we must know if the first part was processed
     bool mFirstResponseProcessed;
-    int mExpectedLength;
+
     void resetCommand();
     // processing commands
     void processPowerOn(const QString &hexData);
@@ -156,8 +156,16 @@ private:
     void doReadBinaryNext();
     void processReadBinaryPersonalData(const QString &hexData);
 
-    // complete (concatanated) data
+    // complete (concatenated) data
     QString mCurrentData;
+    QStringList mCurrentDataChunksList;
+    int mExpectedBytes;
+    int mReceivedBytes;
+    int mRemainingBytes;
+    int mFirstPrefixBytes;
+    int mNextPrefixBytes;
+    int mLastPostfixBytes;
+    int mChunkSizeBytes;
 
     // SETTINGS
     QVariantMap mFeitianCardReaderSettingsMap;
