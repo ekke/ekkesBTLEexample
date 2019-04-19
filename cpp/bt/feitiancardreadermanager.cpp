@@ -667,6 +667,15 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
 
     QVariantMap pdMap;
     pdMap.insert("XMLBytes", xmlPayload.length()/2);
+
+    // first 10 Bytes header of gzip
+    // First byte : ID1 = 0x1F
+    // Secound byte: ID2 = 0x8B
+    // Third byte: CM - compression method: 1-7 reserved - 0x08 == DEFLATE
+    // bytes 4-10 extra flags, like file name, comments, CRC16, etc.. all are 0
+    qDebug() << "GZIP First 10 Bytes: " << xmlPayload.left(20);
+    // last 4 Bytes are size ????
+
     emit personalDataSuccess(pdMap);
 }
 
