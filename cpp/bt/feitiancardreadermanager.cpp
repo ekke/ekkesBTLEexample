@@ -3,6 +3,8 @@
 #include <QDate>
 #include <QTime>
 
+static const QString YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
 static const QString CARD_READER_SERVICE = "46540001-0002-00c4-0000-465453414645";
 static const QString CARD_DATA_CHARACTERISTIC = "46540003-0002-00c4-0000-465453414645";
 static const QString CARD_WRITE_CHARACTERISTIC = "46540002-0002-00c4-0000-465453414645";
@@ -489,49 +491,46 @@ void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
 
     if(payload.length() != 54) {
         qWarning() << "read statusVD payload should be 54, but was " << payload.length();
-        emit appSelectedFailed(tr("Cannot Read StatusVD on eGK - wrong Response Data length."), APDU_RESPONSE_INFO_URL, payload);
+        emit statusVDFailed(tr("Cannot Read StatusVD on eGK - wrong Response Data length."), APDU_RESPONSE_INFO_URL, payload);
         return;
     }
     QString responseStatus = payload.mid(50,4);
     if(responseStatus == APDU_COMMAND_SUCCESSFULLY_EXECUTED) {
         QVariantMap statusVDMap;
-        QString status = payload.left(2);
+        QString status = QByteArray::fromHex(payload.left(2).toLocal8Bit());
 
-        QString year = payload.mid(2,8);
-        QString month = payload.mid(10,4);
-        QString day = payload.mid(14,4);
-        QString hour = payload.mid(18,4);
-        QString minutes = payload.mid(22,4);
-        QString seconds = payload.mid(26,4);
+        QString year = QByteArray::fromHex(payload.mid(2,8).toLocal8Bit());
+        QString month = QByteArray::fromHex(payload.mid(10,4).toLocal8Bit());
+        QString day = QByteArray::fromHex(payload.mid(14,4).toLocal8Bit());
+        QString hour = QByteArray::fromHex(payload.mid(18,4).toLocal8Bit());
+        QString minutes = QByteArray::fromHex(payload.mid(22,4).toLocal8Bit());
+        QString seconds = QByteArray::fromHex(payload.mid(26,4).toLocal8Bit());
 
         QString version1 = payload.mid(30,3);
         QString version2 = payload.mid(33,3);
         QString version3 = payload.mid(36,4);
         QString notUsed = payload.mid(40,10);
 
-        bool ok = false;
+        statusVDMap.insert("Status", status.toInt());
+        qDebug() << "status: " << status << " value: " << status.toInt();
 
-        uint statusValue = status.toUInt(&ok,16);
-        statusVDMap.insert("status",statusValue);
+        qDebug() << "timestamp hex: " << year << "-" << month <<"-" << day << " " << hour << ":" << minutes << ":" << seconds;
+        QDateTime timeStamp = QDateTime(QDate(year.toInt(), month.toInt(), day.toInt()), QTime(hour.toInt(), minutes.toInt(), seconds.toInt()));
+        statusVDMap.insert("Timestamp", timeStamp.toString(YYYY_MM_DD_HH_MM_SS));
+        qDebug() << "Timestamp " << timeStamp.toString(YYYY_MM_DD_HH_MM_SS);
 
-        uint yearValue = year.toUInt(&ok,16);
-        uint monthValue = month.toUInt(&ok,16);
-        uint dayValue = day.toUInt(&ok,16);
-        uint hourValue = hour.toUInt(&ok,16);
-        uint minutesValue = minutes.toUInt(&ok,16);
-        uint secondsValue = seconds.toUInt(&ok,16);
-        QDateTime timeStamp = QDateTime(QDate(yearValue, monthValue, dayValue), QTime(hourValue, minutesValue, secondsValue));
-        statusVDMap.insert("timestamp", timeStamp);
+        QString version = version1+"."+version2+"."+version3;
+        statusVDMap.insert("Version", version);
+        qDebug() << "Version: " << version;
 
-
-
+        qDebug() << "StatusVDMap: " << statusVDMap;
 
         emit statusVDSuccess(statusVDMap);
         // do the next step
-        // doReadBinaryStatusVD();
+        doReadBinaryPersonalData();
         return;
     }
-    emit appSelectedFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, payload);
+    emit statusVDFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, payload);
 }
 
 
@@ -633,7 +632,7 @@ void FeitianCardReaderManager::onCardDataChanged()
     }
     if(mRunningCommand == COMMAND_READ_BINARY || mRunningCommand == COMMAND_READ_BINARY_NEXT) {
         if(mRunningAPDU == APDU_READ_BINARY_STATUS_VD) {
-
+            processReadBinaryStatusVD(hexValue);
             return;
         }
         if(mRunningAPDU == APDU_READ_BINARY_PERSONAL_DATA) {

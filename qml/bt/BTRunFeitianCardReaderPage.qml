@@ -255,7 +255,7 @@ Page {
                         color: primaryColor
                     }
                     DotMarker {
-                        color: cardReadStatus? "green":"red"
+                        color: cardReadPersonalData? "green":"red"
                     }
                 } // Card read personal data
 
@@ -594,9 +594,15 @@ Page {
             }
         }
     }
+    BTPopupStatusVD {
+        id: popupStatusVD
+    }
+
     function onStatusVDSuccess(statusVDMap) {
         cardStatusDataMap = statusVDMap
         cardReadStatus = true
+        console.log("STATUS VD TIMESTAMP: "+statusVDMap.Timestamp)
+        popupStatusVD.statusVDMap = statusVDMap
     }
     function onStatusVDFailed(message, apduResponseInfoUrl, apduResponse) {
         cardStatusDataMap = ({})
@@ -683,7 +689,7 @@ Page {
             itemText: qsTr("Status Data")
             imageName: "info.png"
             onTriggered: {
-                // TODO
+                popupStatusVD.open()
             }
         }
         MenuItemWithIcon {
