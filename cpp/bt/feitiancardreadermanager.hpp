@@ -90,9 +90,9 @@ signals:
     void appSelectedSuccess();
     void appSelectedFailed(const QString& message, const QString apduResponseInfoUrl, const QString apduResponse);
     void statusVDSuccess(const QVariantMap statusVDMap);
-    void statusVDFailed(const QString message);
+    void statusVDFailed(const QString message, const QString apduResponseInfoUrl, const QString apduResponse);
     void personalDataSuccess(const QVariantMap pdMap);
-    void personalDataFailed(const QString message);
+    void personalDataFailed(const QString message, const QString apduResponseInfoUrl, const QString apduResponse);
 
     void cardNotificationsActiveChanged();
     void featuresPreparedChanged();
@@ -147,6 +147,7 @@ private:
     // processing commands
     void processPowerOn(const QString &hexData);
     void processSelectFiles(const QString &hexData);
+    void processReadBinaryStatusVD(const QString &hexData);
     // complete (concatanated) data
     QString mCurrentData;
 
@@ -155,8 +156,6 @@ private:
     QString mSettingsFavoriteAddress;
     QString mSettingsFavoriteName;
     void updateSettings();
-
-
 
 };
 

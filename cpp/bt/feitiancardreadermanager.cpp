@@ -1,5 +1,8 @@
 #include "feitiancardreadermanager.hpp"
 
+#include <QDate>
+#include <QTime>
+
 static const QString CARD_READER_SERVICE = "46540001-0002-00c4-0000-465453414645";
 static const QString CARD_DATA_CHARACTERISTIC = "46540003-0002-00c4-0000-465453414645";
 static const QString CARD_WRITE_CHARACTERISTIC = "46540002-0002-00c4-0000-465453414645";
@@ -424,10 +427,12 @@ void FeitianCardReaderManager::processSelectFiles(const QString& hexData)
     resetCommand();
 
     // go on
-    qDebug() << "processing Power On. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
+    qDebug() << "processing Select File. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
     qDebug() << "Payload: " << payload;
     if(payload == APDU_COMMAND_SUCCESSFULLY_EXECUTED) {
         emit appSelectedSuccess();
+        // do the next step
+        doReadBinaryStatusVD();
         return;
     }
     emit appSelectedFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, payload);
@@ -436,8 +441,99 @@ void FeitianCardReaderManager::processSelectFiles(const QString& hexData)
 void FeitianCardReaderManager::doReadBinaryStatusVD()
 {
     qDebug() << "write to Feitian CardReader ReadBinary StatusVD APDU:";
-    mCardService->writeCharacteristicAsHex(mWriteData, "", false);
+    // reset commands if something left
+    resetCommand();
+    // calculate next ID
+    calculateNextIdHex();
+    // construct the command
+    QString theCommand = COMMAND_READ_BINARY;
+    theCommand.append(mCurrentIdHex);
+    theCommand.append(THREE_BYTE_FILLER);
+    theCommand.append(APDU_READ_BINARY_STATUS_VD);
+    // set running command
+    mRunningCommand = COMMAND_READ_BINARY;
+    mRunningAPDU = APDU_READ_BINARY_STATUS_VD;
+    // Write to CardReader
+    mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
 }
+
+void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
+{
+    if(hexData.length() == 40) {
+        mCurrentData += hexData;
+        // wait for more
+        return;
+    }
+    mCurrentData += hexData;
+    if(mCurrentData.length() != 74) {
+        qWarning() << "response data should be 37 bytes and not " << mCurrentData.length()/2;
+        emit statusVDFailed(tr("Received buffer not 37 Bytes for a valid Read Binary StatusVD response"),"","");
+        resetCommand();
+        return;
+    }
+    QString responseType = mCurrentData.left(6);
+    QString id = mCurrentData.mid(6,8);
+    if(id != mCurrentIdHex) {
+        qWarning() << "ID seems to be wrong: " << id << " instead of " << mCurrentIdHex;
+        // we ignore this in our demo app
+    }
+    QString unknownFiller = mCurrentData.mid(14,6);
+    QString payload = mCurrentData.right(mCurrentData.length()-20);
+
+    // now it's safe to reset the command vars
+    resetCommand();
+
+    // go on
+    qDebug() << "processing Read Binary StatsVD. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
+    qDebug() << "Payload: " << payload;
+
+    if(payload.length() != 54) {
+        qWarning() << "read statusVD payload should be 54, but was " << payload.length();
+        emit appSelectedFailed(tr("Cannot Read StatusVD on eGK - wrong Response Data length."), APDU_RESPONSE_INFO_URL, payload);
+        return;
+    }
+    QString responseStatus = payload.mid(50,4);
+    if(responseStatus == APDU_COMMAND_SUCCESSFULLY_EXECUTED) {
+        QVariantMap statusVDMap;
+        QString status = payload.left(2);
+
+        QString year = payload.mid(2,8);
+        QString month = payload.mid(10,4);
+        QString day = payload.mid(14,4);
+        QString hour = payload.mid(18,4);
+        QString minutes = payload.mid(22,4);
+        QString seconds = payload.mid(26,4);
+
+        QString version1 = payload.mid(30,3);
+        QString version2 = payload.mid(33,3);
+        QString version3 = payload.mid(36,4);
+        QString notUsed = payload.mid(40,10);
+
+        bool ok = false;
+
+        uint statusValue = status.toUInt(&ok,16);
+        statusVDMap.insert("status",statusValue);
+
+        uint yearValue = year.toUInt(&ok,16);
+        uint monthValue = month.toUInt(&ok,16);
+        uint dayValue = day.toUInt(&ok,16);
+        uint hourValue = hour.toUInt(&ok,16);
+        uint minutesValue = minutes.toUInt(&ok,16);
+        uint secondsValue = seconds.toUInt(&ok,16);
+        QDateTime timeStamp = QDateTime(QDate(yearValue, monthValue, dayValue), QTime(hourValue, minutesValue, secondsValue));
+        statusVDMap.insert("timestamp", timeStamp);
+
+
+
+
+        emit statusVDSuccess(statusVDMap);
+        // do the next step
+        // doReadBinaryStatusVD();
+        return;
+    }
+    emit appSelectedFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, payload);
+}
+
 
 void FeitianCardReaderManager::doReadBinaryPersonalData()
 {

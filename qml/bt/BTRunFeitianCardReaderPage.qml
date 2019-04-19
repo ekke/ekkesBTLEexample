@@ -598,22 +598,36 @@ Page {
         cardStatusDataMap = statusVDMap
         cardReadStatus = true
     }
-    function onStatusVDFailed(message) {
+    function onStatusVDFailed(message, apduResponseInfoUrl, apduResponse) {
         cardStatusDataMap = ({})
         cardReadStatus = false
-        if(message.length) {
-            appWindow.showInfo(message)
+        if(apduResponseInfoUrl.length) {
+            popupWrongWithUrl.text = message + qsTr("\nDo you want to see detailed Infos about the Response Code %1 ?").arg(apduResponse)
+            popupWrongWithUrl.theUrl = apduResponseInfoUrl
+            popupWrongWithUrl.isYes = false
+            popupWrongWithUrl.open()
+        } else {
+            if(message.length) {
+                appWindow.showInfo(message)
+            }
         }
     }
     function onPersonalDataSuccess(pdMap) {
         cardPersonalDataMap = pdMap
         cardReadPersonalData = true
     }
-    function onPersonalDataFailed(message) {
+    function onPersonalDataFailed(message, apduResponseInfoUrl, apduResponse) {
         cardPersonalDataMap = ({})
         cardReadPersonalData = false
-        if(message.length) {
-            appWindow.showInfo(message)
+        if(apduResponseInfoUrl.length) {
+            popupWrongWithUrl.text = message + qsTr("\nDo you want to see detailed Infos about the Response Code %1 ?").arg(apduResponse)
+            popupWrongWithUrl.theUrl = apduResponseInfoUrl
+            popupWrongWithUrl.isYes = false
+            popupWrongWithUrl.open()
+        } else {
+            if(message.length) {
+                appWindow.showInfo(message)
+            }
         }
     }
     Connections {
@@ -626,9 +640,9 @@ Page {
         onAppSelectedSuccess: onAppSelectedSuccess()
         onAppSelectedFailed: onAppSelectedFailed(message, apduResponseInfoUrl, apduResponse)
         onStatusVDSuccess: onStatusVDSuccess(statusVDMap)
-        onStatusVDFailed: onStatusVDFailed(message)
+        onStatusVDFailed: onStatusVDFailed(message, apduResponseInfoUrl, apduResponse)
         onPersonalDataSuccess: onPersonalDataSuccess(pdMap)
-        onPersonalDataFailed: onPersonalDataFailed(message)
+        onPersonalDataFailed: onPersonalDataFailed(message, apduResponseInfoUrl, apduResponse)
     }
     // autostart notifications when all is prepared
     function onFeaturesPreparedChanged() {
