@@ -526,12 +526,11 @@ Page {
     } // searchDevice
 
     PopupYesNo {
-        property string parseUrl
-        id: popupWrongCard
-        text: qsTr("This Card Type is not implemented yet - you need an eGK G2.\nDo you want to see detailed Infos about the currently inserted Card ?")
+        property string theUrl
+        id: popupWrongWithUrl
         onClosed: {
             if(isYes) {
-                Qt.openUrlExternally(parseUrl)
+                Qt.openUrlExternally(theUrl)
             }
         }
     } // popupWrongCard
@@ -569,20 +568,30 @@ Page {
         cardSupported = false
         cardPowerOn = true
         if(parseATRUrl.length) {
-            popupWrongCard.parseUrl = parseATRUrl
-            popupWrongCard.isYes = false
-            popupWrongCard.open()
+            popupWrongWithUrl.text = qsTr("This Card Type is not implemented yet - you need an eGK G2.\nDo you want to see detailed Infos about the currently inserted Card ?")
+            popupWrongWithUrl.theUrl = parseATRUrl
+            popupWrongWithUrl.isYes = false
+            popupWrongWithUrl.open()
         } else {
-            appWindow.showInfo(message)
+            if(message.length) {
+                appWindow.showInfo(message)
+            }
         }
     }
     function onAppSelectedSuccess() {
         cardAppSelected = true
     }
-    function onAppSelectedFailed(message) {
+    function onAppSelectedFailed(message, apduResponseInfoUrl, apduResponse) {
         cardAppSelected = false
-        if(message.length) {
-            appWindow.showInfo(message)
+        if(apduResponseInfoUrl.length) {
+            popupWrongWithUrl.text = message + qsTr("\nDo you want to see detailed Infos about the Response Code %1 ?").arg(apduResponse)
+            popupWrongWithUrl.theUrl = apduResponseInfoUrl
+            popupWrongWithUrl.isYes = false
+            popupWrongWithUrl.open()
+        } else {
+            if(message.length) {
+                appWindow.showInfo(message)
+            }
         }
     }
     function onStatusVDSuccess(statusVDMap) {
@@ -615,7 +624,7 @@ Page {
         onReadATRSuccess: onReadATRSuccess()
         onReadATRWrong: onReadATRWrong(message, parseATRUrl)
         onAppSelectedSuccess: onAppSelectedSuccess()
-        onAppSelectedFailed: onAppSelectedFailed(message)
+        onAppSelectedFailed: onAppSelectedFailed(message, apduResponseInfoUrl, apduResponse)
         onStatusVDSuccess: onStatusVDSuccess(statusVDMap)
         onStatusVDFailed: onStatusVDFailed(message)
         onPersonalDataSuccess: onPersonalDataSuccess(pdMap)

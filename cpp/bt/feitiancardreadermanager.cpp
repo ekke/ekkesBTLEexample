@@ -28,6 +28,9 @@ static const QString APDU_READ_BINARY_STATUS_VD = "00b08c00000000";
 static const QString APDU_READ_BINARY_PERSONAL_DATA = "00b08100000000";
 // not used yet:
 static const QString APDU_READ_BINARY_INSURANCE_DATA = "00b08200000000";
+// https://www.eftlab.com/index.php/site-map/knowledge-base/118-apdu-response-list
+// https://de.wikipedia.org/wiki/Application_Protocol_Data_Unit#Statusw%C3%B6rter
+static const QString APDU_RESPONSE_INFO_URL = "https://de.wikipedia.org/wiki/Application_Protocol_Data_Unit#Statusw%C3%B6rter";
 
 // https://de.wikipedia.org/wiki/Answer_to_Reset
 // List of ATR http://ludovic.rousseau.free.fr/softwares/pcsc-tools/smartcard_list.txt
@@ -320,12 +323,6 @@ void FeitianCardReaderManager::doPowerOn()
     mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
 }
 
-void FeitianCardReaderManager::doPowerOff()
-{
-    qDebug() << "write to Feitian CardReader PowerOff command:";
-    mCardService->writeCharacteristicAsHex(mWriteData, "", false);
-}
-
 void FeitianCardReaderManager::processPowerOn(const QString& hexData)
 {
     if(hexData.length() == 40) {
@@ -357,6 +354,8 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
     qDebug() << "Payload: " << payload;
     if(payload == ATR_EGK_G2) {
         emit readATRSuccess();
+        // no do the next step
+        doSelectFile();
         return;
     }
     QString parseUrl = PARSE_ATR;
@@ -365,10 +364,73 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
     emit readATRWrong(tr("Wrong Card - only eGK 2 is implemented yet"),parseUrl);
 }
 
+// do we need this ???
+void FeitianCardReaderManager::doPowerOff()
+{
+    qDebug() << "write to Feitian CardReader PowerOff command:";
+    mCardService->writeCharacteristicAsHex(mWriteData, "", false);
+}
+
 void FeitianCardReaderManager::doSelectFile()
 {
     qDebug() << "write to Feitian CardReader SelectFile APDU:";
-    mCardService->writeCharacteristicAsHex(mWriteData, "", false);
+    // reset commands if something left
+    resetCommand();
+    // calculate next ID
+    calculateNextIdHex();
+    // construct the command
+    QString theCommand = COMMAND_SELECT_FILE;
+    theCommand.append(mCurrentIdHex);
+    theCommand.append(THREE_BYTE_FILLER);
+    theCommand.append(APDU_SELECT_FILE);
+    // set running command
+    mRunningCommand = COMMAND_SELECT_FILE;
+    // Write to CardReader
+    // split command
+    if(theCommand.length() > 40) {
+        mCardService->writeCharacteristicAsHex(mWriteData, theCommand.left(40), false);
+        mCardService->writeCharacteristicAsHex(mWriteData, theCommand.right(theCommand.length()-40), false);
+    } else {
+        qDebug() << "uuups - command should be length 42 (21 Bytes)";
+        mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
+    }
+}
+
+void FeitianCardReaderManager::processSelectFiles(const QString& hexData)
+{
+    if(hexData.length() == 40) {
+        mCurrentData += hexData;
+        // wait for more
+        qWarning() << "uuups - data should be only length of 24 (12 Bytes) and not 40 or more";
+        return;
+    }
+    mCurrentData += hexData;
+    if(mCurrentData.length() != 24) {
+        qWarning() << "response data should be 12 bytes and not " << mCurrentData.length()/2;
+        emit appSelectedFailed(tr("Received buffer not 12 Bytes for a valid Select File response"),"","");
+        resetCommand();
+        return;
+    }
+    QString responseType = mCurrentData.left(6);
+    QString id = mCurrentData.mid(6,8);
+    if(id != mCurrentIdHex) {
+        qWarning() << "ID seems to be wrong: " << id << " instead of " << mCurrentIdHex;
+        // we ignore this in our demo app
+    }
+    QString unknownFiller = mCurrentData.mid(14,6);
+    QString payload = mCurrentData.right(mCurrentData.length()-20);
+
+    // now it's safe to reset the command vars
+    resetCommand();
+
+    // go on
+    qDebug() << "processing Power On. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
+    qDebug() << "Payload: " << payload;
+    if(payload == APDU_COMMAND_SUCCESSFULLY_EXECUTED) {
+        emit appSelectedSuccess();
+        return;
+    }
+    emit appSelectedFailed(tr("Cannot select the File on eGK - wrong Response Code"), APDU_RESPONSE_INFO_URL, payload);
 }
 
 void FeitianCardReaderManager::doReadBinaryStatusVD()
@@ -466,11 +528,11 @@ void FeitianCardReaderManager::onCardDataChanged()
         return;
     }
     if(mRunningCommand == COMMAND_POWER_OFF) {
-
+        // do we need this ???
         return;
     }
     if(mRunningCommand == COMMAND_SELECT_FILE) {
-
+        processSelectFiles(hexValue);
         return;
     }
     if(mRunningCommand == COMMAND_READ_BINARY || mRunningCommand == COMMAND_READ_BINARY_NEXT) {

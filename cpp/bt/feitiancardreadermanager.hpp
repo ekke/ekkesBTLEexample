@@ -88,7 +88,7 @@ signals:
     void readATRSuccess();
     void readATRWrong(const QString message, const QString parseATRUrl);
     void appSelectedSuccess();
-    void appSelectedFailed(const QString& message);
+    void appSelectedFailed(const QString& message, const QString apduResponseInfoUrl, const QString apduResponse);
     void statusVDSuccess(const QVariantMap statusVDMap);
     void statusVDFailed(const QString message);
     void personalDataSuccess(const QVariantMap pdMap);
@@ -146,6 +146,7 @@ private:
     void resetCommand();
     // processing commands
     void processPowerOn(const QString &hexData);
+    void processSelectFiles(const QString &hexData);
     // complete (concatanated) data
     QString mCurrentData;
 
@@ -154,6 +155,7 @@ private:
     QString mSettingsFavoriteAddress;
     QString mSettingsFavoriteName;
     void updateSettings();
+
 
 
 };
