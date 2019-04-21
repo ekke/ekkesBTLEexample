@@ -52,6 +52,8 @@ static const QString THREE_BYTE_FILLER_TWO = "000002";
 // dont know what this data means
 static const QString UNKNOWN_NEXT_BINARY = "001000";
 
+static const QString COMMAND_NOT_EXECUTED = "41fe00";
+
 
 FeitianCardReaderManager::FeitianCardReaderManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
     mCardServiceAvailable(false), mCardServiceConnected(false), mCardDataAvailable(false),
@@ -346,6 +348,7 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
         qWarning() << "response data should be 20 or more bytes and not " << mCurrentData.length()/2;
         emit readATRWrong(tr("Received buffer (%1) too short for a valid ATR.\nWe need 10 Bytes MetaData plus ATR").arg(mCurrentData.length()/2),"");
         resetCommand();
+        mRetryCommand = 0;
         return;
     }
     QString responseType = mCurrentData.left(6);
@@ -357,6 +360,17 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
     QString unknownFiller = mCurrentData.mid(14,6);
     if(mCurrentData.length() == 20) {
         qWarning() << "response data should be more then 20 Bytes and not " << mCurrentData.length()/2;
+        // sometimes there's a timing problem - esp Cards with G2.1
+        // so we retry 3 times
+        if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED) {
+            mRetryCommand ++;
+            if(mRetryCommand <=5) {
+                doPowerOn();
+                return;
+            }
+        } else {
+            qDebug() << "Process Power ON 3 Bytes at the end: " << mCurrentData.right(6);
+        }
         emit readATRWrong(tr("Received buffer (%1) too short for a valid ATR.\nBuffer contains only MetaData (10 Bytes) and no ATR").arg(mCurrentData.length()/2),"");
         resetCommand();
         return;
@@ -365,6 +379,7 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
     QString payload = mCurrentData.right(mCurrentData.length()-20);
 
     // now it's safe to reset the command vars
+    mRetryCommand = 0;
     resetCommand();
 
     // go on
@@ -425,7 +440,18 @@ void FeitianCardReaderManager::processSelectFiles(const QString& hexData)
     mCurrentData += hexData;
     if(mCurrentData.length() != 24) {
         qWarning() << "response data should be 12 bytes and not " << mCurrentData.length()/2;
+        // sometimes there's a timing problem - esp Cards with G2.1
+        // so we retry 3 times
+        if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED) {
+            mRetryCommand ++;
+            if(mRetryCommand <=5) {
+                doSelectFile();
+                return;
+            }
+        }
+        qDebug() << "Process Select Files 3 Bytes at the end: " << mCurrentData.right(6);
         emit appSelectedFailed(tr("Received buffer not 12 Bytes for a valid Select File response"),"","");
+        mRetryCommand = 0;
         resetCommand();
         return;
     }
@@ -439,6 +465,7 @@ void FeitianCardReaderManager::processSelectFiles(const QString& hexData)
     QString payload = mCurrentData.right(mCurrentData.length()-20);
 
     // now it's safe to reset the command vars
+    mRetryCommand = 0;
     resetCommand();
 
     // go on
@@ -482,8 +509,19 @@ void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
     mCurrentData += hexData;
     if(mCurrentData.length() != 74) {
         qWarning() << "response data should be 37 bytes and not " << mCurrentData.length()/2;
+        // sometimes there's a timing problem - esp Cards with G2.1
+        // so we retry 3 times
+        if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED) {
+            mRetryCommand ++;
+            if(mRetryCommand <=5) {
+                doReadBinaryStatusVD();
+                return;
+            }
+        }
+        qDebug() << "Process Read Status VD 3 Bytes at the end: " << mCurrentData.right(6);
         emit statusVDFailed(tr("Received buffer not 37 Bytes for a valid Read Binary StatusVD response"),"","");
         resetCommand();
+        mRetryCommand = 0;
         return;
     }
     QString responseType = mCurrentData.left(6);
@@ -496,6 +534,7 @@ void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
     QString payload = mCurrentData.right(mCurrentData.length()-20);
 
     // now it's safe to reset the command vars
+    mRetryCommand = 0;
     resetCommand();
 
     // go on
@@ -586,7 +625,11 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
 {
     if(!mFirstResponseProcessed) {
         if(hexData.length() != 40) {
-            qWarning() << "something went wrong. first part of data always must be 20 Bytes (40), but was " << hexData.length();
+            qWarning() << "Process read PD something went wrong. first part of data always must be 20 Bytes (40), but was " << hexData.length();
+            if(hexData.length() == 20) {
+                qDebug() << "Process Read PD 3 Bytes at the end: " << mCurrentData.right(6);
+                // perhaps retry
+            }
             return;
         }
         // calculate the length

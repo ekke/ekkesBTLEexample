@@ -168,6 +168,7 @@ private:
     int mNextPrefixBytes;
     int mLastPostfixBytes;
     int mChunkSizeBytes;
+    int mRetryCommand;
 
     // SETTINGS
     QVariantMap mFeitianCardReaderSettingsMap;
