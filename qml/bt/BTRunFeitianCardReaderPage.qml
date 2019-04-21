@@ -267,15 +267,6 @@ Page {
                         text: qsTr("Protocol")
                         color: primaryColor
                     }
-                    ButtonFlat {
-                        visible: theCardDataValueField.text.length
-                        Layout.alignment: Qt.AlignVCenter
-                        text: qsTr("Clear Protocol")
-                        textColor: accentColor
-                        onClicked: {
-                            theCardDataValueField.text = ""
-                        }
-                    }
                 } // card data label
                 RowLayout {
                     Layout.leftMargin: 6
@@ -298,7 +289,7 @@ Page {
         backgroundColor: primaryColor
         imageSource: cardReaderManager.cardNotificationsActive? "qrc:/images/"+iconOnPrimaryFolder+"/stop.png" : "qrc:/images/"+iconOnPrimaryFolder+"/play.png"
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 12
+        anchors.bottomMargin: 18
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
             if(cardReaderManager.cardNotificationsActive) {
@@ -308,7 +299,20 @@ Page {
             }
         }
     } // FloatingActionButton
-    // TODO protocol delete button
+    // protocol delete button
+    FloatingActionMiniButton {
+        id: deleteProtocolButton
+        visible: theCardDataValueField.text.length
+        backgroundColor: accentColor
+        imageSource: "qrc:/images/"+iconOnPrimaryFolder+"/delete_sweep.png"
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 6
+        anchors.left: startCardNotificationsButton.right
+        anchors.leftMargin: 24
+        onClicked: {
+            theCardDataValueField.text = ""
+        }
+    } // FloatingActionButton
 
     // C O N N E C T - D I S C O N N E C T
     function disconnectFromDevice() {

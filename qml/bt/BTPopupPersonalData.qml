@@ -35,6 +35,7 @@ Popup {
                 Layout.preferredWidth: 1
                 text: qsTr("VersichertenID")
                 color: primaryColor
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             }
             LabelSubheading {
                 id: versichertenIDText
