@@ -342,7 +342,7 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
     mCurrentData += hexData;
     if(mCurrentData.length() < 20) {
         qWarning() << "response data should be 20 or more bytes and not " << mCurrentData.length()/2;
-        emit readATRWrong(tr("Received buffer too short for a valid ATR"),"");
+        emit readATRWrong(tr("Received buffer (%1) too short for a valid ATR.\nWe need 10 Bytes MetaData plus ATR").arg(mCurrentData.length()/2),"");
         resetCommand();
         return;
     }
@@ -353,6 +353,13 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
         // we ignore this in our demo app
     }
     QString unknownFiller = mCurrentData.mid(14,6);
+    if(mCurrentData.length() == 20) {
+        qWarning() << "response data should be more then 20 Bytes and not " << mCurrentData.length()/2;
+        emit readATRWrong(tr("Received buffer (%1) too short for a valid ATR.\nBuffer contains only MetaData (10 Bytes) and no ATR").arg(mCurrentData.length()/2),"");
+        resetCommand();
+        return;
+    }
+
     QString payload = mCurrentData.right(mCurrentData.length()-20);
 
     // now it's safe to reset the command vars
@@ -360,7 +367,7 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
 
     // go on
     qDebug() << "processing Power On. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
-    qDebug() << "Payload: " << payload;
+    qDebug() << "Payload (ATR): " << payload;
     if(payload == ATR_EGK_G2) {
         emit readATRSuccess();
         // no do the next step
@@ -510,9 +517,10 @@ void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
         QString minutes = QByteArray::fromHex(payload.mid(22,4).toLocal8Bit());
         QString seconds = QByteArray::fromHex(payload.mid(26,4).toLocal8Bit());
 
-        QString version1 = payload.mid(30,3);
-        QString version2 = payload.mid(33,3);
-        QString version3 = payload.mid(36,4);
+        int version1 = payload.mid(30,3).toInt();
+        int version2 = payload.mid(33,3).toInt();
+        int version3 = payload.mid(36,4).toInt();
+
         QString notUsed = payload.mid(40,10);
 
         statusVDMap.insert("Status", status.toInt());
@@ -523,7 +531,7 @@ void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
         statusVDMap.insert("Timestamp", timeStamp.toString(YYYY_MM_DD_HH_MM_SS));
         qDebug() << "Timestamp " << timeStamp.toString(YYYY_MM_DD_HH_MM_SS);
 
-        QString version = version1+"."+version2+"."+version3;
+        QString version = QString::number(version1)+"."+QString::number(version2)+"."+QString::number(version3);
         statusVDMap.insert("Version", version);
         qDebug() << "Version: " << version;
 
@@ -673,15 +681,18 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
     // Secound byte: ID2 = 0x8B
     // Third byte: CM - compression method: 1-7 reserved - 0x08 == DEFLATE
     // bytes 4-10 extra flags, like file name, comments, CRC16, etc.. all are 0
-    qDebug() << "GZIP First 10 Bytes: " << xmlPayload.left(20);
+    qDebug() << "GZIP First 10 Bytes. ID1 (0x1F) ID2 (0x8B) Compression (0x08 == DEFLATE)" << xmlPayload.left(20);
     // last 4 Bytes are size (in reverse order)
     // per ex 6a020000 --> 0000026a = 618 bytes
 
     // qUncompress only works for zlib
     // now trying solution from StackOverflow
 
-    QByteArray uncompressed = gUncompress(QByteArray::fromHex(xmlPayload.toLatin1()));
-    qDebug() << "XML ???" << uncompressed;
+    QByteArray uncompressedXML = gUncompress(QByteArray::fromHex(xmlPayload.toLatin1()));
+    qDebug() << "XML ???" << uncompressedXML;
+
+    // now parse uncrompessed XML
+
 
     emit personalDataSuccess(pdMap);
 }
