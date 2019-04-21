@@ -4,22 +4,22 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="32"/>
-        <source>ekkes BTLE example
-Qt 5.9 x-platform
-QtQuickControls2</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../qml/pages/AboutPage.qml" line="45"/>
         <source>ekkes BTLE example APP
 developed by ekke (@ekkescorner)</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="../qml/pages/AboutPage.qml" line="32"/>
+        <source>ekkes BTLE example
+Qt 5.12 x-platform
+QtQuickControls2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/AboutPage.qml" line="54"/>
-        <source>This APP is developed with Qt 5.9 and &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt;.</source>
-        <translation></translation>
+        <source>This APP is developed with Qt 5.12 and &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="63"/>
@@ -271,6 +271,113 @@ Use the Tags to configure</source>
     </message>
 </context>
 <context>
+    <name>BTPopupPersonalData</name>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="27"/>
+        <source>Personal Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="36"/>
+        <source>VersichertenID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="50"/>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="63"/>
+        <source>First Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="76"/>
+        <source>Last Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="89"/>
+        <source>Gender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="103"/>
+        <source>Prefix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="117"/>
+        <source>Name Addon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="131"/>
+        <source>Titel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="145"/>
+        <source>ZipCode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="158"/>
+        <source>City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="172"/>
+        <source>Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="186"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="200"/>
+        <source>House No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="213"/>
+        <source>Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="231"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BTPopupStatusVD</name>
+    <message>
+        <location filename="../qml/bt/BTPopupStatusVD.qml" line="27"/>
+        <source>Status VD Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupStatusVD.qml" line="36"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupStatusVD.qml" line="49"/>
+        <source>Timestamp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupStatusVD.qml" line="62"/>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupStatusVD.qml" line="79"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BTRunAddimatPage</name>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="35"/>
@@ -381,6 +488,144 @@ Is the Key mapped to a User ?</source>
     </message>
     <message>
         <location filename="../qml/bt/BTRunAddimatPage.qml" line="583"/>
+        <source>current device removed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BTRunFeitianCardReaderPage</name>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="41"/>
+        <source>no device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="50"/>
+        <source>Search Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="92"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="716"/>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="92"/>
+        <source>Initialize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="171"/>
+        <source>Reader working</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="195"/>
+        <source>Card supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="209"/>
+        <source>Power On ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="223"/>
+        <source>Card App selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="237"/>
+        <source>Read Status Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="251"/>
+        <source>Read Personal Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="267"/>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="273"/>
+        <source>Clear Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="320"/>
+        <source>%1 is disconnected.
+Try to reconnect now ?
+
+Check Device is ON, Battery OK
+Bluetooth is On
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="385"/>
+        <source>Try to connect again: %1 of 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="404"/>
+        <source>Search Device, connect, prepare Services. Please wait ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="405"/>
+        <source>Waited too long for end of discovering devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="417"/>
+        <source>No Devices found. Switch Devices Off/On or Settings Bluetooth Off/On to clear cache.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="426"/>
+        <source>%1 Devices found, but not Device %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="568"/>
+        <source>This Card Type is not implemented yet - you need an eGK G2.
+Do you want to see detailed Infos about the currently inserted Card ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="584"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="607"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="631"/>
+        <source>
+Do you want to see detailed Infos about the Response Code %1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="683"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="691"/>
+        <source>Status Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="699"/>
+        <source>Person Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="708"/>
+        <source>TEST Select File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="756"/>
         <source>current device removed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -800,6 +1045,19 @@ Is the Tag mapped to a User ?</source>
     </message>
 </context>
 <context>
+    <name>BTSettingsFeitianCardReader</name>
+    <message>
+        <location filename="../qml/bt/BTSettingsFeitianCardReader.qml" line="24"/>
+        <source>Favorite Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTSettingsFeitianCardReader.qml" line="44"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BTSettingsGeneralScan</name>
     <message>
         <location filename="../qml/bt/BTSettingsGeneralScan.qml" line="24"/>
@@ -884,37 +1142,37 @@ Is the Tag mapped to a User ?</source>
 <context>
     <name>BluetoothManager</name>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="317"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="321"/>
         <source>The Bluetooth adaptor is powered off, power it on before doing discovery.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="323"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="327"/>
         <source>Discovery error: Writing or reading from the device resulted in an error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="327"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="331"/>
         <source>Discovery error: invalid Bluetooth Adapter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="331"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="335"/>
         <source>Discovery error: unsupported platform</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="335"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="339"/>
         <source>Discovery error: unsupported Discovery Method</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="339"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="343"/>
         <source>Discovery error: unknown error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/bluetoothmanager.cpp" line="343"/>
+        <location filename="../cpp/bt/bluetoothmanager.cpp" line="347"/>
         <source>Discovery error: unhandled error. Code: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -976,6 +1234,52 @@ Is the Tag mapped to a User ?</source>
         <location filename="../qml/navigation/DrawerTitleBar.qml" line="88"/>
         <source>About</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>FeitianCardReaderManager</name>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="347"/>
+        <source>Received buffer (%1) too short for a valid ATR.
+We need 10 Bytes MetaData plus ATR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="360"/>
+        <source>Received buffer (%1) too short for a valid ATR.
+Buffer contains only MetaData (10 Bytes) and no ATR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="382"/>
+        <source>Wrong Card - only eGK 2 is implemented yet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="428"/>
+        <source>Received buffer not 12 Bytes for a valid Select File response</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="453"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="547"/>
+        <source>Cannot select the File on eGK - wrong Response Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="485"/>
+        <source>Received buffer not 37 Bytes for a valid Read Binary StatusVD response</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="507"/>
+        <source>Cannot Read StatusVD on eGK - wrong Response Data length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="670"/>
+        <source>Read Person Data no success.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1042,21 +1346,41 @@ Addimat Lock, NFC Reader, HeartRate Monitor.</source>
     </message>
     <message>
         <location filename="../qml/pages/HelpPage.qml" line="126"/>
+        <source>BT LE Device &apos;Card Reader&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HelpPage.qml" line="150"/>
+        <source>There are many use-cases where you want to read some data from a smart card. One of my customers from health domain want to read the personal data from german health card (eGK) - for more info take a look at &apos;ProfSys&apos; apps in the store. You can read cards via USB or BLE. Feitian CardCreader enables you to use BLE from all your mobile devices. This app shows you HowTo read the data from the card.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HelpPage.qml" line="159"/>
+        <source>BT LE Device &apos;Barcode Scanner&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HelpPage.qml" line="181"/>
+        <source>Barcode Scanners can be used as HID device or as BLE device. This App demonstrates HowTo read Barcodes from GeneralScan Barcode Scanners.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HelpPage.qml" line="190"/>
         <source>BT LE Device &apos;Heart Rate Monitor&apos;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HelpPage.qml" line="139"/>
+        <location filename="../qml/pages/HelpPage.qml" line="203"/>
         <source>A HeartRate Monitor is the most used example in BT LE APPs, so I also included one. I tested with &apos;Scosche Rhytm+ HeartRateMonitor&apos;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HelpPage.qml" line="148"/>
+        <location filename="../qml/pages/HelpPage.qml" line="212"/>
         <source>APP Workflow</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/HelpPage.qml" line="157"/>
+        <location filename="../qml/pages/HelpPage.qml" line="221"/>
         <source>To learn more about &apos;ekkes BTLE example&apos; APP take a look at &lt;a href=&quot;http://bit.ly/ekkeBTLEapp&quot;&gt;APP Documentation&lt;/a&gt;</source>
         <translation></translation>
     </message>
@@ -1070,8 +1394,7 @@ Addimat Lock, NFC Reader, HeartRate Monitor.</source>
     </message>
     <message>
         <location filename="../qml/pages/HomePage.qml" line="56"/>
-        <source>HeartRate, Waiter Lock, NFC Reader</source>
-        <comment>Barcode Scanner</comment>
+        <source>HeartRate, Waiter Lock, NFC Reader, Barcode Scanner, Card Reader</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1247,51 +1570,57 @@ Bluetooth is On
 <context>
     <name>LEDevicesNavigation</name>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="192"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="193"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="192"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="193"/>
         <source>unknown Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="201"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="202"/>
         <source>There&apos;s another HeartRate device connected.
 Please disconnect before selecting another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="216"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="217"/>
         <source>There&apos;s another Addimat Waiter Lock connected.
 Please disconnect before selecting another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="234"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="235"/>
         <source>There&apos;s another NFC Reader connected.
 Please disconnect before selecting another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="246"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="247"/>
         <source>There&apos;s another Barcode Scanner connected.
 Please disconnect before selecting another one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="258"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="259"/>
+        <source>There&apos;s another CardReader connected.
+Please disconnect before selecting another one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="271"/>
         <source>Explore Services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="267"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="280"/>
         <source>Disconnect now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/bt/LEDevicesNavigation.qml" line="267"/>
+        <location filename="../qml/bt/LEDevicesNavigation.qml" line="280"/>
         <source>Connect now</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1455,12 +1784,12 @@ Please disconnect before selecting another one</source>
 <context>
     <name>MyBluetoothServiceInfo</name>
     <message>
-        <location filename="../cpp/bt/mybluetoothserviceinfo.cpp" line="373"/>
+        <location filename="../cpp/bt/mybluetoothserviceinfo.cpp" line="375"/>
         <source>Unknown Error from QLowEnergyService</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cpp/bt/mybluetoothserviceinfo.cpp" line="377"/>
+        <location filename="../cpp/bt/mybluetoothserviceinfo.cpp" line="379"/>
         <source>Unhandled Error %1 from QLowEnergyService</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1510,6 +1839,19 @@ Do you want to exit and leave the App ?
         <location filename="../qml/popups/PopupUpdate.qml" line="56"/>
         <source>Update</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>PopupYesNo</name>
+    <message>
+        <location filename="../qml/popups/PopupYesNo.qml" line="46"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/popups/PopupYesNo.qml" line="56"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1768,68 +2110,74 @@ Do you want to exit and leave the App ?
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="152"/>
-        <location filename="../qml/main.qml" line="166"/>
+        <location filename="../qml/main.qml" line="156"/>
+        <location filename="../qml/main.qml" line="171"/>
         <source>HeartRate</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="153"/>
-        <location filename="../qml/main.qml" line="167"/>
+        <location filename="../qml/main.qml" line="157"/>
+        <location filename="../qml/main.qml" line="172"/>
         <source>Lock</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="154"/>
-        <location filename="../qml/main.qml" line="168"/>
+        <location filename="../qml/main.qml" line="158"/>
+        <location filename="../qml/main.qml" line="173"/>
         <source>NFC Tag</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="158"/>
-        <location filename="../qml/main.qml" line="172"/>
+        <location filename="../qml/main.qml" line="160"/>
+        <location filename="../qml/main.qml" line="175"/>
+        <source>CardReader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/main.qml" line="163"/>
+        <location filename="../qml/main.qml" line="178"/>
         <source>Help</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="159"/>
+        <location filename="../qml/main.qml" line="164"/>
         <source>About this App</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="164"/>
+        <location filename="../qml/main.qml" line="169"/>
         <source>BTLE Example</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="302"/>
+        <location filename="../qml/main.qml" line="309"/>
         <source>Please wait. Back key not allowed at the moment.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="306"/>
+        <location filename="../qml/main.qml" line="313"/>
         <source>Back key not allowed - please select an option.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="173"/>
+        <location filename="../qml/main.qml" line="179"/>
         <source>About</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="155"/>
-        <location filename="../qml/main.qml" line="169"/>
+        <location filename="../qml/main.qml" line="159"/>
+        <location filename="../qml/main.qml" line="174"/>
         <source>Barcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="157"/>
-        <location filename="../qml/main.qml" line="171"/>
+        <location filename="../qml/main.qml" line="162"/>
+        <location filename="../qml/main.qml" line="177"/>
         <source>Devices</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="580"/>
+        <location filename="../qml/main.qml" line="591"/>
         <source>OK</source>
         <translation></translation>
     </message>
