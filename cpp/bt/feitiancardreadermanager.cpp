@@ -3,6 +3,8 @@
 #include <QDate>
 #include <QTime>
 
+#include <QDomDocument>
+
 static const QString YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
 static const QString CARD_READER_SERVICE = "46540001-0002-00c4-0000-465453414645";
@@ -692,7 +694,81 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
     qDebug() << "XML ???" << uncompressedXML;
 
     // now parse uncrompessed XML
+    QString xmlErrorMessage;
+    QDomDocument xmlDoc;
+    xmlDoc.setContent(uncompressedXML);
+    QDomElement root=xmlDoc.documentElement();
+    // "UC_PersoenlicheVersichertendatenXML"
+    qDebug() << "xml root: " << root.tagName();
 
+    QDomNode versicherter = root.firstChild();
+    // "Versicherter"
+    qDebug() << "xml versicherter: " << versicherter.nodeName();
+    if(versicherter.isNull()) {
+        xmlErrorMessage = "Node Versicherter not found in XML document";
+    } else {
+        QDomElement versichertenId = versicherter.firstChildElement("Versicherten_ID");
+        if(versichertenId.isNull()) {
+            pdMap.insert("Versicherten_ID","");
+        } else {
+            pdMap.insert("Versicherten_ID", versichertenId.text());
+        }
+
+        QDomNodeList versicherterNodes = versicherter.childNodes();
+        for (int i = 0; i < versicherterNodes.size(); ++i) {
+            QDomNode versicherterNode = versicherterNodes.at(i);
+            qDebug() << "Versicherter Nodes: " << versicherterNode.nodeName();
+            if(versicherterNode.nodeName() == "Person") {
+                qDebug() << "xml person: " << versicherterNode.nodeName();
+
+                QDomNodeList personNodes = versicherterNode.childNodes();
+                for (int p = 0; p < personNodes.size(); ++p) {
+                    QDomNode personNode = personNodes.at(p);
+                    QDomElement personNodeElement = personNode.toElement();
+                    if(!personNodeElement.isNull()) {
+                        if(personNodeElement.tagName() == "StrassenAdresse") {
+                            qDebug() << "PersonNode StrassenAdresse";
+                            QDomNodeList streetNodes = personNode.childNodes();
+                            for (int s = 0; s < streetNodes.size(); ++s) {
+                                QDomNode streetNode = streetNodes.at(s);
+                                QDomElement streetNodeElement = streetNode.toElement();
+                                if(!streetNodeElement.isNull()) {
+                                    if(streetNodeElement.tagName() == "Land") {
+                                        qDebug() << "StreetNode Land";
+                                        QDomNodeList landNodes = streetNode.childNodes();
+                                        for (int l = 0; l < landNodes.size(); ++l) {
+                                            QDomNode landNode = landNodes.at(l);
+                                            QDomElement landNodeElement = landNode.toElement();
+                                            if(!landNodeElement.isNull()) {
+                                                // a normal element of Land
+                                                qDebug() << "LandNode Elements " << landNodeElement.tagName() << " value: " << landNodeElement.text();
+                                                pdMap.insert(landNodeElement.tagName(),landNodeElement.text());
+                                            }
+                                        }
+                                    } else {
+                                        // a normal element of Street
+                                        qDebug() << "StreetNode Elements " << streetNodeElement.tagName() << " value: " << streetNodeElement.text();
+                                        pdMap.insert(streetNodeElement.tagName(),streetNodeElement.text());
+                                    }
+                                }
+                            } // street Nodes
+
+                        } else if(personNodeElement.tagName() == "PostfachAdresse") {
+                            qDebug() << "PersonNode PostfachAdresse not implemented";
+                        } else {
+                            // a normal element of Person
+                            qDebug() << "PersonNode Elements " << personNodeElement.tagName() << " value: " << personNodeElement.text();
+                            pdMap.insert(personNodeElement.tagName(),personNodeElement.text());
+                        }
+                    }
+                } // Person Nodes
+
+            }// Person
+        } // Versicherter Nodes
+    } // versicherter
+
+
+    // pdMap.insert("Versicherten_ID",versichertenID.text());
 
     emit personalDataSuccess(pdMap);
 }

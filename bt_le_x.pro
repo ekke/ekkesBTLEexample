@@ -2,7 +2,7 @@
 TEMPLATE = app
 TARGET = bt_le_x
 
-QT += qml quick core bluetooth
+QT += qml quick core bluetooth xml
 CONFIG += c++11
 
 HEADERS += \

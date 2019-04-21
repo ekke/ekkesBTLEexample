@@ -614,9 +614,15 @@ Page {
             }
         }
     }
+
+    BTPopupPersonalData {
+        id: popupPersonalData
+    }
     function onPersonalDataSuccess(pdMap) {
         cardReadPersonalData = true
-        console.log("TEST XML SIZE: "+pdMap.XMLBytes)
+        console.log("Versicherten_ID: "+pdMap.Versicherten_ID);
+        popupPersonalData.pdMap = pdMap
+        popupPersonalData.open()
     }
     function onPersonalDataFailed(message, apduResponseInfoUrl, apduResponse) {
         // cardPersonalDataMap = ({})
@@ -693,7 +699,15 @@ Page {
             itemText: qsTr("Person Data")
             imageName: "person.png"
             onTriggered: {
-                // TODO
+                popupPersonalData.open()
+            }
+        }
+
+        MenuItem {
+            enabled: btRunFeitianCardReaderPage.cardPowerOn
+            text: qsTr("TEST Select File")
+            onTriggered: {
+                cardReaderManager.doSelectFile()
             }
         }
 
