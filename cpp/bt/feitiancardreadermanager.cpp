@@ -52,7 +52,9 @@ static const QString THREE_BYTE_FILLER_TWO = "000002";
 // dont know what this data means
 static const QString UNKNOWN_NEXT_BINARY = "001000";
 
-static const QString COMMAND_NOT_EXECUTED = "41fe00";
+// last 3 Bytes of Metadata if problem with the command
+static const QString COMMAND_NOT_EXECUTED_41 = "41fe00";
+static const QString COMMAND_NOT_EXECUTED_40 = "40fe00";
 
 
 FeitianCardReaderManager::FeitianCardReaderManager(QObject *parent) : QObject(parent), mDeviceInfo(nullptr), mDeviceIsConnected(false),
@@ -361,8 +363,8 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
     if(mCurrentData.length() == 20) {
         qWarning() << "response data should be more then 20 Bytes and not " << mCurrentData.length()/2;
         // sometimes there's a timing problem - esp Cards with G2.1
-        // so we retry 3 times
-        if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED) {
+        // so we retry 5 times
+        if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED_40 || mCurrentData.right(6) == COMMAND_NOT_EXECUTED_41) {
             mRetryCommand ++;
             if(mRetryCommand <=5) {
                 doPowerOn();
@@ -373,6 +375,7 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
         }
         emit readATRWrong(tr("Received buffer (%1) too short for a valid ATR.\nBuffer contains only MetaData (10 Bytes) and no ATR").arg(mCurrentData.length()/2),"");
         resetCommand();
+        mRetryCommand = 0;
         return;
     }
 
@@ -440,13 +443,15 @@ void FeitianCardReaderManager::processSelectFiles(const QString& hexData)
     mCurrentData += hexData;
     if(mCurrentData.length() != 24) {
         qWarning() << "response data should be 12 bytes and not " << mCurrentData.length()/2;
-        // sometimes there's a timing problem - esp Cards with G2.1
-        // so we retry 3 times
-        if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED) {
-            mRetryCommand ++;
-            if(mRetryCommand <=5) {
-                doSelectFile();
-                return;
+        if(mCurrentData.length() == 20) {
+            // sometimes there's a timing problem - esp Cards with G2.1
+            // so we retry 5 times
+            if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED_40 || mCurrentData.right(6) == COMMAND_NOT_EXECUTED_41) {
+                mRetryCommand ++;
+                if(mRetryCommand <=5) {
+                    doSelectFile();
+                    return;
+                }
             }
         }
         qDebug() << "Process Select Files 3 Bytes at the end: " << mCurrentData.right(6);
@@ -509,13 +514,15 @@ void FeitianCardReaderManager::processReadBinaryStatusVD(const QString& hexData)
     mCurrentData += hexData;
     if(mCurrentData.length() != 74) {
         qWarning() << "response data should be 37 bytes and not " << mCurrentData.length()/2;
-        // sometimes there's a timing problem - esp Cards with G2.1
-        // so we retry 3 times
-        if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED) {
-            mRetryCommand ++;
-            if(mRetryCommand <=5) {
-                doReadBinaryStatusVD();
-                return;
+        if(mCurrentData.length() == 20) {
+            // sometimes there's a timing problem - esp Cards with G2.1
+            // so we retry 6 times
+            if(mCurrentData.right(6) == COMMAND_NOT_EXECUTED_40 || mCurrentData.right(6) == COMMAND_NOT_EXECUTED_41) {
+                mRetryCommand ++;
+                if(mRetryCommand <=5) {
+                    doReadBinaryStatusVD();
+                    return;
+                }
             }
         }
         qDebug() << "Process Read Status VD 3 Bytes at the end: " << mCurrentData.right(6);
@@ -921,14 +928,16 @@ void FeitianCardReaderManager::onCardDataChanged()
      mCardDataValue = hexValue;
      // at first check card status
      if(hexValue == CARD_STATE_IN) {
-         // only to display the data for test purpose
+         mRetryCommand = 0;
+         // only to display the data for test or log purpose
          emit cardDataValueChanged();
          // Card is inserted
          emit cardIN();
          return;
      }
      if(hexValue == CARD_STATE_OUT) {
-         // only to display the data for test purpose
+         mRetryCommand = 0;
+         // only to display the data for test or log purpose
          emit cardDataValueChanged();
          // Card is removed
          emit cardOUT();

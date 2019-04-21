@@ -192,20 +192,6 @@ Page {
                     LabelSubheading {
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: 1
-                        text: qsTr("Card supported")
-                        color: primaryColor
-                    }
-                    DotMarker {
-                        color: cardSupported? "green":"red"
-                    }
-                } // card supported
-
-                RowLayout {
-                    Layout.leftMargin: 16
-                    Layout.rightMargin: 16
-                    LabelSubheading {
-                        Layout.alignment: Qt.AlignTop
-                        Layout.preferredWidth: 1
                         text: qsTr("Power On ?")
                         color: primaryColor
                     }
@@ -213,6 +199,20 @@ Page {
                         color: cardPowerOn? "green":"red"
                     }
                 } // Power on or off
+
+                RowLayout {
+                    Layout.leftMargin: 16
+                    Layout.rightMargin: 16
+                    LabelSubheading {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        text: qsTr("Card supported")
+                        color: primaryColor
+                    }
+                    DotMarker {
+                        color: cardSupported? "green":"red"
+                    }
+                } // card supported
 
                 RowLayout {
                     Layout.leftMargin: 16
