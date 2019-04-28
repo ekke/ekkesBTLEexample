@@ -42,8 +42,21 @@ static const QString APDU_RESPONSE_INFO_URL = "https://de.wikipedia.org/wiki/App
 // https://de.wikipedia.org/wiki/Answer_to_Reset
 // List of ATR http://ludovic.rousseau.free.fr/softwares/pcsc-tools/smartcard_list.txt
 // online check ATR: https://smartcard-atr.appspot.com/parse?ATR=xxxxx
-// Elektronische Gesundheitskarte Generation 2:
-static const QString ATR_EGK_G2 = "3bd396ff81b1fe451f078081052d";
+// ATR found for Elektronische Gesundheitskarte Generation 2:
+
+// German public health insurance card (Elektronische Gesundheitskarte eGK), 2nd generation (G2) (HealthCare)
+static const QString ATR_EGK_G2_01 = "3bd396ff81b1fe451f078081052d";
+
+// German Elektronische Gesundheitskarte (eGK) (HealthCare) - From TK (HealthCare)
+static const QString ATR_EGK_G2_02 = "3bd097ff81b1fe451f072b";
+
+// German public health insurance card („Gesundheitskarte“), 2nd generation (G2), issuer Techniker Krankenkasse (HealthCare)
+static const QString ATR_EGK_G2_03 = "3bd096ff81b1fe451f072a";
+
+// New european health insurance card of the German health insurance (G2) (HealthCare)
+static const QString ATR_EGK_G2_04 = "3bd096ff81b1fe451f032e";
+
+
 static const QString PARSE_ATR = "https://smartcard-atr.appspot.com/parse?ATR=";
 
 static const QString THREE_BYTE_FILLER = "000000";
@@ -388,7 +401,7 @@ void FeitianCardReaderManager::processPowerOn(const QString& hexData)
     // go on
     qDebug() << "processing Power On. response type: " << responseType << " ID: " << id << " Filler: " << unknownFiller;
     qDebug() << "Payload (ATR): " << payload;
-    if(payload == ATR_EGK_G2) {
+    if(payload == ATR_EGK_G2_01 || payload == ATR_EGK_G2_02 || payload == ATR_EGK_G2_03 || payload == ATR_EGK_G2_04) {
         emit readATRSuccess();
         // no do the next step
         doSelectFile();
