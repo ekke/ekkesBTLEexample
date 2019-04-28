@@ -95,6 +95,8 @@ signals:
     void statusVDFailed(const QString message, const QString apduResponseInfoUrl, const QString apduResponse);
     void personalDataSuccess(const QVariantMap pdMap);
     void personalDataFailed(const QString message, const QString apduResponseInfoUrl, const QString apduResponse);
+    void insuranceDataSuccess(const QVariantMap vdMap, const QVariantMap gvdMap);
+    void insuranceDataFailed(const QString message, const QString apduResponseInfoUrl, const QString apduResponse);
 
     void cardNotificationsActiveChanged();
     void featuresPreparedChanged();
@@ -157,6 +159,8 @@ private:
     void processReadBinaryStatusVD(const QString &hexData);
     void doReadBinaryNext();
     void processReadBinaryPersonalData(const QString &hexData);
+    void processReadBinaryInsuranceData(const QString &hexData);
+
 
     // complete (concatenated) data
     QString mCurrentData;
@@ -168,6 +172,10 @@ private:
     int mNextPrefixBytes;
     int mLastPostfixBytes;
     int mChunkSizeBytes;
+    int mOffsetStartVD;
+    int mOffsetEndVD;
+    int mOffsetStartGVD;
+    int mOffsetEndGVD;
     int mRetryCommand;
 
     // SETTINGS
@@ -175,8 +183,6 @@ private:
     QString mSettingsFavoriteAddress;
     QString mSettingsFavoriteName;
     void updateSettings();
-
-
 
     QByteArray gUncompress(const QByteArray &data);
 };

@@ -659,14 +659,14 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
         mFirstResponseProcessed = true;
         // before getting data from first chunk we clear the list
         mCurrentDataChunksList.clear();
-        // response Type 3
-        // ID 4
-        // filler 3 (000001)
-        // expected length 2
+        // response Type 3 Bytes
+        // ID 4 Bytes
+        // filler 3 Bytes (000001)
+        // expected length 2 Bytes
         mFirstPrefixBytes = 12;
-        // response Type 3
-        // ID 4
-        // filler 3 (000002)
+        // response Type 3 Bytes
+        // ID 4 Bytes
+        // filler 3 Bytes (000002)
         mNextPrefixBytes = 10;
         // Status per ex 90 00 == success
         mLastPostfixBytes = 2;
@@ -698,7 +698,7 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
 
     QString responseStatus;
 
-    mRemainingBytes -= mReceivedBytes;
+    mRemainingBytes = mExpectedBytes + mLastPostfixBytes - mReceivedBytes;
     if(mRemainingBytes > 0) {
         // we need more
         // read next part
@@ -710,7 +710,7 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
     }
 
     // now we have it all
-    qDebug() << "received data Bytes " << mReceivedBytes << "including postfix " << mLastPostfixBytes << " expected: "<< mExpectedBytes;
+    qDebug() << "PD: received data Bytes " << mReceivedBytes << "including postfix " << mLastPostfixBytes << " expected: "<< mExpectedBytes;
 
     // create the XML payload
     QString xmlPayload;
@@ -739,7 +739,7 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
     resetCommand();
 
     QVariantMap pdMap;
-    pdMap.insert("XMLBytes", xmlPayload.length()/2);
+    qDebug() << "PD: XML Bytes: " << xmlPayload.length()/2;
 
     // first 10 Bytes header of gzip
     // First byte : ID1 = 0x1F
@@ -754,7 +754,7 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
     // now trying solution from StackOverflow
 
     QByteArray uncompressedXML = gUncompress(QByteArray::fromHex(xmlPayload.toLatin1()));
-    qDebug() << "XML ???" << uncompressedXML;
+    // qDebug() << "XML ???" << uncompressedXML;
 
     // now parse uncrompessed XML
     QString xmlErrorMessage;
@@ -830,11 +830,195 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
         } // Versicherter Nodes
     } // versicherter
 
-
-    // pdMap.insert("Versicherten_ID",versichertenID.text());
-
     emit personalDataSuccess(pdMap);
+    // do the next step
+    doReadBinaryInsuranceData();
 }
+
+
+
+void FeitianCardReaderManager::doReadBinaryInsuranceData()
+{
+    qDebug() << "write to Feitian CardReader ReadBinary InsuranceData APDU:";
+    // reset commands if something left
+    resetCommand();
+    // calculate next ID
+    calculateNextIdHex();
+    // construct the command
+    QString theCommand = COMMAND_READ_BINARY;
+    theCommand.append(mCurrentIdHex);
+    theCommand.append(THREE_BYTE_FILLER);
+    theCommand.append(APDU_READ_BINARY_INSURANCE_DATA);
+    // set running command
+    mRunningCommand = COMMAND_READ_BINARY;
+    mRunningAPDU = APDU_READ_BINARY_INSURANCE_DATA;
+    //
+    mFirstResponseProcessed = false;
+    // Write to CardReader
+    mCardService->writeCharacteristicAsHex(mWriteData, theCommand, false);
+}
+
+void FeitianCardReaderManager::processReadBinaryInsuranceData(const QString& hexData)
+{
+    if(!mFirstResponseProcessed) {
+        if(hexData.length() != 40) {
+            qWarning() << "Process read VD something went wrong. first part of data always must be 20 Bytes (40), but was " << hexData.length();
+            if(hexData.length() == 20) {
+                qDebug() << "Process Read VD 3 Bytes at the end: " << mCurrentData.right(6);
+                // perhaps retry
+            }
+            return;
+        }
+        // calculate the length
+        bool ok;
+        QString offset = hexData.mid(20,4);
+        mOffsetStartVD = offset.toInt(&ok,16);
+        offset = hexData.mid(24,4);
+        mOffsetEndVD = offset.toInt(&ok,16);
+        offset = hexData.mid(28,4);
+        if(offset.toUpper() == "FFFF") {
+            mOffsetStartGVD = 0;
+            mOffsetEndGVD = 0;
+        } else {
+            mOffsetStartGVD = offset.toInt(&ok,16);
+            offset = hexData.mid(32,4);
+            mOffsetEndGVD = offset.toInt(&ok,16);
+        }
+        // if there are no GVD, then start and end Offset is "ffff"
+        if(mOffsetEndGVD > 0) {
+            mExpectedBytes = mOffsetEndGVD - 8 + 1;
+        } else {
+            mExpectedBytes = mOffsetEndVD - 8 + 1;
+        }
+
+        mFirstResponseProcessed = true;
+        // before getting data from first chunk we clear the list
+        mCurrentDataChunksList.clear();
+        // response Type 3 Bytes
+        // ID 4 Bytes
+        // filler 3 (000001)
+        // offset length 8 Bytes (start VD 2 Bytes, end VD 2 Bytes, start GVD 2 Bytes, end GVD 2 Bytes)
+        mFirstPrefixBytes = 18;
+        // response Type 3 Bytes
+        // ID 4 Bytes
+        // filler 3 Bytes (000002)
+        mNextPrefixBytes = 10;
+        // Status per ex 90 00 == success
+        mLastPostfixBytes = 2;
+        //
+        mRemainingBytes = mExpectedBytes + mLastPostfixBytes;
+        mReceivedBytes = 0;
+        //
+        mChunkSizeBytes = 271;
+    } // first response
+
+    if(hexData.length() == 40) {
+        mCurrentData += hexData;
+        // wait for more
+        // go on it's the same chunk
+        return;
+    }
+
+    // concatenate the last row of this chunk
+    mCurrentData += hexData;
+    // now add to the list
+    mCurrentDataChunksList.append(mCurrentData);
+
+    if(mCurrentDataChunksList.size() == 1) {
+        // the very first chunk
+        mReceivedBytes = mCurrentData.length()/2 - mFirstPrefixBytes;
+    } else {
+        // we already have more chunks
+        mReceivedBytes += (mCurrentData.length()/2 - mNextPrefixBytes);
+    }
+
+    QString responseStatus;
+
+    mRemainingBytes = mExpectedBytes + mLastPostfixBytes - mReceivedBytes;
+    qDebug() << "VD + GVD: received: " << mReceivedBytes << " remaining: " << mRemainingBytes;
+    if(mRemainingBytes > 0) {
+        // we need more
+        // read next part
+        // reset chunk
+        mCurrentData.clear();
+        // go on
+        doReadBinaryNext();
+        return;
+    }
+
+    // now we have it all
+    qDebug() << "VD + GVD: received data Bytes " << mReceivedBytes << "including postfix " << mLastPostfixBytes << " expected: "<< mExpectedBytes;
+    qDebug() << "VD + GVD offsets: start VD: " << mOffsetStartVD << " end VD: " << mOffsetEndVD << " start GVD: " << mOffsetStartGVD << " end GVD: " << mOffsetEndGVD;
+
+    // create the XML payloads
+    QString xmlPayloads;
+    for (int i = 0; i < mCurrentDataChunksList.size(); ++i) {
+        QString chunkData = mCurrentDataChunksList.at(i);
+        if(i == 0) {
+            // the first one
+            xmlPayloads.append(chunkData.right(chunkData.length()-mFirstPrefixBytes*2));
+        } else {
+            // the second or more
+            xmlPayloads.append(chunkData.right(chunkData.length()-mNextPrefixBytes*2));
+        }
+        if(i == mCurrentDataChunksList.size()-1) {
+            // the last one: get the response status and remove from xml
+            responseStatus = chunkData.right(4);
+            xmlPayloads = xmlPayloads.left(xmlPayloads.length()-4);
+        }
+    } // loop thru chunks
+    if(responseStatus != APDU_COMMAND_SUCCESSFULLY_EXECUTED) {
+        emit insuranceDataFailed(tr("Read Insurance Data no success."), APDU_RESPONSE_INFO_URL, responseStatus);
+        resetCommand();
+        return;
+    }
+
+    // now it's safe to reset the command vars
+    resetCommand();
+
+    QVariantMap vdMap;
+    QVariantMap gvdMap;
+    int xmlPayloadVDLength = 0;
+    int xmlPayloadGVDLength = 0;
+    QString xmlPayloadVD;
+    QString xmlPayloadGVD;
+    // Attention there could be some filler / space / unknown between VD and GVD
+    xmlPayloadVDLength = (mOffsetEndVD-mOffsetStartVD+1) *2;
+    if(mOffsetStartGVD > 0) {
+        xmlPayloadGVDLength = (mOffsetEndGVD-mOffsetStartGVD+1)*2;
+        qDebug() << "VD: XML Bytes VD: " << xmlPayloadVDLength/2 << " GVD: " << xmlPayloadGVDLength/2;
+        xmlPayloadVD = xmlPayloads.left(xmlPayloadVDLength);
+        xmlPayloadGVD = xmlPayloads.right(xmlPayloadGVDLength);
+    } else {
+        xmlPayloadVD = xmlPayloads.left(xmlPayloadVDLength);
+        qDebug() << "VD: XML Bytes VD: " << xmlPayloadVDLength/2 << " GVD: EMPTY";
+    }
+
+    // first 10 Bytes header of gzip
+    // First byte : ID1 = 0x1F
+    // Secound byte: ID2 = 0x8B
+    // Third byte: CM - compression method: 1-7 reserved - 0x08 == DEFLATE
+    // bytes 4-10 extra flags, like file name, comments, CRC16, etc.. all are 0
+    qDebug() << "VD: GZIP First 10 Bytes. ID1 (0x1F) ID2 (0x8B) Compression (0x08 == DEFLATE)" << xmlPayloadVD.left(20);
+    if(xmlPayloadGVDLength > 0) {
+        qDebug() << "GVD: GZIP First 10 Bytes. ID1 (0x1F) ID2 (0x8B) Compression (0x08 == DEFLATE)" << xmlPayloadGVD.left(20);
+    }
+    // last 4 Bytes are size (in reverse order)
+    // per ex 6a020000 --> 0000026a = 618 bytes
+
+    // qUncompress only works for zlib
+    // now trying solution from StackOverflow
+
+    QByteArray uncompressedXMLVD = gUncompress(QByteArray::fromHex(xmlPayloadVD.toLatin1()));
+    // qDebug() << "VD XML ???" << uncompressedXMLVD;
+    QByteArray uncompressedXMLGVD = gUncompress(QByteArray::fromHex(xmlPayloadGVD.toLatin1()));
+    // qDebug() << "VD XML ???" << uncompressedXMLGVD;
+
+
+
+
+}
+
 
 // https://stackoverflow.com/questions/2690328/qt-quncompress-gzip-data
 // https://stackoverflow.com/a/7351507
@@ -886,13 +1070,6 @@ QByteArray FeitianCardReaderManager::gUncompress(const QByteArray &data)
     // clean up and return
     inflateEnd(&strm);
     return result;
-}
-
-
-void FeitianCardReaderManager::doReadBinaryInsuranceData()
-{
-    qDebug() << "write to Feitian CardReader ReadBinary InsuranceData APDU:";
-    // not yet implemented
 }
 
 void FeitianCardReaderManager::onCardCharacteristicsDone()
@@ -991,7 +1168,7 @@ void FeitianCardReaderManager::onCardDataChanged()
             return;
         }
         if(mRunningAPDU == APDU_READ_BINARY_INSURANCE_DATA) {
-            qWarning() << "reading Insurance Data not implemented yet";
+            processReadBinaryInsuranceData(hexValue);
             return;
         }
         return;
