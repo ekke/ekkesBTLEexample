@@ -756,7 +756,7 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
     QByteArray uncompressedXML = gUncompress(QByteArray::fromHex(xmlPayload.toLatin1()));
     // qDebug() << "XML ???" << uncompressedXML;
 
-    // now parse uncrompessed XML
+    // now parse uncompressed XML
     QString xmlErrorMessage;
     QDomDocument xmlDoc;
     xmlDoc.setContent(uncompressedXML);
@@ -1014,8 +1014,26 @@ void FeitianCardReaderManager::processReadBinaryInsuranceData(const QString& hex
     QByteArray uncompressedXMLGVD = gUncompress(QByteArray::fromHex(xmlPayloadGVD.toLatin1()));
     // qDebug() << "VD XML ???" << uncompressedXMLGVD;
 
+    // now parse uncompressed XML for VD
+    QString xmlErrorMessage;
+    QDomDocument xmlDoc;
+    xmlDoc.setContent(uncompressedXMLVD);
+    QDomElement root=xmlDoc.documentElement();
+    // "UC_AllgemeineVersicherungsdatenXML"
+    qDebug() << "VD xml root: " << root.tagName();
+    // parese ...
 
 
+    // now parse uncompressed XML for GVD - if available
+    if(xmlPayloadGVDLength == 0) {
+        // emit success
+        return;
+    }
+    xmlDoc.setContent(uncompressedXMLGVD);
+    root=xmlDoc.documentElement();
+    // "UC_GeschuetzteVersichertendatenXML"
+    qDebug() << "GVD xml root: " << root.tagName();
+    // parse gvd ...
 
 }
 
