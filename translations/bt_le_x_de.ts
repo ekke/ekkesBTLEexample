@@ -279,80 +279,108 @@ Tags benutzen zum konfigurieren</translation>
     </message>
 </context>
 <context>
+    <name>BTPopupInsuranceData</name>
+    <message>
+        <location filename="../qml/bt/BTPopupInsuranceData.qml" line="35"/>
+        <source>Personal Insurance Data (VD) as XML</source>
+        <translation>Persönliche Versichertendaten (VD) als XML</translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupInsuranceData.qml" line="51"/>
+        <source>Protected Insurance Data (GVD) as XML</source>
+        <translation>Geschützte Versicherungsdaten (GVD) als XML</translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupInsuranceData.qml" line="71"/>
+        <source>Done</source>
+        <translation>OK</translation>
+    </message>
+</context>
+<context>
     <name>BTPopupPersonalData</name>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="27"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="35"/>
         <source>Personal Data</source>
         <translation>Personendaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="36"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="44"/>
         <source>VersichertenID</source>
         <translation>Versicherten Nummer</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="50"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="58"/>
         <source>Birthday</source>
         <translation>Geburtstag</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="63"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="71"/>
         <source>First Name</source>
         <translation>Vorname</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="76"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="84"/>
         <source>Last Name</source>
         <translation>Nachname</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="89"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="97"/>
         <source>Gender</source>
         <translation>Geschlecht</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="103"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="111"/>
         <source>Prefix</source>
         <translation>Vorsatzwort</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="117"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="125"/>
         <source>Name Addon</source>
         <translation>Namenszusatz</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="131"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="139"/>
         <source>Titel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="145"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="153"/>
         <source>ZipCode</source>
         <translation>PLZ</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="158"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="166"/>
         <source>City</source>
         <translation>Stadt</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="172"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="180"/>
         <source>Street</source>
         <translation>Strasse</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="186"/>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="200"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="194"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="208"/>
         <source>House No</source>
         <translation>Hausnummer</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="213"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="221"/>
         <source>Country</source>
         <translation>Land</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTPopupPersonalData.qml" line="231"/>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="233"/>
+        <source>Personal Data as XML</source>
+        <translation>Personendaten als XML</translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="246"/>
+        <source>Find StatusData and InsuranceData (VD, GVD) from Options Menu in previous Page.</source>
+        <translation>Statusdaten und Versicherungsdaten (VD, GVD) können über das Optionen-Menu auf der vorigen Seite aufgerufen werden.</translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTPopupPersonalData.qml" line="258"/>
         <source>Done</source>
         <translation>OK</translation>
     </message>
@@ -508,68 +536,67 @@ Is the Key mapped to a User ?</source>
 <context>
     <name>BTRunFeitianCardReaderPage</name>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="41"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="42"/>
         <source>no device</source>
         <translation>kein Gerät</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="50"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="51"/>
         <source>Search Device</source>
         <translation>Gerät suchen</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="92"/>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="716"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="93"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="749"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="92"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="93"/>
         <source>Initialize</source>
         <translation>Initialisisieren</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="171"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="172"/>
         <source>Reader working</source>
         <translation>Leser aktiv</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="195"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="210"/>
         <source>Card supported</source>
         <translation>Karte unterstützt</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="209"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="196"/>
         <source>Power On ?</source>
-        <translation type="unfinished">Spannung angelegt</translation>
+        <translation>Spannung angelegt</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="223"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="224"/>
         <source>Card App selected</source>
         <translation>Karte App ausgewählt</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="237"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="238"/>
         <source>Read Status Data</source>
         <translation>Lese Statusdaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="251"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="252"/>
         <source>Read Personal Data</source>
         <translation>Lese Personendaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="267"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="268"/>
         <source>Protocol</source>
         <translation>Protokoll</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="273"/>
         <source>Clear Protocol</source>
-        <translation>Protokoll löschen</translation>
+        <translation type="vanished">Protokoll löschen</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="320"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="325"/>
         <source>%1 is disconnected.
 Try to reconnect now ?
 
@@ -584,68 +611,73 @@ Bluetooth ist An
 </translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="385"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="390"/>
         <source>Try to connect again: %1 of 5</source>
         <translation>Versuche, neu zu verbinden: %1 von 5</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="404"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="409"/>
         <source>Search Device, connect, prepare Services. Please wait ...</source>
         <translation>Suche Gerät, verbinde, bereite Dienste vor. Bitte warten ...</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="405"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="410"/>
         <source>Waited too long for end of discovering devices</source>
         <translation>zu lange auf Dienste gewartet</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="417"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="422"/>
         <source>No Devices found. Switch Devices Off/On or Settings Bluetooth Off/On to clear cache.</source>
         <translation>Kein Gerät gefunden. Gerät aus/anschalten oder Bluetooth Einstellungen Aus/An um Cache zu leeren.</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="426"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="431"/>
         <source>%1 Devices found, but not Device %2.</source>
         <translation>%1 Geräte gefunden, aber nicht Gerät %2.</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="568"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="573"/>
         <source>This Card Type is not implemented yet - you need an eGK G2.
 Do you want to see detailed Infos about the currently inserted Card ?</source>
         <translation>Dieser Karrtentyp ist nicht implementiert - Sie benötigen eine eGK G2.
 Möchten Sie detaillierte Infos über die eingelegte Karte sehen ?</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="584"/>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="607"/>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="631"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="589"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="612"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="635"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="661"/>
         <source>
 Do you want to see detailed Infos about the Response Code %1 ?</source>
         <translation>
 Möchten Sie detaillierte Infos über den Antwort Code %1 ?</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="683"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="715"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="691"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="723"/>
         <source>Status Data</source>
         <translation>Statusdaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="699"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="731"/>
         <source>Person Data</source>
         <translation>Personendaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="708"/>
-        <source>TEST Select File</source>
-        <translation>TEST Karte App wählen</translation>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="740"/>
+        <source>Insurance Data</source>
+        <translation>Versicherungsdaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="756"/>
+        <source>TEST Select File</source>
+        <translation type="vanished">TEST Karte App wählen</translation>
+    </message>
+    <message>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="789"/>
         <source>current device removed</source>
         <translation>aktuelles Gerät entfernt</translation>
     </message>
@@ -1279,49 +1311,64 @@ Ist der Tag gemapped ?</translation>
 <context>
     <name>FeitianCardReaderManager</name>
     <message>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="347"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="364"/>
         <source>Received buffer (%1) too short for a valid ATR.
 We need 10 Bytes MetaData plus ATR</source>
         <translation>Empfangener Puffer (%1) zu klein für gültige ATR.
 Wir brauchen 10 Bytes Metadaten plus ATR</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="360"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="389"/>
         <source>Received buffer (%1) too short for a valid ATR.
 Buffer contains only MetaData (10 Bytes) and no ATR</source>
         <translation>Empfangener Puffer (%1) zu klein für gültige ATR.
 Puffer enthält nur Metadaten (10 Bytes) und kein ATR</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="382"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="413"/>
         <source>Wrong Card - only eGK 2 is implemented yet</source>
         <translation>Falsche Karte - nur eGK 2 ist derzeit implementiert</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="428"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="471"/>
         <source>Received buffer not 12 Bytes for a valid Select File response</source>
         <translation>Empfangener Puffer enthält nicht 12 Bytes für gültige Datei-Auswahl-Antwort</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="453"/>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="547"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="498"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="606"/>
         <source>Cannot select the File on eGK - wrong Response Code</source>
         <translation>Kann Datei auf eGK nicht auswählen - falscher Antwortcode</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="485"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="542"/>
         <source>Received buffer not 37 Bytes for a valid Read Binary StatusVD response</source>
         <translation>Empfangener Puffer nicht 37 Bytes für gültige Statusdaten-Antwort</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="507"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="566"/>
         <source>Cannot Read StatusVD on eGK - wrong Response Data length.</source>
         <translation>Kann Statusdaten nicht lesen von eGK - falsche Antwortdatenlänge.</translation>
     </message>
     <message>
-        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="670"/>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="733"/>
         <source>Read Person Data no success.</source>
         <translation>Personendaten konnten NICHT gelesen werden.</translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="978"/>
+        <source>Read Insurance Data no success.</source>
+        <translation>Versichertendaten konnten NICHT gelesen werden.</translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="1032"/>
+        <source>XML Root Object is not UC_AllgemeineVersicherungsdatenXML</source>
+        <translation>XML Root Object ist nicht UC_AllgemeineVersicherungsdatenXML</translation>
+    </message>
+    <message>
+        <location filename="../cpp/bt/feitiancardreadermanager.cpp" line="1047"/>
+        <source>XML Root Object is not UC_GeschuetzteVersichertendatenXML</source>
+        <translation>XML Root Object ist nicht UC_GeschuetzteVersichertendatenXML</translation>
     </message>
 </context>
 <context>
