@@ -93,9 +93,9 @@ signals:
     void appSelectedFailed(const QString& message, const QString apduResponseInfoUrl, const QString apduResponse);
     void statusVDSuccess(const QVariantMap statusVDMap);
     void statusVDFailed(const QString message, const QString apduResponseInfoUrl, const QString apduResponse);
-    void personalDataSuccess(const QVariantMap pdMap);
+    void personalDataSuccess(const QVariantMap pdMap, const QString pdXml);
     void personalDataFailed(const QString message, const QString apduResponseInfoUrl, const QString apduResponse);
-    void insuranceDataSuccess(const QVariantMap vdMap, const QVariantMap gvdMap);
+    void insuranceDataSuccess(const QString vdXml, const QString gvdXml);
     void insuranceDataFailed(const QString message, const QString apduResponseInfoUrl, const QString apduResponse);
 
     void cardNotificationsActiveChanged();

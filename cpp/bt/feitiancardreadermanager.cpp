@@ -837,7 +837,7 @@ void FeitianCardReaderManager::processReadBinaryPersonalData(const QString& hexD
 
     } // root nodes
 
-    emit personalDataSuccess(pdMap);
+    emit personalDataSuccess(pdMap, uncompressedXML);
     // do the next step
     doReadBinaryInsuranceData();
 }
@@ -1029,7 +1029,7 @@ void FeitianCardReaderManager::processReadBinaryInsuranceData(const QString& hex
     QDomElement root=xmlDoc.documentElement();
     if(root.tagName() != "UC_AllgemeineVersicherungsdatenXML") {
         qDebug() << "VD xml root not valid: " << root.tagName();
-        // emit error
+        emit insuranceDataFailed(tr("XML Root Object is not UC_AllgemeineVersicherungsdatenXML"),"","");
 
     } else {
         qDebug() << "VD xml root is valid: " << root.tagName();
@@ -1037,20 +1037,20 @@ void FeitianCardReaderManager::processReadBinaryInsuranceData(const QString& hex
 
     if(xmlPayloadGVDLength == 0) {
         // we don't have GVD - so all is done
-        // emit success
+        emit insuranceDataSuccess(uncompressedXMLVD, uncompressedXMLGVD);
         return;
     }
     xmlDoc.setContent(uncompressedXMLGVD);
     root=xmlDoc.documentElement();
     if(root.tagName() != "UC_GeschuetzteVersichertendatenXML") {
         qDebug() << "GVD xml root not valid: " << root.tagName();
-        // emit error
+        emit insuranceDataFailed(tr("XML Root Object is not UC_GeschuetzteVersichertendatenXML"),"","");
 
     } else {
         qDebug() << "GVD xml root is valid: " << root.tagName();
     }
 
-    // emit success
+    emit insuranceDataSuccess(uncompressedXMLVD, uncompressedXMLGVD);
 }
 
 

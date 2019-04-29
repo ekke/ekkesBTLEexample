@@ -1,8 +1,8 @@
 // ekke (Ekkehard Gentz) @ekkescorner
-import QtQuick 2.9
+import QtQuick 2.12
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
+import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.5
 import QtGraphicalEffects 1.0
 import "../common"
 import "../popups"
@@ -22,6 +22,7 @@ Page {
     property bool cardAppSelected: false
     property bool cardReadStatus: false
     property bool cardReadPersonalData: false
+    property bool cardReadInsuranceData: false
 
     header: Pane {
         leftPadding: 24
@@ -619,13 +620,38 @@ Page {
         }
     }
 
+    BTPopupInsuranceData {
+        id: popupInsuranceData
+        parent: Overlay.overlay
+    }
+    function onInsuranceDataSuccess(vdXml, gvdXml) {
+        cardReadInsuranceData = true
+        popupInsuranceData.vdXml = vdXml
+        popupInsuranceData.gvdXml = gvdXml
+    }
+    function onInsuranceDataFailed(message, apduResponseInfoUrl, apduResponse) {
+        cardReadInsuranceData = false
+        if(apduResponseInfoUrl.length) {
+            popupWrongWithUrl.text = message + qsTr("\nDo you want to see detailed Infos about the Response Code %1 ?").arg(apduResponse)
+            popupWrongWithUrl.theUrl = apduResponseInfoUrl
+            popupWrongWithUrl.isYes = false
+            popupWrongWithUrl.open()
+        } else {
+            if(message.length) {
+                appWindow.showInfo(message)
+            }
+        }
+    }
+
     BTPopupPersonalData {
         id: popupPersonalData
+        parent: Overlay.overlay
     }
-    function onPersonalDataSuccess(pdMap) {
+    function onPersonalDataSuccess(pdMap, pdXml) {
         cardReadPersonalData = true
         console.log("Versicherten_ID: "+pdMap.Versicherten_ID);
         popupPersonalData.pdMap = pdMap
+        popupPersonalData.pdXml = pdXml
         popupPersonalData.open()
     }
     function onPersonalDataFailed(message, apduResponseInfoUrl, apduResponse) {
@@ -653,8 +679,10 @@ Page {
         onAppSelectedFailed: onAppSelectedFailed(message, apduResponseInfoUrl, apduResponse)
         onStatusVDSuccess: onStatusVDSuccess(statusVDMap)
         onStatusVDFailed: onStatusVDFailed(message, apduResponseInfoUrl, apduResponse)
-        onPersonalDataSuccess: onPersonalDataSuccess(pdMap)
+        onPersonalDataSuccess: onPersonalDataSuccess(pdMap, pdXml)
         onPersonalDataFailed: onPersonalDataFailed(message, apduResponseInfoUrl, apduResponse)
+        onInsuranceDataSuccess: onInsuranceDataSuccess(vdXml, gvdXml)
+        onInsuranceDataFailed: onInsuranceDataFailed(message, apduResponseInfoUrl, apduResponse)
     }
     // autostart notifications when all is prepared
     function onFeaturesPreparedChanged() {
@@ -707,11 +735,12 @@ Page {
             }
         }
 
-        MenuItem {
-            enabled: btRunFeitianCardReaderPage.cardPowerOn
-            text: qsTr("TEST Select File")
+        MenuItemWithIcon {
+            enabled: btRunFeitianCardReaderPage.cardReadInsuranceData
+            itemText: qsTr("Insurance Data")
+            imageName: "description.png"
             onTriggered: {
-                cardReaderManager.doSelectFile()
+                popupInsuranceData.open()
             }
         }
 

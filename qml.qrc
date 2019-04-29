@@ -99,5 +99,6 @@
         <file>qml/popups/PopupYesNo.qml</file>
         <file>qml/bt/BTPopupStatusVD.qml</file>
         <file>qml/bt/BTPopupPersonalData.qml</file>
+        <file>qml/bt/BTPopupInsuranceData.qml</file>
     </qresource>
 </RCC>
