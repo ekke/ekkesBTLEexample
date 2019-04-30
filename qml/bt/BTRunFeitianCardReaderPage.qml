@@ -235,28 +235,44 @@ Page {
                     LabelSubheading {
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: 1
-                        text: qsTr("Read Status Data")
+                        text: qsTr("Read Binary Data")
                         color: primaryColor
-                    }
-                    DotMarker {
-                        color: cardReadStatus? "green":"red"
-                    }
-                } // Card read status
-
-                RowLayout {
-                    Layout.leftMargin: 16
-                    Layout.rightMargin: 16
-                    LabelSubheading {
-                        Layout.alignment: Qt.AlignTop
-                        Layout.preferredWidth: 1
-                        text: qsTr("Read Personal Data")
-                        color: primaryColor
-                    }
-                    DotMarker {
-                        color: cardReadPersonalData? "green":"red"
                     }
                 } // Card read personal data
 
+                RowLayout {
+                    Layout.leftMargin: 24
+                    Layout.rightMargin: 16
+                    LabelBody {
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: 1
+                        text: qsTr("Status | Person | VD+GVD")
+                        wrapMode: Text.WrapAnywhere
+                    }
+                    Row {
+                        Layout.bottomMargin: 8
+                        Layout.rightMargin: 10
+                        spacing: 10
+                        Rectangle {
+                            width: 8
+                            height: 8
+                            radius: width / 2
+                            color: cardReadStatus? "green":"red"
+                        }
+                        Rectangle {
+                            width: 8
+                            height: 8
+                            radius: width / 2
+                            color: cardReadPersonalData? "green":"red"
+                        }
+                        Rectangle {
+                            width: 8
+                            height: 8
+                            radius: width / 2
+                            color: cardReadInsuranceData? "green":"red"
+                        }
+                    }
+                } // Card read status person vd gvd
 
                 HorizontalListDivider{}
                 RowLayout {
@@ -555,6 +571,7 @@ Page {
         cardReaderManager.doPowerOn()
     }
     function onCardout() {
+        cardReadInsuranceData = false
         cardReadPersonalData = false
         cardReadStatus = false
         cardAppSelected = false
