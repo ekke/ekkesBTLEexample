@@ -28,7 +28,7 @@ Popup {
                 color: primaryColor
             }
         } // title row
-        HorizontalListDivider{}
+        HorizontalListDividerL{}
         RowLayout {
             Layout.leftMargin: 16
             LabelSubheading {

@@ -36,7 +36,7 @@ Popup {
                     color: primaryColor
                 }
             } // title row
-            HorizontalListDivider{}
+            HorizontalListDividerL{}
             RowLayout {
                 Layout.leftMargin: 16
                 LabelSubheading {
@@ -227,7 +227,7 @@ Popup {
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 }
             } // country row
-            HorizontalListDivider{}
+            HorizontalListDividerL{}
             LabelSubheading {
                 Layout.leftMargin: 16
                 text: qsTr("Personal Data as XML")
@@ -239,7 +239,7 @@ Popup {
                 text: pdXml
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             }
-            HorizontalListDivider{}
+            HorizontalListDividerL{}
             LabelBodySecondary {
                 Layout.leftMargin: 16
                 Layout.rightMargin: 16

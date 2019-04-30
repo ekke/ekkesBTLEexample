@@ -27,7 +27,7 @@ Popup {
         contentHeight: root.implicitHeight + 60
         ColumnLayout {
             id: root
-            width: parent.width
+            width: thePopup.implicitWidth
             RowLayout {
                 Layout.leftMargin: 16
                 LabelTitle {
@@ -43,7 +43,7 @@ Popup {
                 text: vdXml
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             }
-            HorizontalListDivider{}
+            HorizontalListDividerL{}
             RowLayout {
                 Layout.leftMargin: 16
                 LabelTitle {

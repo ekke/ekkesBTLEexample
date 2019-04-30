@@ -107,14 +107,13 @@ Page {
                     } // connect disconnect button
                 } // 2nd row
             }// header main col
-            DotMarker {
+            DotMarkerL {
                 width: 12
                 height: 12
                 color: deviceInfo? (deviceInfo.deviceIsConnected? "green":"red") : "transparent"
-                anchors.rightMargin: 0
-                anchors.bottom: undefined
-                anchors.bottomMargin: undefined
-                anchors.top: parent.top
+                Layout.rightMargin: 0
+                Layout.bottomMargin: 0
+                Layout.alignment: Qt.AlignRight | Qt.AlignTop
             } // indicator top-right at row
         } // header row layout
     } // header pane
@@ -172,7 +171,7 @@ Page {
                         text: qsTr("Reader working")
                         color: primaryColor
                     }
-                    DotMarker {
+                    DotMarkerL {
                         visible: !cardReaderManager.cardNotificationsActive
                         color: "red"
                     }
@@ -196,7 +195,7 @@ Page {
                         text: qsTr("Power On ?")
                         color: primaryColor
                     }
-                    DotMarker {
+                    DotMarkerL {
                         color: cardPowerOn? "green":"red"
                     }
                 } // Power on or off
@@ -210,7 +209,7 @@ Page {
                         text: qsTr("Card supported")
                         color: primaryColor
                     }
-                    DotMarker {
+                    DotMarkerL {
                         color: cardSupported? "green":"red"
                     }
                 } // card supported
@@ -224,7 +223,7 @@ Page {
                         text: qsTr("Card App selected")
                         color: primaryColor
                     }
-                    DotMarker {
+                    DotMarkerL {
                         color: cardAppSelected? "green":"red"
                     }
                 } // Card app selected
@@ -274,7 +273,7 @@ Page {
                     }
                 } // Card read status person vd gvd
 
-                HorizontalListDivider{}
+                HorizontalListDividerL{}
                 RowLayout {
                     Layout.leftMargin: 6
                     Layout.rightMargin: 16

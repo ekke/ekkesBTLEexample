@@ -100,5 +100,7 @@
         <file>qml/bt/BTPopupStatusVD.qml</file>
         <file>qml/bt/BTPopupPersonalData.qml</file>
         <file>qml/bt/BTPopupInsuranceData.qml</file>
+        <file>qml/common/HorizontalListDividerL.qml</file>
+        <file>qml/common/DotMarkerL.qml</file>
     </qresource>
 </RCC>
