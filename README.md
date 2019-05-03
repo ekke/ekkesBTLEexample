@@ -27,7 +27,7 @@ This sample APP uses Material Design with UI Controls provided by Qt 5.12.x and 
 
 ekkes BTLE example APP discovers BT LE devices nearby and you can explore Services and Characteristics. You can test Read, Notify and Write.
 
-For three BT LE Devices a special implementation is done, so you can simulate real use-cases.
+For five BT LE Devices a special implementation is done, so you can simulate real use-cases.
 
 ### HeartRate Monitor
 more info: search for Scosche Rhytm+ HeartRate Monitor
