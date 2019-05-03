@@ -1,5 +1,6 @@
 # ekkes BTLE example APP
-Sample APP - Qt 5.9.1+ - tested on Android + iOS
+Sample APP - Qt 5.12.x - tested on Android + iOS
+Also tested with Qt 5.13 Beta2 on Windows10-64
 
 [AUTHOR ( ekke )](AUTHOR.md)
 
@@ -8,7 +9,7 @@ http://j.mp/qt-x
 
 This is not a real-life app - this app only demonstrates the use of Bluetooth LE in a Qt Quick Controls 2 APP
 
-This app needs Qt 5.9.1 Release or greater
+This app needs Qt 5.12.1 Release or greater
 
 ![alt tag](https://appbus.files.wordpress.com/2017/06/01_home.png  "ekkes BTLE example APP")
 
@@ -38,6 +39,12 @@ more info: http://bit.ly/addimatInfo
 ### NFCReader reads the NFC ID to manage registration of attendees (conferences, events, trainings) on devices without NFC or without getting the NFC Id from OS.
 ![alt tag](https://appbus.files.wordpress.com/2017/06/nfc_reader1.png  "NFC Reader")
 more info: http://bit.ly/nfcReaderInfo
+
+### Barcode Reader
+![alt tag](https://github.com/ekke/ekkesBTLEexample/blob/master/images/extra/ring_scanner.png  "GeneralScan RingScanner")
+
+### CardReader for eGK
+![alt tag](https://github.com/ekke/ekkesBTLEexample/blob/master/images/extra/feitian_egk.png  "Feitian br301 BLE CardReader")
 
 ## my blog
 A detailed description you'll find at my blog
