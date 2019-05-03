@@ -40,10 +40,10 @@ more info: http://bit.ly/addimatInfo
 ![alt tag](https://appbus.files.wordpress.com/2017/06/nfc_reader1.png  "NFC Reader")
 more info: http://bit.ly/nfcReaderInfo
 
-### Barcode Reader
+### Barcode Reader: GeneralScan RingScanner
 ![alt tag](https://github.com/ekke/ekkesBTLEexample/blob/master/images/extra/ring_scanner.png  "GeneralScan RingScanner")
 
-### CardReader for eGK
+### CardReader for eGK: Feitian br301 BLE
 ![alt tag](https://github.com/ekke/ekkesBTLEexample/blob/master/images/extra/feitian_egk.png  "Feitian br301 BLE CardReader")
 
 ## my blog
