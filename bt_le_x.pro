@@ -152,9 +152,9 @@ ios {
     # QMAKE_MAC_XCODE_SETTINGS += MY_DEVELOPMENT_TEAM
     include(ios_signature.pri)
 
-    MY_BUNDLE_ID.name = PRODUCT_BUNDLE_IDENTIFIER
-    MY_BUNDLE_ID.value = org.ekkescorner.examples.btle
-    QMAKE_MAC_XCODE_SETTINGS += MY_BUNDLE_ID
+    # see https://bugreports.qt.io/browse/QTBUG-70072
+    QMAKE_TARGET_BUNDLE_PREFIX = org.ekkescorner.examples
+    QMAKE_BUNDLE = btle
 
     # Note for devices: 1=iPhone, 2=iPad, 1,2=Universal.
     QMAKE_APPLE_TARGETED_DEVICE_FAMILY = 1,2
