@@ -547,7 +547,7 @@ Is the Key mapped to a User ?</source>
     </message>
     <message>
         <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="93"/>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="766"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="765"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
@@ -557,22 +557,22 @@ Is the Key mapped to a User ?</source>
         <translation>Initialisisieren</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="172"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="171"/>
         <source>Reader working</source>
         <translation>Leser aktiv</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="210"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="209"/>
         <source>Card supported</source>
         <translation>Karte unterstützt</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="196"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="195"/>
         <source>Power On ?</source>
         <translation>Spannung angelegt</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="224"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="223"/>
         <source>Card App selected</source>
         <translation>Karte App ausgewählt</translation>
     </message>
@@ -585,7 +585,7 @@ Is the Key mapped to a User ?</source>
         <translation type="vanished">Lese Personendaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="284"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="283"/>
         <source>Protocol</source>
         <translation>Protokoll</translation>
     </message>
@@ -594,17 +594,17 @@ Is the Key mapped to a User ?</source>
         <translation type="vanished">Protokoll löschen</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="238"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="237"/>
         <source>Read Binary Data</source>
         <translation>Lesen binäre Daten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="249"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="248"/>
         <source>Status | Person | VD+GVD</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="341"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="340"/>
         <source>%1 is disconnected.
 Try to reconnect now ?
 
@@ -619,64 +619,64 @@ Bluetooth ist An
 </translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="406"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="405"/>
         <source>Try to connect again: %1 of 5</source>
         <translation>Versuche, neu zu verbinden: %1 von 5</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="425"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="424"/>
         <source>Search Device, connect, prepare Services. Please wait ...</source>
         <translation>Suche Gerät, verbinde, bereite Dienste vor. Bitte warten ...</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="426"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="425"/>
         <source>Waited too long for end of discovering devices</source>
         <translation>zu lange auf Dienste gewartet</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="438"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="437"/>
         <source>No Devices found. Switch Devices Off/On or Settings Bluetooth Off/On to clear cache.</source>
         <translation>Kein Gerät gefunden. Gerät aus/anschalten oder Bluetooth Einstellungen Aus/An um Cache zu leeren.</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="447"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="446"/>
         <source>%1 Devices found, but not Device %2.</source>
         <translation>%1 Geräte gefunden, aber nicht Gerät %2.</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="590"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="589"/>
         <source>This Card Type is not implemented yet - you need an eGK G2.
 Do you want to see detailed Infos about the currently inserted Card ?</source>
         <translation>Dieser Karrtentyp ist nicht implementiert - Sie benötigen eine eGK G2.
 Möchten Sie detaillierte Infos über die eingelegte Karte sehen ?</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="606"/>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="629"/>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="652"/>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="678"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="605"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="628"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="651"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="677"/>
         <source>
 Do you want to see detailed Infos about the Response Code %1 ?</source>
         <translation>
 Möchten Sie detaillierte Infos über den Antwort Code %1 ?</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="732"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="731"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="740"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="739"/>
         <source>Status Data</source>
         <translation>Statusdaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="748"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="747"/>
         <source>Person Data</source>
         <translation>Personendaten</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="757"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="756"/>
         <source>Insurance Data</source>
         <translation>Versicherungsdaten</translation>
     </message>
@@ -685,7 +685,7 @@ Möchten Sie detaillierte Infos über den Antwort Code %1 ?</translation>
         <translation type="vanished">TEST Karte App wählen</translation>
     </message>
     <message>
-        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="806"/>
+        <location filename="../qml/bt/BTRunFeitianCardReaderPage.qml" line="805"/>
         <source>current device removed</source>
         <translation>aktuelles Gerät entfernt</translation>
     </message>
