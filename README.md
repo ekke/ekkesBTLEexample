@@ -55,8 +55,6 @@ http://bit.ly/ekkeBTLEapp
 ## Download from Google Play
 http://play.google.com/store/apps/details?id=org.ekkescorner.examples.btle
 
-Don't have a Google Account ? Grab the APK here: https://app.box.com/s/zi5xt9h7a8znbzd5mixbfdvii5quqx1u
-
 ## Download from Amazon App Store
 .com: http://www.amazon.com/gp/product/B073NLD652
 .de: http://www.amazon.de/gp/product/B073NLD652
