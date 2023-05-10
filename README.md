@@ -14,6 +14,9 @@ This app needs Qt 5.15.13 Release or greater
 
 You can also download this APP from Apple App Store, Google Play and Amazon App Store.
 
+## Qt 6
+This App will be re-worked for Qt 6.6 and will use Material M3 UI Controls. Transformation just starts with Qt 6.5.1 - goal is to have the new App ready for 6.6 in Q4 / 2023
+
 ## License Information
 [see LICENSE ( The Unlicense )](LICENSE)
 
@@ -22,11 +25,11 @@ most Images downloaded from https://design.google.com/icons/ - then renamed to m
 [see /images/LICENSE ( cc-by )](images/LICENSE)
 
 ## ekkes BTLE example
-This sample APP uses Material Design with UI Controls provided by Qt 5.15.x and was designed and tested on Android Smartphones (Motorola Z2 - Android 8.0, BlackBerry Motion, BlackBerry Key 2 - Android 8.1, Nokia 7.1, Xiaomi m2 Lite - Android 9, Google Pixel 6a - Android 13), Android Tablet (Google PixelC - Android 7.1), Amazon Fire HD 8 Tablet, iOS (iPhone 6s, 8s, iPad Mini 2 - iOS 12.1).
+This sample APP uses Material Design with UI Controls provided by Qt 5.15.x and was designed and tested on Android Smartphones (Motorola Z2 - Android 8.0, BlackBerry Motion, BlackBerry Key 2 - Android 8.1, Nokia 7.1, Xiaomi m2 Lite - Android 9, Google Pixel 6a - Android 13, Motorola g13 - Android 13, Samsung A23 - Android 13), Android Tablet (Google PixelC - Android 7.1), Amazon Fire HD 8 Tablet, iOS (iPhone 6s, 8s, SE, iPad Mini 2 - iOS 16.4).
 
 ekkes BTLE example APP discovers BT LE devices nearby and you can explore Services and Characteristics. You can test Read, Notify and Write.
 
-For five BT LE Devices a special implementation is done, so you can simulate real use-cases.
+For five BT LE Devices a special example/demo implementation is done, so you can simulate real use-cases. ... if you buy the BLE devicxes ;-)
 
 ### HeartRate Monitor
 more info: search for Scosche Rhytm+ HeartRate Monitor
