@@ -10,27 +10,26 @@ developed by ekke (@ekkescorner)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="32"/>
-        <source>ekkes BTLE example
-Qt 5.12 x-platform
-QtQuickControls2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="54"/>
-        <source>This APP is developed with Qt 5.12 and &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qml/pages/AboutPage.qml" line="63"/>
         <source>All work is done in my spare time and complete sourcecode is available at &lt;a href=&quot;https://github.com/ekke/ekkesBTLEexample&quot;&gt;Github&lt;/a&gt;</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="../qml/pages/AboutPage.qml" line="32"/>
+        <source>ekkes BTLE example
+Qt 5.15 x-platform
+QtQuickControls2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="54"/>
+        <source>This APP is developed with Qt 5.15 and &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/AboutPage.qml" line="72"/>
-        <source>This APP is NOT a production-ready APP - it&apos;s an APP for developers to see what can be done with Qt and connected Bluetooth LE devices.
-This first release doesn&apos;t support to work in background ! Stay tuned... I&apos;ll provide this later. I&apos;ll also upload some videos.</source>
-        <translation></translation>
+        <source>This APP is NOT a production-ready APP - it&apos;s an APP for developers to see what can be done with Qt and connected Bluetooth LE devices.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="82"/>
@@ -74,9 +73,9 @@ This first release doesn&apos;t support to work in background ! Stay tuned... I&
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="157"/>
-        <source>Since more then 30 years ekke is doing international development for Enterprise and SMB (Small and Medium Business). Most APPs are &apos;hidden&apos; because they&apos;re running as inhouse APP at customer site.
+        <source>Since more then 40 years ekke is doing international development for Enterprise and SMB (Small and Medium Business). Most APPs are &apos;hidden&apos; because they&apos;re running as inhouse APP at customer site.
 This BT LE App will give you some impressions what kind of APPs you can expect. Need an APP ? ask ekke</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="168"/>

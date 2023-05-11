@@ -14,16 +14,8 @@ developed by ekke (@ekkescorner)</source>
         <translation type="vanished">Diese APP wurde mit Qt 5.9 und &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt; entwickelt.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="32"/>
-        <source>ekkes BTLE example
-Qt 5.12 x-platform
-QtQuickControls2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="54"/>
         <source>This APP is developed with Qt 5.12 and &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt;.</source>
-        <translation>Diese APP wurde mit Qt 5.12 und &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt; entwickelt.</translation>
+        <translation type="vanished">Diese APP wurde mit Qt 5.12 und &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt; entwickelt.</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="63"/>
@@ -31,11 +23,27 @@ QtQuickControls2</source>
         <translation>Die Entwicklung erfolgte in meiner Freizeit, der komplette Sourcecode ist verfügbar unter &lt;a href=&quot;https://github.com/ekke/ekkesBTLEexample&quot;&gt;Github&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="72"/>
         <source>This APP is NOT a production-ready APP - it&apos;s an APP for developers to see what can be done with Qt and connected Bluetooth LE devices.
 This first release doesn&apos;t support to work in background ! Stay tuned... I&apos;ll provide this later. I&apos;ll also upload some videos.</source>
-        <translation>Diese APP ist nicht für den produktiven Einsatz gedacht - es ist nur ein Beispiel für Entwickler, was mit Qt und angebundenen Bluetooth LE Geräten möglich ist.
+        <translation type="vanished">Diese APP ist nicht für den produktiven Einsatz gedacht - es ist nur ein Beispiel für Entwickler, was mit Qt und angebundenen Bluetooth LE Geräten möglich ist.
 Dieser erste Release unterstützt noch nicht die Verarbeitung im Hintergrund ! Stay tuned... das kommt noch. Ich werde ausserdem ein paar Videos bereitstellen.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="32"/>
+        <source>ekkes BTLE example
+Qt 5.15 x-platform
+QtQuickControls2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="54"/>
+        <source>This APP is developed with Qt 5.15 and &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt;.</source>
+        <translation>Diese APPwurde mit Qt 5.15 and &lt;a href=&quot;http://doc.qt.io/qt-5/qtquickcontrols2-index.html&quot;&gt;QtQuickControls2&lt;/a&gt; entwickelt.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="72"/>
+        <source>This APP is NOT a production-ready APP - it&apos;s an APP for developers to see what can be done with Qt and connected Bluetooth LE devices.</source>
+        <translation>Diese APP ist nicht für den produktiven Einsatz gedacht - es ist nur ein Beispiel für Entwickler, was mit Qt und angebundenen Bluetooth LE Geräten möglich ist.</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="82"/>
@@ -79,9 +87,15 @@ Dieser erste Release unterstützt noch nicht die Verarbeitung im Hintergrund ! S
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="157"/>
+        <source>Since more then 40 years ekke is doing international development for Enterprise and SMB (Small and Medium Business). Most APPs are &apos;hidden&apos; because they&apos;re running as inhouse APP at customer site.
+This BT LE App will give you some impressions what kind of APPs you can expect. Need an APP ? ask ekke</source>
+        <translation>Seit mehr als 40 Jahren entwickelt ekke weltweit für Enterprise und SMB (Mittelständische Unternehmen). Die meisten APPs sind &apos;unsichtbar&apos;, da sie als in-Haus Anwendungen bei Kunden installiert sind.
+Diese BTLE App soll nur ein paar Eindrücke vermitteln, was für APPs Sie erwarten können. Sie brauchen eine APP ? ekke fragen</translation>
+    </message>
+    <message>
         <source>Since more then 30 years ekke is doing international development for Enterprise and SMB (Small and Medium Business). Most APPs are &apos;hidden&apos; because they&apos;re running as inhouse APP at customer site.
 This BT LE App will give you some impressions what kind of APPs you can expect. Need an APP ? ask ekke</source>
-        <translation>Seit mehr als 30 Jahren entwickelt ekke weltweit für Enterprise und SMB (Mittelständische Unternehmen). Die meisten APPs sind &apos;unsichtbar&apos;, da sie als in-Haus Anwendungen bei Kunden installiert sind.
+        <translation type="vanished">Seit mehr als 30 Jahren entwickelt ekke weltweit für Enterprise und SMB (Mittelständische Unternehmen). Die meisten APPs sind &apos;unsichtbar&apos;, da sie als in-Haus Anwendungen bei Kunden installiert sind.
 Diese BTLE App soll nur ein paar Eindrücke vermitteln, was für APPs Sie erwarten können. Sie brauchen eine APP ? ekke fragen</translation>
     </message>
     <message>
