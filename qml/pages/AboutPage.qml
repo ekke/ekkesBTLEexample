@@ -29,7 +29,7 @@ Flickable {
                     leftPadding: 10
                     rightPadding: 10
                     wrapMode: Text.WordWrap
-                    text: qsTr("ekkes BTLE example\nQt 5.12 x-platform\nQtQuickControls2")
+                    text: qsTr("ekkes BTLE example\nQt 5.15 x-platform\nQtQuickControls2")
                     color: primaryColor
                 }
             }
@@ -51,7 +51,7 @@ Flickable {
                     leftPadding: 10
                     rightPadding: 10
                     wrapMode: Text.WordWrap
-                    text: qsTr("This APP is developed with Qt 5.12 and <a href=\"http://doc.qt.io/qt-5/qtquickcontrols2-index.html\">QtQuickControls2</a>.")
+                    text: qsTr("This APP is developed with Qt 5.15 and <a href=\"http://doc.qt.io/qt-5/qtquickcontrols2-index.html\">QtQuickControls2</a>.")
                     onLinkActivated: Qt.openUrlExternally("http://doc.qt.io/qt-5/qtquickcontrols2-index.html")
                 }
             }
@@ -69,7 +69,7 @@ Flickable {
                     leftPadding: 10
                     rightPadding: 10
                     wrapMode: Text.WordWrap
-                    text: qsTr("This APP is NOT a production-ready APP - it's an APP for developers to see what can be done with Qt and connected Bluetooth LE devices.\nThis first release doesn't support to work in background ! Stay tuned... I'll provide this later. I'll also upload some videos.")
+                    text: qsTr("This APP is NOT a production-ready APP - it's an APP for developers to see what can be done with Qt and connected Bluetooth LE devices.")
                 }
             }
 //
@@ -154,7 +154,7 @@ Flickable {
                     leftPadding: 10
                     rightPadding: 10
                     wrapMode: Text.WordWrap
-                    text: qsTr("Since more then 30 years ekke is doing international development for Enterprise and SMB (Small and Medium Business). Most APPs are 'hidden' because they're running as inhouse APP at customer site.\nThis BT LE App will give you some impressions what kind of APPs you can expect. Need an APP ? ask ekke")
+                    text: qsTr("Since more then 40 years ekke is doing international development for Enterprise and SMB (Small and Medium Business). Most APPs are 'hidden' because they're running as inhouse APP at customer site.\nThis BT LE App will give you some impressions what kind of APPs you can expect. Need an APP ? ask ekke")
                 }
             }
 
