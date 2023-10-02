@@ -65,6 +65,16 @@ Pane {
                 text: qsTr("Bluetooth LE Devices")
             }
         }
+        RowLayout {
+            visible: myApp.getDeviceModel().length
+            LabelSubheading {
+                Layout.maximumWidth: isLandscape? appWindow.width-12-logoImage.width : appWindow.width-12
+                topPadding: 36
+                rightPadding: 16
+                wrapMode: Text.WordWrap
+                text: qsTr("This Device: %1").arg(myApp.getDeviceModel())
+            }
+        }
     } // col layout
 
     // emitting a Signal could be another option
@@ -89,6 +99,10 @@ Pane {
     // called immediately after Loader.loaded
     function init() {
         fitIntoWindow()
+
+        if(myApp.isWindowsSubSystemForAndroid()) {
+            appWindow.showInfo("You are running on Windows Subsystem for Android.\nunfortunately Microsoft lags support for BT LE.\nPlease send Feedback to Microsoft, that you need BT LE Support.")
+        }
 
         console.log("Init done from Home Page")
     }

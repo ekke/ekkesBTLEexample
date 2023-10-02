@@ -6,6 +6,11 @@
 #include <QtQml>
 #include <QGuiApplication>
 
+#if defined (Q_OS_ANDROID)
+#include <QtAndroidExtras/QAndroidJniObject>
+#include <jni.h>
+#endif
+
 using namespace ekke::constants;
 
 ApplicationUI::ApplicationUI(QObject *parent) : QObject(parent),  mBluetoothManager(new BluetoothManager(this)),
@@ -36,6 +41,39 @@ void ApplicationUI::addContextProperty(QQmlContext *context)
     context->setContextProperty("nfcManager", mNfcReaderManager);
     context->setContextProperty("scanManager", mGeneralScanManager);
     context->setContextProperty("cardReaderManager", mFeitianCardReaderManager);
+}
+
+// the best way to check if we're running inside Windows Subsystem for Android:
+// see https://stackoverflow.com/questions/69985356
+// Build.BRAND will be "Windows"
+// Build.BOARD will be "windows"
+// Build.MANUFACTURER will be "Microsoft Corporation"
+// Build.MODEL will be "Subsystem for Android(TM)"
+bool ApplicationUI::isWindowsSubSystemForAndroid()
+{
+    QString deviceModel = getDeviceModel();
+    if(deviceModel.isNull() || deviceModel.isEmpty()) {
+        return false;
+    }
+    if(QString::compare(deviceModel, "Subsystem for Android(TM);Microsoft Corporation", Qt::CaseInsensitive) == 0) {
+        return true;
+    }
+    return false;
+}
+
+// // "STH100-2;BlackBerry" -- Model;Manufacturer
+QString ApplicationUI::getDeviceModel()
+{
+#if defined (Q_OS_ANDROID)
+    QAndroidJniObject theString = QAndroidJniObject::callStaticObjectMethod<jstring>("org/ekkescorner/utils/QAndroidUtils", "getDeviceModel");
+    QString theModel = theString.toString();
+    qDebug() << theModel;
+    return theModel;
+#elif defined (Q_OS_IOS)
+    return "";
+#else
+    return "";
+#endif
 }
 
 /* Change Theme Palette */

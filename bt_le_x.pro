@@ -65,6 +65,9 @@ OTHER_FILES += images/black/*.png \
     ios/*.png \
     ios/Images.xcassets/AppIcon.appiconset/*.*
 
+# can be placed under android only, but I prefer to see them always
+OTHER_FILES += android/src/org/ekkescorner/utils/QAndroidUtils.java
+
 RESOURCES += \
     translations.qrc \
     qml.qrc \
@@ -119,6 +122,8 @@ DISTFILES += \
     android/gradlew.bat
 
 android {
+    QT += androidextras
+
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
     # deploying 32-bit and 64-bit APKs you need different VersionCode

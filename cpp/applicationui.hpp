@@ -39,6 +39,12 @@ public:
 
      void addContextProperty(QQmlContext* context);
 
+     Q_INVOKABLE
+     QString getDeviceModel();
+
+     Q_INVOKABLE
+     bool isWindowsSubSystemForAndroid();
+
 signals:
 
 public slots:
